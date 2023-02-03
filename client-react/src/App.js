@@ -26,7 +26,7 @@ export default function App() {
   const invidiousEndpoint = "https://invidio.us/api/v1/videos/";
   const videoId = "MWQkvbe5nyY";
 
-  const getVideoSource = async function (videoId) {
+  const getVideoSource = async function(videoId) {
     const response = await fetch(invidiousEndpoint + videoId);
     console.log("response: ", response);
     const data = await response.json();
@@ -42,12 +42,12 @@ export default function App() {
       });
     }, [videoId]);
 
-    return <video controls={true} src={source} style={{ width: "100%" }} />;
+    return ( <video controls={true} src={source} style={{ width: "100%" }} />);
   };
 
   return (
     <div className="App">
-      <h1>Hello React World</h1>
+      <h1>Qwerty</h1>
       <YouTube videoId="MWQkvbe5nyY" opts={opts} />
 
       <VideoPlayer videoId={videoId} />
