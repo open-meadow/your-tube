@@ -24,14 +24,16 @@ export default function App() {
   };
 
   const invidiousEndpoint = "https://invidio.us/api/v1/videos/";
+  const proxyEndpoint = "https://your-lambda-function.com/getVideoSource";
   const videoId = "MWQkvbe5nyY";
 
-  const getVideoSource = async function (videoId) {
-    const response = await fetch(invidiousEndpoint + videoId);
+  const getVideoSource = async function(videoId) {
+    const response = await fetch(`${proxyEndpoint}?videoId=${videoId}`);
     console.log("response: ", response);
     const data = await response.json();
-    return data.files[0].url;
+    return data.source;
   };
+
 
   const VideoPlayer = ({ videoId }) => {
     const [source, setSource] = useState("");
