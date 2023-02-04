@@ -11,11 +11,14 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
 // import Material UI components
-import { Box, AppBar, Toolbar } from "@mui/material";
+import { Box, AppBar, Toolbar, Container, TextField } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import { flexbox } from "@mui/system";
+
+// import React Bootstrap components
+import Form from "react-bootstrap/Form";
 
 export default function App() {
   const [status, setStatus] = useState({});
@@ -39,13 +42,24 @@ export default function App() {
 
   return (
     <main className="App">
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar sx={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <h1>YourTube</h1>
-          <AccountCircle sx={{height: '25%'}}/>
-        </AppBar>
-      </Box>
+      <AppBar sx={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <h1 className="logo">YourTube</h1>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="menu-appbar"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <AccountCircle size="large" />
+        </IconButton>
+      </AppBar>
       <Toolbar>{/* content */}</Toolbar>
+      <Toolbar>{/* content */}</Toolbar>
+
+      <Form>
+        <Form.Control size="lg" type="search" placeholder="Search" />
+      </Form>
 
       <h1>Hello React World</h1>
       <YouTube videoId="MWQkvbe5nyY" opts={opts} />
