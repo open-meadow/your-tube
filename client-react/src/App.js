@@ -18,7 +18,7 @@ import IconButton from "@mui/material/IconButton";
 import { flexbox } from "@mui/system";
 
 // import React Bootstrap components
-import Form from "react-bootstrap/Form";
+import { Navbar, Form, FormControl, Button } from "react-bootstrap";
 
 export default function App() {
   const [status, setStatus] = useState({});
@@ -56,10 +56,16 @@ export default function App() {
       </AppBar>
       <Toolbar>{/* content */}</Toolbar>
       <Toolbar>{/* content */}</Toolbar>
-
-      <Form>
-        <Form.Control size="lg" type="search" placeholder="Search" />
-      </Form>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Form className="mb-0">
+          <FormControl
+            className="search-bar "
+            size="lg"
+            type="search"
+            placeholder="Search"
+          />
+        </Form>
+      </div>
 
       <h1>Hello React World</h1>
       <YouTube videoId="MWQkvbe5nyY" opts={opts} />

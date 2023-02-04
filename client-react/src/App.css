@@ -6,6 +6,17 @@
   padding: 0.2em;
 }
 
+.form-div {
+  display:flex;
+  justify-content: "center";
+}
+
+.search-bar {
+  width: 500px;
+  height: 40px;
+  font-size: 20px;
+}
+
 h4 {
   padding: 0px;
   margin: 0.2em;
