@@ -10,7 +10,8 @@
     "build:client": "cd client-react && npm run build",
     "install": "(npm run install:server) && (npm run install:client)",
     "build": "npm run build:client",
-    "deploy": "mv -f client-react/build/ ./public"
+    "deploy": "mv -f client-react/build/ ./public",
+    "db:reset": "node server-express/bin/resetdb.js"
   },
   "repository": {
     "type": "git",
