@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS videos CASCADE;
-CREATE TABLE users (
+CREATE TABLE videos (
   id SERIAL PRIMARY KEY NOT NULL,
-  video_key VARCHAR(11) NOT NULL,
+  yt_video_key VARCHAR(11) NOT NULL,
   playlist_id INTEGER REFERENCES playlists(id) ON DELETE CASCADE
 );
