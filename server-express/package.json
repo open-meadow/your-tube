@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node src/server.js",
-    "local": "nodemon src/server.js"
+    "local": "nodemon src/server.js",
+    "db:reset": "node bin/resetdb.js"
   },
   "keywords": [],
   "author": "",
