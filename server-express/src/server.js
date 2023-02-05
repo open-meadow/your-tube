@@ -14,10 +14,12 @@ app.use(express.static(public));
 // Separate routes for each resource here
 
 const userApiRoutes = require("../routes/users-api");
+const playlistApiRoutes = require("../routes/playlists-api");
 
 // Mount the resource routes here
 
 app.use("/api/users", userApiRoutes);
+app.use("/api/playlists", playlistApiRoutes);
 
 // Do Not make a route for "/" or it will override public
 
