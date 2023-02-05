@@ -1,6 +1,5 @@
 require("dotenv").config();
 const express = require("express");
-const db = require("../db/connection");
 const path = require("path");
 
 const app = express();
@@ -11,6 +10,14 @@ const cwd = process.cwd();
 const public = path.join(cwd, "..", "public");
 console.log("public dir: ", public);
 app.use(express.static(public));
+
+// Separate routes for each resource here
+
+const userApiRoutes = require("../routes/users-api");
+
+// Mount the resource routes here
+
+app.use("/api/users", userApiRoutes);
 
 // Do Not make a route for "/" or it will override public
 
@@ -24,19 +31,4 @@ app.use(function (req, res) {
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}!`);
-});
-
-// Test route
-
-app.get("/api/users", (req, res) => {
-  const query = `SELECT * FROM users`;
-  console.log(query);
-  db.query(query)
-    .then((data) => {
-      const users = data.rows;
-      res.json({ users });
-    })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
 });
