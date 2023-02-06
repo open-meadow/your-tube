@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-const cors = require("cors");
+// const cors = require("cors");
 const path = require("path");
 
 const app = express();
@@ -26,7 +26,7 @@ app.get("/api/status", (req, res) => {
   res.json({ version: "1.01" });
 });
 
-app.use(cors())
+// app.use(cors())
 
 app.use(function (req, res) {
   res.status(404);
