@@ -3,7 +3,7 @@ const express = require("express");
 const path = require("path");
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8000;
 
 // serve static files from ../build (needed for React)
 const cwd = process.cwd();
@@ -12,12 +12,10 @@ console.log("public dir: ", public);
 app.use(express.static(public));
 
 // Separate routes for each resource here
-
 const userApiRoutes = require("../routes/users-api");
 const playlistApiRoutes = require("../routes/playlists-api");
 
 // Mount the resource routes here
-
 app.use("/api/users", userApiRoutes);
 app.use("/api/playlists", playlistApiRoutes);
 
