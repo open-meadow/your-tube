@@ -7,3 +7,13 @@ Serves API and compiled React App
 ```
 npm run db:reset
 ```
+
+# Data
+
+```
+http://localhost:8000/api/users
+```
+
+```
+http://localhost:8000/api/playlists
+```
