@@ -7,8 +7,6 @@ import YouTube from "react-youtube";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import Container from "react-bootstrap/Container";
-
 ////////////////////////////////////////////////////
 
 // Import components
@@ -66,7 +64,7 @@ export default function App() {
       <MainContent />
       <Footer />
 
-      {/* <div>
+      <div>
         <section>
           {!status.error && (
             <>
@@ -79,7 +77,8 @@ export default function App() {
             </>
           )}
         </section>
-      </div> */}
+      </div>
+      
     </div>
   );
 }
