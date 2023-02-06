@@ -1,5 +1,10 @@
-.App {
-  margin: 1em;
+html {
+  background-color: #333333;
+}
+
+input {
+  border: 2px solid black;
+  margin: 0 0 10px 10px;
 }
 
 h4 {
@@ -36,4 +41,75 @@ li:hover a {
   color: white;
 }
 
+#user-name {
+  margin-right: 10px;
+}
 
+#footer {
+  padding: 5px 0 0 0;
+  background-color: #f2f2f2;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.App {
+  background-color: #333333;
+}
+
+.break-line {
+  color: grey;
+  height: 3px;
+  size: 1em;
+  width: 90%;
+  margin-left: 5%;
+}
+
+.main-words {
+  margin: 10em 0;
+}
+
+.open-sidebar {
+  margin-right: 1em;
+}
+
+.video-player {
+  margin-top: 5em;
+}
+
+.home-link {
+  margin-left: 1em;
+}
+
+.get-started {
+  margin-bottom: 1em;
+}
+
+.main-content {
+  justify-content: center;
+  background-color: #333333;
+}
+
+.text-white {
+  color: white;
+}
+
+.search-bar {
+  display: block;
+  margin: auto;
+  width: 100vh;
+  height: 5vh;
+}
+
+.button {
+  width: auto;
+}
+
+.welcome-text {
+  display: flex;
+  justify-content: center;
+  color: white;
+  margin: 10px 0 0 10px ;
+}
