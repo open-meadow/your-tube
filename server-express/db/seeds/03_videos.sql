@@ -1,4 +1,4 @@
-INSERT INTO videos (yt_video_key, playlist_id) VALUES
+INSERT INTO videos (yt_video_key, title, playlist_id) VALUES
 ('W6NZfCO5SIk', 'JavaScript Tutorial for Beginners: Learn JavaScript in 1 Hour', '1'),
 ('hdI2bqOjy3c', 'JavaScript Crash Course For Beginners', '1'),
 ('h74pPIySz78', 'Night Sky - Lofi hip hop mix ~ Stress Relief, Relaxing Music', '2'),
