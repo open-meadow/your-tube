@@ -16,6 +16,8 @@ import Navigation from "components/Navigation";
 import MainContent from "components/MainContent";
 import Footer from "components/Footer";
 
+const youtubesearchapi = require("youtube-search-api");
+
 export default function App() {
   const [status, setStatus] = useState({});
 
@@ -59,20 +61,25 @@ export default function App() {
     return <video controls={true} src={source} style={{ width: "100%" }} />;
   };
 
-  const API_KEY = "AIzaSyBZ9Mr5A7JlJO2sqYsG09v1UR1TCKtkRk8";
+  // const API_KEY = "AIzaSyBZ9Mr5A7JlJO2sqYsG09v1UR1TCKtkRk8";
   const searchTerm = "pitch meeting";
 
-  // fetch(`https://invidio.us/api/v1/search?q=${searchTerm}`, { mode: "no-cors" })
+  fetch(`https://invidious.sethforprivacy.com/api/v1/search?q=${searchTerm}`)
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.error(error));
+
+  // fetch(
+  //   `https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&part=snippet&type=video&key=${API_KEY}`
+  // )
   //   .then((response) => response.json())
   //   .then((data) => console.log(data))
   //   .catch((error) => console.error(error));
 
-  fetch(
-    `https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&part=snippet&type=video&key=${API_KEY}`
-  )
-    .then((response) => response.json())
-    .then((data) => console.log(data))
-    .catch((error) => console.error(error));
+  youtubesearchapi
+    .GetListByKeyword("pitch+meeting")
+    .then((data) => console.log("this is data: ", data))
+    .catch((err) => console.error("this is err: ", err));
 
   return (
     <div className="App">
