@@ -99,6 +99,12 @@ li:hover a {
 .search-bar {
   display: block;
   margin: auto;
+  width: 100vh;
+  height: 5vh;
+}
+
+.button {
+  width: auto;
 }
 
 .welcome-text {
