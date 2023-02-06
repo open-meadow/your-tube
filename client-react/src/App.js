@@ -80,6 +80,13 @@ export default function App() {
           )}
         </section>
       </div> */}
+
+      <div id="search-results">
+        <article className="video">
+          
+        </article>
+      </div>
+
     </div>
   );
 }
