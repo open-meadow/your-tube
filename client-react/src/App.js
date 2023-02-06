@@ -59,6 +59,21 @@ export default function App() {
     return <video controls={true} src={source} style={{ width: "100%" }} />;
   };
 
+  const API_KEY = "AIzaSyBZ9Mr5A7JlJO2sqYsG09v1UR1TCKtkRk8";
+  const searchTerm = "pitch meeting";
+
+  // fetch(`https://invidio.us/api/v1/search?q=${searchTerm}`, { mode: "no-cors" })
+  //   .then((response) => response.json())
+  //   .then((data) => console.log(data))
+  //   .catch((error) => console.error(error));
+
+  fetch(
+    `https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&part=snippet&type=video&key=${API_KEY}`
+  )
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.error(error));
+
   return (
     <div className="App">
       <Navigation />
