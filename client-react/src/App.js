@@ -1,13 +1,15 @@
-import "App.css";
 import axios from "axios";
 import { React, useEffect, useState } from "react";
 import YouTube from "react-youtube";
 
-// Bootstrap Imports ///////////////////////////////
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
+
+// CSS Imports ///////////////////////////////
 
 import "bootstrap/dist/css/bootstrap.min.css";
-
-import Container from "react-bootstrap/Container";
+import "App.css";
+import "Results.css";
 
 ////////////////////////////////////////////////////
 
@@ -59,20 +61,27 @@ export default function App() {
     return <video controls={true} src={source} style={{ width: "100%" }} />;
   };
 
-  const API_KEY = "AIzaSyBZ9Mr5A7JlJO2sqYsG09v1UR1TCKtkRk8";
-  const searchTerm = "pitch meeting";
+  // const API_KEY = "AIzaSyBZ9Mr5A7JlJO2sqYsG09v1UR1TCKtkRk8";
+  // const searchTerm = "pitch meeting";
 
   // fetch(`https://invidio.us/api/v1/search?q=${searchTerm}`, { mode: "no-cors" })
   //   .then((response) => response.json())
   //   .then((data) => console.log(data))
   //   .catch((error) => console.error(error));
 
-  fetch(
-    `https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&part=snippet&type=video&key=${API_KEY}`
-  )
-    .then((response) => response.json())
-    .then((data) => console.log(data))
-    .catch((error) => console.error(error));
+  // fetch(
+  //   `https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&part=snippet&type=video&key=${API_KEY}`
+  // )
+  //   .then((response) => response.json())
+  //   .then((data) => {
+  //     // console.log("data ====", data);
+  //     // console.log("item ====", data.items[0]);
+  //     // console.log("full ====", data.items[0].snippet.title);
+
+  //     // .items[0].snippet.title
+
+  //   })
+  //   .catch((error) => console.error(error));
 
   return (
     <div className="App">
@@ -97,11 +106,20 @@ export default function App() {
       </div> */}
 
       <div id="search-results">
-        <article className="video">
-          
+        <article className="video-result">
+          <a href="/">
+          <div className="preview">
+            <img
+              className="video-header"
+              src="https://upload.wikimedia.org/wikipedia/en/5/5f/Original_Doge_meme.jpg"
+              alt="header"
+            ></img>
+            <p className="video-title text-white">Very cool video title</p>
+            <FontAwesomeIcon className="plus-icon" icon={faPlusCircle} size="3x" />
+          </div>
+          </a>
         </article>
       </div>
-
     </div>
   );
 }
