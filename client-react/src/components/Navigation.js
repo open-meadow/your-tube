@@ -5,6 +5,9 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+
 export default function Nav() {
   const [show, setShow] = useState(false);
 
@@ -21,7 +24,7 @@ export default function Nav() {
         <Navbar.Text>BigJim48s Playlists</Navbar.Text>
       </Navbar.Collapse>
       <Button className="open-sidebar" variant="dark" onClick={handleShow}>
-        Playlists
+        <FontAwesomeIcon icon={faArrowLeft}/>
       </Button>
       <Offcanvas placement="end" show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
