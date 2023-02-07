@@ -19,6 +19,7 @@ import MainContent from "components/MainContent";
 import Footer from "components/Footer";
 import SearchResult from "components/SearchResult";
 import useApplicationData from "hooks/useApplicationData";
+import SearchBar from "components/SearchBar";
 
 export default function App() {
   const [status, setStatus] = useState({});
@@ -46,6 +47,8 @@ export default function App() {
       <Navigation />
       <hr className="break-line"></hr>
       <MainContent />
+      <SearchBar/>
+      <SearchResult getSearchData={getSearchData} />
       <Footer />
 
       {/* <div>
@@ -63,7 +66,6 @@ export default function App() {
         </section>
       </div> */}
 
-      <SearchResult getSearchData={getSearchData} />
     </div>
   );
 }
