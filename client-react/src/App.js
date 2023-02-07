@@ -17,6 +17,7 @@ import "Results.css";
 import Navigation from "components/Navigation";
 import MainContent from "components/MainContent";
 import Footer from "components/Footer";
+import SearchResult from "components/SearchResult";
 
 export default function App() {
   const [status, setStatus] = useState({});
@@ -97,27 +98,7 @@ export default function App() {
         </section>
       </div> */}
 
-      <div id="search-results">
-        <article className="video-result">
-          <a href="/">
-            <div className="preview">
-              <img
-                className="video-header"
-                src="https://upload.wikimedia.org/wikipedia/en/5/5f/Original_Doge_meme.jpg"
-                alt="header"
-              ></img>
-              <p className="video-title text-white">Very cool video title</p>
-              <FontAwesomeIcon
-                className="plus-icon"
-                icon={faPlusCircle}
-                size="3x"
-              />
-            </div>
-          </a>
-        </article>
-
-        {getSearchData()}
-      </div>
+      <SearchResult getSearchData={getSearchData}/>
     </div>
   );
 }
