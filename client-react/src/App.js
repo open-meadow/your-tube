@@ -20,6 +20,7 @@ import Footer from "components/Footer";
 
 export default function App() {
   const [status, setStatus] = useState({});
+  const [user, setUser] = useState();
 
   useEffect(() => {
     axios
