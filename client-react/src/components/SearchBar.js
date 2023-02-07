@@ -1,5 +1,4 @@
 import { useState } from "react";
-import useApplicationData from "hooks/useApplicationData";
 
 export default function SearchBar(props) {
   // const {

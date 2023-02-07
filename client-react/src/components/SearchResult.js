@@ -39,6 +39,7 @@ export default function SearchResult(props) {
       }
     });
 
+    console.log("obtai", obtainedSearchData);
     return obtainedSearchData;
   };
 

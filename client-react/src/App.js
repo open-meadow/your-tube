@@ -18,7 +18,6 @@ import Navigation from "components/Navigation";
 import MainContent from "components/MainContent";
 import Footer from "components/Footer";
 import SearchResult from "components/SearchResult";
-import useApplicationData from "hooks/useApplicationData";
 import SearchBar from "components/SearchBar";
 
 export default function App() {
@@ -31,6 +30,7 @@ export default function App() {
   useEffect(() => {
     setSearchData([]);
     setLoadingState(true);
+
     fetch(`https://invidious.sethforprivacy.com/api/v1/search?q=${searchTerm}`)
       .then((response) => response.json())
       .then((data) => {
