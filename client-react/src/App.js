@@ -16,7 +16,7 @@ import Navigation from "components/Navigation";
 import MainContent from "components/MainContent";
 import Footer from "components/Footer";
 
-const youtubesearchapi = require("youtube-search-api");
+// const youtubesearchapi = require("youtube-search-api");
 
 export default function App() {
   const [status, setStatus] = useState({});
