@@ -21,20 +21,23 @@
 .preview {
   display: flex;
   align-items: center;
+  position: relative;
+  padding: 1em 5.5em 1em 1em;
 }
 
 .video-header {
   display: flex;
   padding: 10px;
-  width: 15%;
-  height: 15%;
+  width: 125px;
+  height: 100px;
 }
 
 .video-title {
   display: flex;
-  margin: auto;
+  margin: auto 0;
   font-size: 25px;
   font-weight: 600;
+  text-align: left;
 }
 
 .plus-icon {
@@ -54,4 +57,14 @@
 
 .dropdown-toggle::after {
   display: none !important; 
+}
+
+.add-to-playlist {
+  display: flex;
+  position: absolute;
+  right: 0;
+}
+
+.link-to-video {
+  display: flex;
 }
