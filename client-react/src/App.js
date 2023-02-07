@@ -25,9 +25,10 @@ export default function App() {
   const [status, setStatus] = useState({});
 
   const [searchData, setSearchData] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("pitch meeting");
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
+    setSearchData([]);
     fetch(`https://invidious.sethforprivacy.com/api/v1/search?q=${searchTerm}`)
       .then((response) => response.json())
       .then((data) => {

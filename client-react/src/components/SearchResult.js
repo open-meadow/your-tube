@@ -1,11 +1,20 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import Spinner from "react-bootstrap/Spinner";
 import { useEffect } from "react";
 
 export default function SearchResult(props) {
   const { searchData } = props;
 
   const getSearchData = () => {
+    if (searchData.length === 0) {
+      return (
+        <Spinner animation="border" variant="light" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      );
+    }
+
     const obtainedSearchData = searchData.map((single) => {
       if (single.title) {
         return (
