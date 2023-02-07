@@ -21,7 +21,7 @@ const getUserByName = (username) => {
     });
 };
 
-// Get user by name
+// Get user by id
 const getUserById = (id) => {
   return db
     .query(
