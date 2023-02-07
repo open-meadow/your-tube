@@ -33,7 +33,6 @@ export default function App() {
     getSearchData,
   } = useApplicationData();
 
-
   useEffect(() => {
     axios
       .get("/api/status")
@@ -44,7 +43,6 @@ export default function App() {
         setStatus({ error: err.message });
       });
   }, []);
-
 
   // Change user: 1=BigJim48, 2=LabberLearner23, 3=iHEARTreact
   const loggedInUser = 1;
@@ -92,7 +90,7 @@ export default function App() {
   };
 
   // const API_KEY = "AIzaSyBZ9Mr5A7JlJO2sqYsG09v1UR1TCKtkRk8";
-  const searchTerm = "pitch meeting";
+  // const searchTerm = "pitch meeting";
 
   fetch(`https://invidious.sethforprivacy.com/api/v1/search?q=${searchTerm}`)
     .then((response) => response.json())
@@ -110,7 +108,6 @@ export default function App() {
   //   .GetListByKeyword("pitch+meeting")
   //   .then((data) => console.log("this is data: ", data))
   //   .catch((err) => console.error("this is err: ", err));
-
 
   return (
     <div className="App">
