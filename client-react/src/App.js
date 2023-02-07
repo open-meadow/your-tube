@@ -2,9 +2,6 @@ import axios from "axios";
 import { React, useEffect, useState } from "react";
 import YouTube from "react-youtube";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-
 // CSS Imports ///////////////////////////////
 
 import "bootstrap/dist/css/bootstrap.min.css";
