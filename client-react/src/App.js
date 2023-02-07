@@ -76,11 +76,6 @@ export default function App() {
   //   .then((data) => console.log(data))
   //   .catch((error) => console.error(error));
 
-  youtubesearchapi
-    .GetListByKeyword("pitch+meeting")
-    .then((data) => console.log("this is data: ", data))
-    .catch((err) => console.error("this is err: ", err));
-
   return (
     <div className="App">
       <Navigation />
