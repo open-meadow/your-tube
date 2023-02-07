@@ -20,7 +20,8 @@ import Footer from "components/Footer";
 
 export default function App() {
   const [status, setStatus] = useState({});
-  const [user, setUser] = useState();
+  const [username, setUsername] = useState();
+  const [userid, setUserid] = useState();
 
   useEffect(() => {
     axios
@@ -33,21 +34,21 @@ export default function App() {
       });
   }, []);
 
-  useEffect(() => {
-    // Change user: 1=BigJim48, 2=LabberLearner23, 3=iHEARTreact
-    const userId = 1;
+  // Change user: 1=BigJim48, 2=LabberLearner23, 3=iHEARTreact
+  const loggedInUser = 1;
 
+  useEffect(() => {
     axios
-      .get(`/api/users/${userId}`)
+      .get(`/api/users/${loggedInUser}`)
       .then((res) => {
-        setUser(res.data.user[0].username);
+        // Set 'user' states
+        setUsername(res.data.user[0].username);
+        setUserid(res.data.user[0].id);
       })
       .catch((err) => {
         console.log(err.message);
       });
   }, []);
-
-  console.log("state:", user);
 
   const opts = {
     playerVars: {
@@ -100,7 +101,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <Navigation username={user} />
+      <Navigation username={username} />
       <hr className="break-line"></hr>
       <MainContent />
       <Footer />
