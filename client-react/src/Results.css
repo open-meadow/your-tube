@@ -1,0 +1,40 @@
+#search-results {
+  display: block;
+  text-align: center;
+}
+
+.video-result {
+  width: 70%;
+  margin: 1em 0;
+  border: 5px solid #212529;
+  margin: 1em auto
+}
+
+.video-result:hover {
+  box-shadow: 5px 5px white;
+}
+
+.preview {
+  display: flex;
+  align-items: center;
+}
+
+.video-header {
+  display: flex;
+  padding: 10px;
+  width: 15%;
+  height: 15%;
+}
+
+.video-title {
+  display: flex;
+  margin: auto;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.plus-icon {
+  color: white;
+  margin-right: 1em;
+  size: 25px;
+}

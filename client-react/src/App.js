@@ -1,13 +1,15 @@
-import "App.css";
 import axios from "axios";
 import { React, useEffect, useState } from "react";
 import YouTube from "react-youtube";
 
-// Bootstrap Imports ///////////////////////////////
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+
+// CSS Imports ///////////////////////////////
 
 import "bootstrap/dist/css/bootstrap.min.css";
-
-import Container from "react-bootstrap/Container";
+import "App.css";
+import "Results.css";
 
 ////////////////////////////////////////////////////
 
@@ -15,13 +17,22 @@ import Container from "react-bootstrap/Container";
 import Navigation from "components/Navigation";
 import MainContent from "components/MainContent";
 import Footer from "components/Footer";
-
-// const youtubesearchapi = require("youtube-search-api");
+import SearchResult from "components/SearchResult";
+import useApplicationData from "hooks/useApplicationData";
 
 export default function App() {
   const [status, setStatus] = useState({});
   const [username, setUsername] = useState();
   const [userid, setUserid] = useState();
+
+  const {
+    searchData,
+    setSearchData,
+    searchTerm,
+    setSearchTerm,
+    getSearchData,
+  } = useApplicationData();
+
 
   useEffect(() => {
     axios
@@ -33,6 +44,7 @@ export default function App() {
         setStatus({ error: err.message });
       });
   }, []);
+
 
   // Change user: 1=BigJim48, 2=LabberLearner23, 3=iHEARTreact
   const loggedInUser = 1;
@@ -99,6 +111,7 @@ export default function App() {
   //   .then((data) => console.log("this is data: ", data))
   //   .catch((err) => console.error("this is err: ", err));
 
+
   return (
     <div className="App">
       <Navigation username={username} />
@@ -120,6 +133,8 @@ export default function App() {
           )}
         </section>
       </div> */}
+
+      <SearchResult getSearchData={getSearchData} />
     </div>
   );
 }
