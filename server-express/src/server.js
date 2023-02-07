@@ -30,7 +30,6 @@ app.use(function (req, res) {
   res.status(404);
 });
 
-
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}!`);
 });
