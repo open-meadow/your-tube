@@ -105,10 +105,15 @@ export default function App() {
   // const API_KEY = "AIzaSyBZ9Mr5A7JlJO2sqYsG09v1UR1TCKtkRk8";
   // const searchTerm = "pitch meeting";
 
-  fetch(`https://invidious.sethforprivacy.com/api/v1/search?q=${searchTerm}`)
-    .then((response) => response.json())
-    .then((data) => console.log(data))
-    .catch((error) => console.error(error));
+
+// Uncomment this later ///////////////////////////////////////////////////////////////////////////////////////////////
+
+  // fetch(`https://invidious.sethforprivacy.com/api/v1/search?q=${searchTerm}`)
+  //   .then((response) => response.json())
+  //   .then((data) => console.log(data))
+  //   .catch((error) => console.error(error));
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // fetch(
   //   `https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&part=snippet&type=video&key=${API_KEY}`

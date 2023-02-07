@@ -10,6 +10,11 @@ html {
   background-color: #333333;
 }
 
+/* Adds a margin right to the desktop emblem */
+svg {
+  margin-right: 10px;
+}
+
 input {
   border: 2px solid black;
   margin: 0 0 10px 10px;

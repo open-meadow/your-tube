@@ -1,4 +1,4 @@
-// React Bootstrap
+// React-Bootstrap
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 
@@ -9,9 +9,16 @@ import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 export default function SearchResult(props) {
   const { getSearchData } = props;
 
+  // HTML FontAwesome element for ease of implementation
   const plusIcon = (
     <FontAwesomeIcon className="plus-icon" icon={faPlusCircle} size="3x" />
   );
+
+  // Hard coded video data for checking
+  const videoData = {
+    preview: "https://upload.wikimedia.org/wikipedia/en/5/5f/Original_Doge_meme.jpg",
+    title: "Very cool video title changed",
+  } 
 
   return (
     <div id="search-results">
@@ -21,10 +28,10 @@ export default function SearchResult(props) {
             <div className="link-to-video">
               <img
                 className="video-header"
-                src="https://upload.wikimedia.org/wikipedia/en/5/5f/Original_Doge_meme.jpg"
+                src={videoData.preview}
                 alt="header"
               ></img>
-              <p className="video-title text-white">Very cool video title</p>
+              <p className="video-title text-white">{videoData.title}</p>
             </div>
           </a>
           <div
