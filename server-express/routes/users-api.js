@@ -16,8 +16,22 @@ router.get("/", (req, res) => {
 
 // Get user by name
 router.get("/name", (req, res) => {
+  const username = req.params.username;
   userQueries
-    .getUserByName()
+    .getUserByName(username)
+    .then((user) => {
+      res.json({ user });
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
+// Get user by id
+router.get("/:id", (req, res) => {
+  const id = req.params.id;
+  userQueries
+    .getUserById(id)
     .then((user) => {
       res.json({ user });
     })
