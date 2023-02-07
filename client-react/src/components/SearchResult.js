@@ -4,10 +4,10 @@ import Spinner from "react-bootstrap/Spinner";
 import { useEffect } from "react";
 
 export default function SearchResult(props) {
-  const { searchData } = props;
+  const { searchData, loadingState } = props;
 
   const getSearchData = () => {
-    if (searchData.length === 0) {
+    if (loadingState) {
       return (
         <Spinner animation="border" variant="light" role="status">
           <span className="visually-hidden">Loading...</span>

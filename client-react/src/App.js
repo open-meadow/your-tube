@@ -26,13 +26,16 @@ export default function App() {
 
   const [searchData, setSearchData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [loadingState, setLoadingState] = useState(false);
 
   useEffect(() => {
     setSearchData([]);
+    setLoadingState(true);
     fetch(`https://invidious.sethforprivacy.com/api/v1/search?q=${searchTerm}`)
       .then((response) => response.json())
       .then((data) => {
         setSearchData(data);
+        setLoadingState(false);
       });
   }, [searchTerm]);
 
@@ -53,7 +56,7 @@ export default function App() {
       <hr className="break-line"></hr>
       <MainContent />
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <SearchResult searchData={searchData} />
+      <SearchResult loadingState={loadingState} searchData={searchData} />
       <Footer />
 
       {/* <div>
