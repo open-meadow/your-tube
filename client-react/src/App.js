@@ -18,11 +18,17 @@ import Navigation from "components/Navigation";
 import MainContent from "components/MainContent";
 import Footer from "components/Footer";
 import SearchResult from "components/SearchResult";
+import useApplicationData from "hooks/useApplicationData";
 
 export default function App() {
   const [status, setStatus] = useState({});
-  const [searchData, setSearchData] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("pitch meeting");
+  const {
+    searchData,
+    setSearchData,
+    searchTerm,
+    setSearchTerm,
+    getSearchData,
+  } = useApplicationData();
 
   useEffect(() => {
     axios
@@ -34,47 +40,6 @@ export default function App() {
         setStatus({ error: err.message });
       });
   }, []);
-
-  useEffect(() => {
-    fetch(`https://invidious.sethforprivacy.com/api/v1/search?q=${searchTerm}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        console.log("daat1", data[1]);
-        setSearchData(data);
-      });
-  }, [searchTerm]);
-
-  const getSearchData = () => {
-    const obtainedSearchData = searchData.map((single) => {
-      console.log("single", single);
-      if (single.title) {
-        return (
-          <div className="video-result">
-            <a href="/">
-              <div className="preview">
-                <img
-                  className="video-header"
-                  src={
-                    single.videoThumbnails && single.videoThumbnails[1].url
-                  }
-                  alt="header"
-                ></img>
-                <p className="video-title text-white">{single.title}</p>
-                <FontAwesomeIcon
-                  className="plus-icon"
-                  icon={faPlusCircle}
-                  size="3x"
-                />
-              </div>
-            </a>
-          </div>
-        );
-      }
-    })
-
-    return obtainedSearchData;
-  }
 
   return (
     <div className="App">
@@ -98,7 +63,7 @@ export default function App() {
         </section>
       </div> */}
 
-      <SearchResult getSearchData={getSearchData}/>
+      <SearchResult getSearchData={getSearchData} />
     </div>
   );
 }
