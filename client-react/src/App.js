@@ -127,7 +127,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <Navigation username={username} />
+      <Navigation username={username} playlists={playlists} />
       <hr className="break-line"></hr>
       <MainContent />
       <Footer />
