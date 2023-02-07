@@ -2,8 +2,8 @@ import axios from "axios";
 import { React, useEffect, useState } from "react";
 import YouTube from "react-youtube";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 // CSS Imports ///////////////////////////////
 
@@ -20,6 +20,8 @@ import Footer from "components/Footer";
 
 export default function App() {
   const [status, setStatus] = useState({});
+  const [searchData, setSearchData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("pitch meeting");
 
   useEffect(() => {
     axios
@@ -32,56 +34,46 @@ export default function App() {
       });
   }, []);
 
-  const opts = {
-    playerVars: {
-      rel: 0,
-    },
-  };
-
-  const invidiousEndpoint = "https://invidio.us/api/v1/videos/";
-  const videoId = "MWQkvbe5nyY";
-
-  const getVideoSource = async function (videoId) {
-    const response = await fetch(invidiousEndpoint + videoId);
-    console.log("response: ", response);
-    const data = await response.json();
-    return data.files[0].url;
-  };
-
-  // Videoplayer (not in use right now)
-  const VideoPlayer = ({ videoId }) => {
-    const [source, setSource] = useState("");
-
-    useEffect(() => {
-      getVideoSource(videoId).then((source) => {
-        setSource(source);
+  useEffect(() => {
+    fetch(`https://invidious.sethforprivacy.com/api/v1/search?q=${searchTerm}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        console.log("daat1", data[1]);
+        setSearchData(data);
       });
-    }, [videoId]);
+  }, [searchTerm]);
 
-    return <video controls={true} src={source} style={{ width: "100%" }} />;
-  };
+  const getSearchData = () => {
+    const obtainedSearchData = searchData.map((single) => {
+      console.log("single", single);
+      if (single.title) {
+        return (
+          <div className="video-result">
+            <a href="/">
+              <div className="preview">
+                <img
+                  className="video-header"
+                  src={
+                    single.videoThumbnails && single.videoThumbnails[1].url
+                  }
+                  alt="header"
+                ></img>
+                <p className="video-title text-white">{single.title}</p>
+                <FontAwesomeIcon
+                  className="plus-icon"
+                  icon={faPlusCircle}
+                  size="3x"
+                />
+              </div>
+            </a>
+          </div>
+        );
+      }
+    })
 
-  // const API_KEY = "AIzaSyBZ9Mr5A7JlJO2sqYsG09v1UR1TCKtkRk8";
-  // const searchTerm = "pitch meeting";
-
-  // fetch(`https://invidio.us/api/v1/search?q=${searchTerm}`, { mode: "no-cors" })
-  //   .then((response) => response.json())
-  //   .then((data) => console.log(data))
-  //   .catch((error) => console.error(error));
-
-  // fetch(
-  //   `https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&part=snippet&type=video&key=${API_KEY}`
-  // )
-  //   .then((response) => response.json())
-  //   .then((data) => {
-  //     // console.log("data ====", data);
-  //     // console.log("item ====", data.items[0]);
-  //     // console.log("full ====", data.items[0].snippet.title);
-
-  //     // .items[0].snippet.title
-
-  //   })
-  //   .catch((error) => console.error(error));
+    return obtainedSearchData;
+  }
 
   return (
     <div className="App">
@@ -108,17 +100,23 @@ export default function App() {
       <div id="search-results">
         <article className="video-result">
           <a href="/">
-          <div className="preview">
-            <img
-              className="video-header"
-              src="https://upload.wikimedia.org/wikipedia/en/5/5f/Original_Doge_meme.jpg"
-              alt="header"
-            ></img>
-            <p className="video-title text-white">Very cool video title</p>
-            <FontAwesomeIcon className="plus-icon" icon={faPlusCircle} size="3x" />
-          </div>
+            <div className="preview">
+              <img
+                className="video-header"
+                src="https://upload.wikimedia.org/wikipedia/en/5/5f/Original_Doge_meme.jpg"
+                alt="header"
+              ></img>
+              <p className="video-title text-white">Very cool video title</p>
+              <FontAwesomeIcon
+                className="plus-icon"
+                icon={faPlusCircle}
+                size="3x"
+              />
+            </div>
           </a>
         </article>
+
+        {getSearchData()}
       </div>
     </div>
   );
