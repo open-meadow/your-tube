@@ -5,14 +5,18 @@ import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
 
+
+export default function Nav(props) {
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
-export default function Nav() {
   const [show, setShow] = useState(false);
 
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
+
+  console.log("props:", props);
 
   return (
     <Navbar bg="dark" variant="dark">
@@ -21,7 +25,7 @@ export default function Nav() {
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse className="justify-content-end" id="user-name">
-        <Navbar.Text>BigJim48s Playlists</Navbar.Text>
+        <Navbar.Text>{props.username}'s Playlists</Navbar.Text>
       </Navbar.Collapse>
       <Button className="open-sidebar" variant="dark" onClick={handleShow}>
         <FontAwesomeIcon icon={faArrowLeft}/>
