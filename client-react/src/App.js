@@ -2,9 +2,6 @@ import axios from "axios";
 import { React, useEffect, useState } from "react";
 import YouTube from "react-youtube";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-
 // CSS Imports ///////////////////////////////
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -114,24 +111,24 @@ export default function App() {
       <Navigation username={username} />
       <hr className="break-line"></hr>
       <MainContent />
-      <Footer />
 
       {/* <div>
         <section>
-          {!status.error && (
-            <>
-              API Version: <code>{status.version}</code>
-            </>
+        {!status.error && (
+          <>
+          API Version: <code>{status.version}</code>
+          </>
           )}
           {status.error && (
             <>
-              API Error: <code>{status.error}</code>
+            API Error: <code>{status.error}</code>
             </>
-          )}
-        </section>
-      </div> */}
+            )}
+            </section>
+          </div> */}
 
       <SearchResult getSearchData={getSearchData} />
+      <Footer />
     </div>
   );
 }

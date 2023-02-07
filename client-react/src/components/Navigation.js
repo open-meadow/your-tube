@@ -1,8 +1,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
 
-import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
+import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
