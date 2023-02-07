@@ -24,6 +24,7 @@ export default function App() {
   const [status, setStatus] = useState({});
   const [username, setUsername] = useState();
   const [userid, setUserid] = useState();
+  const [playlists, setPlaylists] = useState([]);
 
   const {
     searchData,
@@ -59,6 +60,21 @@ export default function App() {
         console.log(err.message);
       });
   }, []);
+
+  useEffect(() => {
+    axios
+      .get(`/api/playlists/${loggedInUser}`)
+      .then((res) => {
+        // Set 'user' states
+        console.log("playlist data:", res.data.playlists);
+        setPlaylists(res.data.playlists);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
+
+  console.log("playlist state:", playlists);
 
   const opts = {
     playerVars: {
