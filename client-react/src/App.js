@@ -43,24 +43,24 @@ export default function App() {
       <Navigation />
       <hr className="break-line"></hr>
       <MainContent />
-      <Footer />
 
       {/* <div>
         <section>
-          {!status.error && (
-            <>
-              API Version: <code>{status.version}</code>
-            </>
+        {!status.error && (
+          <>
+          API Version: <code>{status.version}</code>
+          </>
           )}
           {status.error && (
             <>
-              API Error: <code>{status.error}</code>
+            API Error: <code>{status.error}</code>
             </>
-          )}
-        </section>
-      </div> */}
+            )}
+            </section>
+          </div> */}
 
       <SearchResult getSearchData={getSearchData} />
+      <Footer />
     </div>
   );
 }
