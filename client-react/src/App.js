@@ -34,10 +34,12 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    // Change user: 1=BigJim48, 2=LabberLearner23, 3=iHEARTreact
+    const userId = 1;
+
     axios
-      .get("/api/users/name?username=BigJim48")
+      .get(`/api/users/${userId}`)
       .then((res) => {
-        // console.log("user:", res.data.user[0].username);
         setUser(res.data.user[0].username);
       })
       .catch((err) => {
