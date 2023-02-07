@@ -24,7 +24,7 @@ export default function SearchResult(props) {
                 src="https://upload.wikimedia.org/wikipedia/en/5/5f/Original_Doge_meme.jpg"
                 alt="header"
               ></img>
-              <p className="video-title text-white">Very cool video title Very cool video title Very cool video title Very cool video title Very cool video title</p>
+              <p className="video-title text-white">Very cool video title</p>
             </div>
           </a>
           <div
