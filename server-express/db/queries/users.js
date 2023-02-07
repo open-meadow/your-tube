@@ -14,11 +14,25 @@ const getUserByName = (username) => {
       `SELECT username
         FROM users 
         WHERE username = $1;`,
-      ["BigJim48"]
+      [username]
     )
     .then((data) => {
       return data.rows;
     });
 };
 
-module.exports = { getUsers, getUserByName };
+// Get user by name
+const getUserById = (id) => {
+  return db
+    .query(
+      `SELECT username
+        FROM users 
+        WHERE id = $1;`,
+      [id]
+    )
+    .then((data) => {
+      return data.rows;
+    });
+};
+
+module.exports = { getUsers, getUserByName, getUserById };
