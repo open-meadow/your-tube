@@ -3,6 +3,10 @@
   text-align: center;
 }
 
+.dropdown-toggle::after {
+  display:none;
+}
+
 .video-result {
   width: 70%;
   margin: 1em 0;
@@ -37,4 +41,17 @@
   color: white;
   margin-right: 1em;
   size: 25px;
+}
+
+.dropdown-toggle {
+  --bs-btn-bg: null;
+  --bs-btn-border-color: null;
+  --bs-btn-hover-bg: null;
+  --bs-btn-padding-x: null;
+  --bs-btn-active-bg: null;
+  width: 45%;
+}
+
+.dropdown-toggle::after {
+  display: none !important; 
 }
