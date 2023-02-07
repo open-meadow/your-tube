@@ -25,7 +25,7 @@ const getUserByName = (username) => {
 const getUserById = (id) => {
   return db
     .query(
-      `SELECT username
+      `SELECT *
         FROM users 
         WHERE id = $1;`,
       [id]
