@@ -33,6 +33,20 @@ export default function App() {
       });
   }, []);
 
+  useEffect(() => {
+    axios
+      .get("/api/users/name?username=BigJim48")
+      .then((res) => {
+        // console.log("user:", res.data.user[0].username);
+        setUser(res.data.user[0].username);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
+
+  console.log("state:", user);
+
   const opts = {
     playerVars: {
       rel: 0,
@@ -84,7 +98,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <Navigation />
+      <Navigation username={user} />
       <hr className="break-line"></hr>
       <MainContent />
       <Footer />
