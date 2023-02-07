@@ -1,6 +1,6 @@
 require("dotenv").config();
 const express = require("express");
-const cors = require("cors");
+// const cors = require("cors");
 const path = require("path");
 
 const app = express();
@@ -29,7 +29,6 @@ app.get("/api/status", (req, res) => {
 app.use(function (req, res) {
   res.status(404);
 });
-
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}!`);
