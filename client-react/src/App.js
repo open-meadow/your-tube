@@ -23,13 +23,17 @@ import SearchBar from "components/SearchBar";
 
 export default function App() {
   const [status, setStatus] = useState({});
-  const {
-    searchData,
-    setSearchData,
-    searchTerm,
-    setSearchTerm,
-    getSearchData,
-  } = useApplicationData();
+
+  const [searchData, setSearchData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("pitch meeting");
+
+  useEffect(() => {
+    fetch(`https://invidious.sethforprivacy.com/api/v1/search?q=${searchTerm}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setSearchData(data);
+      });
+  }, [searchTerm]);
 
   useEffect(() => {
     axios
@@ -47,8 +51,8 @@ export default function App() {
       <Navigation />
       <hr className="break-line"></hr>
       <MainContent />
-      <SearchBar/>
-      <SearchResult getSearchData={getSearchData} />
+      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <SearchResult searchData={searchData} />
       <Footer />
 
       {/* <div>
@@ -65,7 +69,6 @@ export default function App() {
           )}
         </section>
       </div> */}
-
     </div>
   );
 }
