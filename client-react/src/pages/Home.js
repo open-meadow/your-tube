@@ -6,17 +6,29 @@ import SearchResult from "components/SearchResult";
 import SearchBar from "components/SearchBar";
 import VideoPlayer from "components/VideoPlayer";
 
+import { useGlobalContext } from "context/context";
+
 export default function Home(props) {
   const {
+    status,
+    setStatus,
     username,
+    setUsername,
+    userid,
+    setUserid,
     playlists,
+    setPlaylists,
+    searchData,
+    setSearchData,
     searchTerm,
     setSearchTerm,
     loadingState,
-    searchData,
+    setLoadingState,
     totalPages,
-    itemsPerPage,
-  } = props;
+    setTotalPages,
+  } = useGlobalContext();
+
+  const { itemsPerPage } = props;
 
   return (
     <div className="App">

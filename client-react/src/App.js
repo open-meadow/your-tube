@@ -1,6 +1,7 @@
 import axios from "axios";
 import { React, useEffect, useState, useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useGlobalContext } from "context/context";
 import YouTube from "react-youtube";
 
 // CSS Imports ///////////////////////////////
@@ -16,15 +17,24 @@ import Home from "pages/Home";
 import Video from "pages/Video";
 
 export default function App() {
-  const [status, setStatus] = useState({});
-  const [username, setUsername] = useState();
-  const [userid, setUserid] = useState();
-  const [playlists, setPlaylists] = useState([]);
-
-  const [searchData, setSearchData] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [loadingState, setLoadingState] = useState(false);
-  const [totalPages, setTotalPages] = useState(0);
+  const {
+    status,
+    setStatus,
+    username,
+    setUsername,
+    userid,
+    setUserid,
+    playlists,
+    setPlaylists,
+    searchData,
+    setSearchData,
+    searchTerm,
+    setSearchTerm,
+    loadingState,
+    setLoadingState,
+    totalPages,
+    setTotalPages,
+  } = useGlobalContext();
 
   const itemsPerPage = 5;
 
@@ -93,25 +103,8 @@ export default function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                username={username}
-                playlists={playlists}
-                searchTerm={searchTerm}
-                setSearchTerm={setSearchTerm}
-                loadingState={loadingState}
-                searchData={searchData}
-                totalPages={totalPages}
-                itemsPerPage={itemsPerPage}
-              />
-            }
-          />
-          <Route
-            path="/video"
-            element={<Video username={username} playlists={playlists} />}
-          />
+          <Route path="/" element={<Home itemsPerPage={itemsPerPage} />} />
+          <Route path="/video" element={<Video />} />
         </Routes>
       </Router>
 
