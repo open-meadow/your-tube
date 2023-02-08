@@ -6,7 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Playlist from "./Playlist";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faDesktop } from "@fortawesome/free-solid-svg-icons";
 
 export default function Nav(props) {
   const [show, setShow] = useState(false);
@@ -33,7 +33,8 @@ export default function Nav(props) {
   return (
     <Navbar sticky="top" bg="dark" variant="dark">
       <Navbar.Brand className="home-link" href="/">
-        YourTube
+        <FontAwesomeIcon icon={faDesktop} />
+        <span id="brand-home-link">YourTube</span>
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse className="justify-content-end" id="user-name">
