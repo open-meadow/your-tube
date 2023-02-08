@@ -8,14 +8,13 @@ export default function SearchResult(props) {
   const { searchData, loadingState, totalPages, itemsPerPage } = props;
   const [currentPage, setCurrentPage] = useState(1);
 
+  // divide obtained data by page number
   const currentData = searchData.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
 
+  // get actual data from components
   const getSearchData = () => {
     if (loadingState) {
       return (
@@ -25,7 +24,7 @@ export default function SearchResult(props) {
       );
     }
 
-    const obtainedSearchData = currentData.map((single) => {
+    return currentData.map((single) => {
       if (single.title) {
         return (
           <div className="video-result">
@@ -48,8 +47,6 @@ export default function SearchResult(props) {
         );
       }
     });
-
-    return obtainedSearchData;
   };
 
   return (
