@@ -1,30 +1,40 @@
 import React, { useState } from "react";
+import { Button, ButtonGroup, DropdownButton, Dropdown } from "react-bootstrap";
+import DropdownItem from "react-bootstrap/esm/DropdownItem";
+import "./Pagination.css";
 
 const Pagination = (props) => {
   const { totalPages, itemsPerPage, setCurrentPage, currentPage } = props;
 
-  console.log("total items: ", totalPages);
-  console.log("items per page: ", itemsPerPage);
-
-  // const [currentPage, setCurrentPage] = useState(1);
   const pageNumbers = [];
-
   for (let i = 1; i <= Math.ceil(totalPages); i++) {
     pageNumbers.push(i);
   }
 
+  const generatePageLinks = () => {
+    return pageNumbers.map((number) => (
+      <DropdownItem
+        key={number}
+        onClick={() => setCurrentPage(number)}
+        className="page-link"
+      >
+        {number}
+      </DropdownItem>
+    ));
+  };
+
   return (
     <nav className="pagination">
-      <div className="page-div">Poopoo</div>
-      <ul>
-        {pageNumbers.map((number) => (
-          <li key={number}>
-            <button onClick={() => setCurrentPage(number)} className="page-link">
-              {number}
-            </button>
-          </li>
-        ))}
-      </ul>
+      {totalPages && (
+        <DropdownButton
+          title="Pages"
+          className="mb-2"
+          id="bg-vertical-dropdown-1"
+          variant="outline-light"
+        >
+          {generatePageLinks()}
+        </DropdownButton>
+      )}
     </nav>
   );
 };
