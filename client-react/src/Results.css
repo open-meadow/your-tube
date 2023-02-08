@@ -59,6 +59,10 @@
   display: none !important; 
 }
 
+.dropdown-menu {
+  --bs-dropdown-link-active-bg: #212529
+}
+
 .add-to-playlist {
   display: flex;
   position: absolute;
