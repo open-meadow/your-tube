@@ -43,7 +43,7 @@ export default function SearchResult(props) {
       if (single.type === "video") {
         return (
           <div className="video-result">
-            <Link to={"/video/" + single.videoId}>
+            <Link to={`/video/${single.videoId}`}>
               <div className="preview">
                 <img
                   className="video-header"
