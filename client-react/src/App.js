@@ -16,6 +16,7 @@ import MainContent from "components/MainContent";
 import Footer from "components/Footer";
 import SearchResult from "components/SearchResult";
 import SearchBar from "components/SearchBar";
+import Video from "Video";
 
 export default function App() {
   const [status, setStatus] = useState({});
@@ -140,6 +141,7 @@ export default function App() {
     <div className="App">
       <Navigation username={username} playlists={playlists} />
       <hr className="break-line"></hr>
+      <Video/>
       <MainContent />
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <SearchResult

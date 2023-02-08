@@ -1,46 +1,47 @@
 import "App.css";
 import axios from "axios";
-import { React, useEffect, useState } from "react";
 import YouTube from "react-youtube";
+import { React, useEffect, useState, useRef } from "react";
+import videojs from "video.js";
+import 'video.js/dist/video-js.css';
 
 export default function Video() {
-  useEffect(() => {
-    axios
-      .get("/api/status")
-      .then((res) => {
-        setStatus(res.data);
-      })
-      .catch((err) => {
-        setStatus({ error: err.message });
-      });
-  }, []);
-
-  const opts = {
-    playerVars: {
-      rel: 0,
-    },
-  };
-
   const invidiousEndpoint = "https://invidio.us/api/v1/videos/";
   const videoId = "MWQkvbe5nyY";
 
-  const getVideoSource = async function (videoId) {
-    const response = await fetch(invidiousEndpoint + videoId);
-    console.log("response: ", response);
-    const data = await response.json();
-    return data.files[0].url;
-  };
+  // const getVideoSource = async function (videoId) {
+  //   const response = await fetch(invidiousEndpoint + videoId);
+  //   console.log("response: ", response);
+  //   const data = await response.json();
+  //   return data.files[0].url;
+  // };
 
   // Videoplayer (not in use right now)
-  const VideoPlayer = ({ videoId }) => {
-    const [source, setSource] = useState("");
+  const VideoPlayer = () => {
+    const videoNode = useRef(null);
 
     useEffect(() => {
-      getVideoSource(videoId).then((source) => {
-        setSource(source);
+      const player = videojs(videoNode.current, {
+        autoplay: true,
+        controls: true,
+        sources: [{
+          src: "//vjs.zencdn.net/v/oceans.mp4",
+          type: 'video/mp4'
+        }]
       });
-    }, [videoId]);
 
-    return <video controls={true} src={source} style={{ width: "100%" }} />;
+      return () => {
+        player.dispose();
+      }
+    }, []);
+
+    return (
+      <video ref={videoNode} className="video-js vjs-default-skin vjs-big-play-centered" />
+    );
+
   };
+
+  return (
+    <VideoPlayer/>
+  );
 }
