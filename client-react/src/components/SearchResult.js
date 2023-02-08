@@ -12,6 +12,8 @@ import Spinner from "react-bootstrap/Spinner";
 
 // Import Pagination
 import Pagination from "./Pagination";
+import { Popover } from "react-bootstrap";
+import axios from "axios";
 
 export default function SearchResult(props) {
   const { searchData, loadingState, totalPages, itemsPerPage } = props;
@@ -36,6 +38,16 @@ export default function SearchResult(props) {
         </Spinner>
       );
     }
+    
+    
+  // add video to playlist
+  const handleSubmit = (vidId, title, plId) => {
+    axios
+      .put("/api/playlists/1", {vidId, title, plId})
+      .then((res) => {
+        console.log(res)
+      })
+  }
 
     return currentData.map((single) => {
       if (single.title) {
@@ -69,7 +81,7 @@ export default function SearchResult(props) {
                     <Dropdown.Header>Add to playlist:</Dropdown.Header>
                     <Dropdown.Divider />
                     <Dropdown.Item
-                      onClick={() => console.log("Link 1 got clicked!")}
+                      onClick={() => handleSubmit(single.videoId, single.title)}
                     >
                       Playlist 1
                     </Dropdown.Item>
