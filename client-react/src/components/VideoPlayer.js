@@ -5,7 +5,7 @@ import { React, useEffect, useState, useRef } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 
-export default function Video() {
+export default function VideoPlayer() {
   const invidiousEndpoint = "https://invidio.us/api/v1/videos/";
   const videoId = "MWQkvbe5nyY";
 
@@ -16,7 +16,6 @@ export default function Video() {
   //   return data.files[0].url;
   // };
 
-  // Videoplayer (not in use right now)
   const videoNode = useRef(null);
 
   useEffect(() => {

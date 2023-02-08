@@ -16,7 +16,7 @@ import MainContent from "components/MainContent";
 import Footer from "components/Footer";
 import SearchResult from "components/SearchResult";
 import SearchBar from "components/SearchBar";
-import Video from "Video";
+import VideoPlayer from "components/VideoPlayer";
 
 export default function App() {
   const [status, setStatus] = useState({});
@@ -94,54 +94,16 @@ export default function App() {
     },
   };
 
-  const invidiousEndpoint = "https://invidio.us/api/v1/videos/";
-  const videoId = "MWQkvbe5nyY";
-
-  const getVideoSource = async function (videoId) {
-    const response = await fetch(invidiousEndpoint + videoId);
-    console.log("response: ", response);
-    const data = await response.json();
-    return data.files[0].url;
-  };
-
-  // Videoplayer (not in use right now)
-  const VideoPlayer = ({ videoId }) => {
-    const [source, setSource] = useState("");
-
-    useEffect(() => {
-      getVideoSource(videoId).then((source) => {
-        setSource(source);
-      });
-    }, [videoId]);
-
-    return <video controls={true} src={source} style={{ width: "100%" }} />;
-  };
-
-  // const API_KEY = "AIzaSyBZ9Mr5A7JlJO2sqYsG09v1UR1TCKtkRk8";
-  // const searchTerm = "pitch meeting";
-
   fetch(`https://invidious.sethforprivacy.com/api/v1/search?q=${searchTerm}`)
     .then((response) => response.json())
     .then((data) => console.log(data))
     .catch((error) => console.error(error));
 
-  // fetch(
-  //   `https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&part=snippet&type=video&key=${API_KEY}`
-  // )
-  //   .then((response) => response.json())
-  //   .then((data) => console.log(data))
-  //   .catch((error) => console.error(error));
-
-  // youtubesearchapi
-  //   .GetListByKeyword("pitch+meeting")
-  //   .then((data) => console.log("this is data: ", data))
-  //   .catch((err) => console.error("this is err: ", err));
-
   return (
     <div className="App">
       <Navigation username={username} playlists={playlists} />
       <hr className="break-line"></hr>
-      <Video/>
+      <VideoPlayer/>
       <MainContent />
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <SearchResult
