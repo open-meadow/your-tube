@@ -3,6 +3,7 @@ import { Button, ButtonGroup, DropdownButton, Dropdown } from "react-bootstrap";
 import DropdownItem from "react-bootstrap/esm/DropdownItem";
 import "./Pagination.css";
 
+// create pages at the end
 const Pagination = (props) => {
   const { totalPages, itemsPerPage, setCurrentPage, currentPage } = props;
 

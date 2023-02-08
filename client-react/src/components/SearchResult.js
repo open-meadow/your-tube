@@ -51,13 +51,14 @@ export default function SearchResult(props) {
 
   return (
     <div id="search-results">
+      <hr className="break-line"/>
       {getSearchData()}
-      <Pagination
+      {!loadingState && <Pagination
         totalPages={totalPages}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         itemsPerPage={itemsPerPage}
-      />
+      />}
     </div>
   );
 }
