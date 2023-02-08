@@ -16,7 +16,7 @@ import MainContent from "components/MainContent";
 import Footer from "components/Footer";
 import SearchResult from "components/SearchResult";
 import SearchBar from "components/SearchBar";
-import Video from "components/Video";
+import Video from "Video";
 
 export default function App() {
   const [status, setStatus] = useState({});
