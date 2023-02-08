@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 const playlistQueries = require("../db/queries/playlists");
 
-router.get("/", (req, res) => {
+router.get("/:id", (req, res) => {
+  const id = req.params.id;
   playlistQueries
-    .getPlaylists()
+    .getPlaylistsById(id)
     .then((playlists) => {
       res.json({ playlists });
     })
