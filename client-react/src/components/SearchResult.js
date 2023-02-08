@@ -1,7 +1,7 @@
-// import react
+// Import React
 import { useState, useEffect } from "react";
 
-// font awesome
+// Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
@@ -10,7 +10,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Spinner from "react-bootstrap/Spinner";
 
-// import pagination
+// Import Pagination
 import Pagination from "./Pagination";
 
 export default function SearchResult(props) {
