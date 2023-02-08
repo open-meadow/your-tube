@@ -18,6 +18,8 @@ import SearchResult from "components/SearchResult";
 import SearchBar from "components/SearchBar";
 import VideoPlayer from "components/VideoPlayer";
 
+import Home from "pages/Home";
+
 export default function App() {
   const [status, setStatus] = useState({});
   const [username, setUsername] = useState();
