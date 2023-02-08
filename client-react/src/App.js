@@ -1,5 +1,6 @@
 import axios from "axios";
-import { React, useEffect, useState } from "react";
+import { React, useEffect, useState, useContext } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import YouTube from "react-youtube";
 
 // CSS Imports ///////////////////////////////
@@ -10,22 +11,15 @@ import "Results.css";
 
 ////////////////////////////////////////////////////
 
-// Import components
-import Navigation from "components/Navigation";
-import MainContent from "components/MainContent";
-import Footer from "components/Footer";
-import SearchResult from "components/SearchResult";
-import SearchBar from "components/SearchBar";
-import VideoPlayer from "components/VideoPlayer";
-
+// Import pages
 import Home from "pages/Home";
+import Video from "pages/Video";
 
 export default function App() {
   const [status, setStatus] = useState({});
   const [username, setUsername] = useState();
   const [userid, setUserid] = useState();
   const [playlists, setPlaylists] = useState([]);
-
 
   const [searchData, setSearchData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -90,12 +84,6 @@ export default function App() {
 
   console.log("playlist state:", playlists);
 
-  const opts = {
-    playerVars: {
-      rel: 0,
-    },
-  };
-
   fetch(`https://invidious.sethforprivacy.com/api/v1/search?q=${searchTerm}`)
     .then((response) => response.json())
     .then((data) => console.log(data))
@@ -103,18 +91,29 @@ export default function App() {
 
   return (
     <div className="App">
-      <Navigation username={username} playlists={playlists} />
-      <hr className="break-line"></hr>
-      <VideoPlayer/>
-      <MainContent />
-      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <SearchResult
-        loadingState={loadingState}
-        searchData={searchData}
-        totalPages={totalPages}
-        itemsPerPage={itemsPerPage}
-      />
-      <Footer />
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                username={username}
+                playlists={playlists}
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+                loadingState={loadingState}
+                searchData={searchData}
+                totalPages={totalPages}
+                itemsPerPage={itemsPerPage}
+              />
+            }
+          />
+          <Route
+            path="/video"
+            element={<Video username={username} playlists={playlists} />}
+          />
+        </Routes>
+      </Router>
 
       {/* <div>
         <section>
