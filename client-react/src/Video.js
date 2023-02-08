@@ -3,7 +3,7 @@ import axios from "axios";
 import YouTube from "react-youtube";
 import { React, useEffect, useState, useRef } from "react";
 import videojs from "video.js";
-import 'video.js/dist/video-js.css';
+import "video.js/dist/video-js.css";
 
 export default function Video() {
   const invidiousEndpoint = "https://invidio.us/api/v1/videos/";
@@ -17,31 +17,29 @@ export default function Video() {
   // };
 
   // Videoplayer (not in use right now)
-  const VideoPlayer = () => {
-    const videoNode = useRef(null);
+  const videoNode = useRef(null);
 
-    useEffect(() => {
-      const player = videojs(videoNode.current, {
-        autoplay: true,
-        controls: true,
-        sources: [{
+  useEffect(() => {
+    const player = videojs(videoNode.current, {
+      autoplay: true,
+      controls: true,
+      sources: [
+        {
           src: "//vjs.zencdn.net/v/oceans.mp4",
-          type: 'video/mp4'
-        }]
-      });
+          type: "video/mp4",
+        },
+      ],
+    });
 
-      return () => {
-        player.dispose();
-      }
-    }, []);
-
-    return (
-      <video ref={videoNode} className="video-js vjs-default-skin vjs-big-play-centered" />
-    );
-
-  };
+    return () => {
+      player.dispose();
+    };
+  }, []);
 
   return (
-    <VideoPlayer/>
+    <video
+      ref={videoNode}
+      className="video-js vjs-default-skin vjs-big-play-centered"
+    />
   );
 }
