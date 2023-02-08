@@ -1,4 +1,5 @@
 require("dotenv").config();
+const bodyParser = require('body-parser');
 const express = require("express");
 // const cors = require("cors");
 const path = require("path");
@@ -15,6 +16,10 @@ app.use(express.static(public));
 // Separate routes for each resource here
 const userApiRoutes = require("../routes/users-api");
 const playlistApiRoutes = require("../routes/playlists-api");
+
+// Body Parser
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
 
 // Mount the resource routes here
 app.use("/api/users", userApiRoutes);
