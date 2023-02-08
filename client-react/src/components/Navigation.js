@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import Button from "react-bootstrap/Button";
 import Navbar from "react-bootstrap/Navbar";
+import Playlist from "./Playlist";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -13,7 +14,21 @@ export default function Nav(props) {
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
 
-  console.log("props:", props);
+  // console.log("props:", props.playlists);
+
+  const arrayOfPlaylists = props.playlists;
+
+  const allThePlaylists = arrayOfPlaylists.map((playlist) => {
+    // console.log("props:", props.playlists);
+    return (
+      <Playlist
+        key={playlist.playlist_id}
+        playlist_name={playlist.playlist_name}
+        playlist_desc={playlist.playlist_desc}
+        videos={playlist.videos}
+      />
+    );
+  });
 
   return (
     <Navbar bg="dark" variant="dark">
@@ -31,15 +46,7 @@ export default function Nav(props) {
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Playlists</Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>
-          <h2>Hello World!</h2>
-          <ul>
-            <li>Song 1</li>
-            <li>Song 2</li>
-            <li>Song 3</li>
-            <li>Song 4</li>
-          </ul>
-        </Offcanvas.Body>
+        <Offcanvas.Body>{allThePlaylists}</Offcanvas.Body>
       </Offcanvas>
     </Navbar>
   );
