@@ -3,3 +3,17 @@
   flex-direction: column;
   margin-bottom: 2em;
 }
+
+#bg-vertical-dropdown-1 {
+  outline: auto;
+  color: floralwhite;
+}
+
+#bg-vertical-dropdown-1:hover {
+  background-color: floralwhite;
+  color: black;
+}
+
+.page-link {
+  text-align: center;
+}
