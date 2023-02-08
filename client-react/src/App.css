@@ -56,7 +56,7 @@ li:hover a {
 #footer {
   padding: 5px 0 0 0;
   background-color: #f2f2f2;
-  position: fixed;
+  /* position: fixed; */
   left: 0;
   bottom: 0;
   width: 100%;
@@ -120,4 +120,8 @@ li:hover a {
   justify-content: center;
   color: white;
   margin: 10px 0 0 10px ;
+}
+
+.page-div {
+  color: aliceblue;
 }

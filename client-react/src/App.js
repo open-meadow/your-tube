@@ -26,6 +26,9 @@ export default function App() {
   const [searchData, setSearchData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loadingState, setLoadingState] = useState(false);
+  const [totalPages, setTotalPages] = useState(0);
+
+  const itemsPerPage = 5;
 
   useEffect(() => {
     setSearchData([]);
@@ -34,8 +37,10 @@ export default function App() {
     fetch(`https://invidious.sethforprivacy.com/api/v1/search?q=${searchTerm}`)
       .then((response) => response.json())
       .then((data) => {
+        console.log("this is data: ", data);
         setSearchData(data);
         setLoadingState(false);
+        setTotalPages(Math.ceil(data.length / itemsPerPage));
       });
   }, [searchTerm]);
 
@@ -56,7 +61,12 @@ export default function App() {
       <hr className="break-line"></hr>
       <MainContent />
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <SearchResult loadingState={loadingState} searchData={searchData} />
+      <SearchResult
+        loadingState={loadingState}
+        searchData={searchData}
+        totalPages={totalPages}
+        itemsPerPage={itemsPerPage}
+      />
       <Footer />
 
       {/* <div>

@@ -1,10 +1,20 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import Spinner from "react-bootstrap/Spinner";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import Pagination from "./Pagination";
 
 export default function SearchResult(props) {
-  const { searchData, loadingState } = props;
+  const { searchData, loadingState, totalPages, itemsPerPage } = props;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const currentData = searchData.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   const getSearchData = () => {
     if (loadingState) {
@@ -15,7 +25,7 @@ export default function SearchResult(props) {
       );
     }
 
-    const obtainedSearchData = searchData.map((single) => {
+    const obtainedSearchData = currentData.map((single) => {
       if (single.title) {
         return (
           <div className="video-result">
@@ -39,7 +49,6 @@ export default function SearchResult(props) {
       }
     });
 
-    console.log("obtai", obtainedSearchData);
     return obtainedSearchData;
   };
 
@@ -65,6 +74,12 @@ export default function SearchResult(props) {
       </article>
 
       {getSearchData()}
+      <Pagination
+        totalPages={totalPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        itemsPerPage={itemsPerPage}
+      />
     </div>
   );
 }
