@@ -16,7 +16,7 @@ export default function Nav(props) {
   console.log("props:", props);
 
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar sticky="top" bg="dark" variant="dark">
       <Navbar.Brand className="home-link" href="/">
         <FontAwesomeIcon icon={faDesktop} />
         <span className="website-name" >YourTube</span>
