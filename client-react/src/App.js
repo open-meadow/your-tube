@@ -104,7 +104,7 @@ export default function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home itemsPerPage={itemsPerPage} />} />
-          <Route path="/video" element={<Video />} />
+          <Route path="/video/:id" element={<Video />} />
         </Routes>
       </Router>
 

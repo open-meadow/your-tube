@@ -40,10 +40,10 @@ export default function SearchResult(props) {
     }
 
     return currentData.map((single) => {
-      if (single.title) {
+      if (single.type === "video") {
         return (
           <div className="video-result">
-            <a href="/">
+            <Link to={"/video/" + single.videoId}>
               <div className="preview">
                 <img
                   className="video-header"
@@ -51,13 +51,7 @@ export default function SearchResult(props) {
                   alt="header"
                 ></img>
 
-                <div className="video-title text-white">
-                  <Link to='/video'>{single.title}</Link>
-                </div>
-
-                <Routes>
-                  <Route path="/video" element={<Video />} />
-                </Routes>
+                <div className="video-title text-white">{single.title}</div>
 
                 <div
                   className="add-to-playlist"
@@ -97,7 +91,7 @@ export default function SearchResult(props) {
                   </DropdownButton>
                 </div>
               </div>
-            </a>
+            </Link>
           </div>
         );
       }

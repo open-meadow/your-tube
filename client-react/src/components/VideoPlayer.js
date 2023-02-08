@@ -5,9 +5,9 @@ import { React, useEffect, useState, useRef } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 
-export default function VideoPlayer() {
-  const invidiousEndpoint = "https://invidio.us/api/v1/videos/";
-  const videoId = "MWQkvbe5nyY";
+export default function VideoPlayer(props) {
+  // const invidiousEndpoint = "https://invidio.us/api/v1/videos/";
+  // const videoId = "MWQkvbe5nyY";
 
   // const getVideoSource = async function (videoId) {
   //   const response = await fetch(invidiousEndpoint + videoId);
