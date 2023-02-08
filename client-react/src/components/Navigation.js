@@ -31,7 +31,7 @@ export default function Nav(props) {
   });
 
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar sticky="top" bg="dark" variant="dark">
       <Navbar.Brand className="home-link" href="/">
         YourTube
       </Navbar.Brand>
