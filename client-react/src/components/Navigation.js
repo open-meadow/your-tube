@@ -19,11 +19,13 @@ export default function Nav(props) {
   const arrayOfPlaylists = props.playlists;
 
   const allThePlaylists = arrayOfPlaylists.map((playlist) => {
-    console.log("props:", props.playlists);
+    // console.log("props:", props.playlists);
     return (
       <Playlist
+        key={playlist.playlist_id}
         playlist_name={playlist.playlist_name}
-        video_title={playlist.video_title}
+        playlist_desc={playlist.playlist_desc}
+        videos={playlist.videos}
       />
     );
   });
