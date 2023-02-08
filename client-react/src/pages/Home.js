@@ -22,7 +22,6 @@ export default function Home(props) {
     <div className="App">
       <Navigation username={username} playlists={playlists} />
       <hr className="break-line"></hr>
-      <VideoPlayer />
       <MainContent />
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <SearchResult

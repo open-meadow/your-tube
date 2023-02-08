@@ -12,6 +12,8 @@ import Spinner from "react-bootstrap/Spinner";
 
 // import pagination
 import Pagination from "./Pagination";
+import { Link, Route, Routes } from "react-router-dom";
+import Video from "pages/Video";
 
 export default function SearchResult(props) {
   const { searchData, loadingState, totalPages, itemsPerPage } = props;
@@ -48,7 +50,15 @@ export default function SearchResult(props) {
                   src={single.videoThumbnails && single.videoThumbnails[1].url}
                   alt="header"
                 ></img>
-                <p className="video-title text-white">{single.title}</p>
+
+                <div className="video-title text-white">
+                  <Link to='/video'>{single.title}</Link>
+                </div>
+
+                <Routes>
+                  <Route path="/video" element={<Video />} />
+                </Routes>
+
                 <div
                   className="add-to-playlist"
                   onClick={(event) =>
