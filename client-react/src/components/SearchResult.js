@@ -22,14 +22,15 @@ export default function SearchResult(props) {
   const { searchData, loadingState, totalPages, itemsPerPage } = props;
   const [currentPage, setCurrentPage] = useState(1);
 
+  const plusIcon = (
+    <FontAwesomeIcon className="plus-icon" icon={faPlusCircle} size="3x" />
+  );
+  
   const {
     // Used to update playlist sidebar on add video
     setUpdatePL,
   } = useGlobalContext();
 
-  const plusIcon = (
-    <FontAwesomeIcon className="plus-icon" icon={faPlusCircle} size="3x" />
-  );
 
   // divide obtained data by page number
   const currentData = searchData.slice(
