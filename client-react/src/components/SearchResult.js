@@ -30,7 +30,7 @@ export default function SearchResult(props) {
     <FontAwesomeIcon className="plus-icon" icon={faPlusCircle} size="3x" />
   );
 
-  const { setUpdatePL, setShow } = useGlobalContext();
+  const { setUpdatePL, setShow, show } = useGlobalContext();
 
   // divide obtained data by page number
   const currentData = searchData.slice(
@@ -58,11 +58,14 @@ export default function SearchResult(props) {
       });
     };
 
+    // if (show) {
+    //   return <Success message={successMsg} />;
+    // }
+
     return currentData.map((single) => {
       if (single.type === "video") {
         return (
           <div className="video-result" key={single.videoId}>
-            <Success message={successMsg} />;
             <Link to={`/video/${single.videoId}`}>
               <div className="preview">
                 <img
