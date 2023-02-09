@@ -1,3 +1,8 @@
 #create-new-playlist {
   margin-bottom: 1em;
 }
+
+.create-playlist-button {
+  display: block;
+  margin-left: 7px;
+}
