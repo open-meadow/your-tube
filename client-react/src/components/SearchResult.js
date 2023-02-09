@@ -19,6 +19,8 @@ import { Link, Route, Routes } from "react-router-dom";
 // Other Imports
 import { useGlobalContext } from "context/context";
 
+import Success from "./Success";
+
 export default function SearchResult(props) {
   const { searchData, loadingState, totalPages, itemsPerPage } = props;
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,16 +29,15 @@ export default function SearchResult(props) {
   // Get playlists from global context
   const { playlists } = useGlobalContext();
 
+  const [successMsg, setSuccessMsg] = useState("");
+
   const plusIcon = (
     <FontAwesomeIcon className="plus-icon" icon={faPlusCircle} size="3x" />
   );
 
-  const {
-    // Used to update playlist sidebar on add video
-    setUpdatePL,
-  } = useGlobalContext();
+  const { setUpdatePL, setShow, show } = useGlobalContext();
 
-  // Divide obtained data by page number
+  // divide obtained data by page number
   const currentData = searchData.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
@@ -59,6 +60,8 @@ export default function SearchResult(props) {
         .then((res) => {
           console.log(res);
           setUpdatePL(vidId);
+          setSuccessMsg(`${title} successfully added to playlist!`);
+          setShow(true);
         });
     };
 
@@ -81,6 +84,10 @@ export default function SearchResult(props) {
         </Dropdown.Item>
       );
     });
+
+    // if (show) {
+    //   return <Success message={successMsg} />;
+    // }
 
     return currentData.map((single) => {
       if (single.type === "video") {
