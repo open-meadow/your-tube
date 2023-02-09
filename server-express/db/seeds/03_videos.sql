@@ -3,4 +3,5 @@ INSERT INTO videos (yt_video_key, title, playlist_id) VALUES
 ('hdI2bqOjy3c', 'JavaScript Crash Course For Beginners', '1'),
 ('h74pPIySz78', 'Night Sky - Lofi hip hop mix ~ Stress Relief, Relaxing Music', '2'),
 ('4ZUi5EP6rAI', 'Stop Overthinking 🔮 - Lofi hip hop mix - Calm Down And Relax - Lofi For Life', '2'),
-('o4IQRX8zSJ4', 'Night In Japan Lofi Hip Hop ☯ - relaxing music to sleep/chill', '2');
+('o4IQRX8zSJ4', 'Night In Japan Lofi Hip Hop ☯ - relaxing music to sleep/chill', '2'),
+('hQAHSlTtcmY', 'Learn React In 30 Minutes', '3');
