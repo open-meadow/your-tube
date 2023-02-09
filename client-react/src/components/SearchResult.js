@@ -85,50 +85,54 @@ export default function SearchResult(props) {
       );
     });
 
-    // if (show) {
-    //   return <Success message={successMsg} />;
-    // }
+    if (show) {
+      return <Success message={successMsg} />;
+    }
 
     return currentData.map((single) => {
       if (single.type === "video") {
         return (
-          <div className="video-result" key={single.videoId}>
-            <Link to={`/video/${single.videoId}`}>
-              <div className="preview">
-                <img
-                  className="video-header"
-                  src={single.videoThumbnails && single.videoThumbnails[1].url}
-                  alt="header"
-                ></img>
+          <>
+            <div className="video-result" key={single.videoId}>
+              <Link to={`/video/${single.videoId}`}>
+                <div className="preview">
+                  <img
+                    className="video-header"
+                    src={
+                      single.videoThumbnails && single.videoThumbnails[1].url
+                    }
+                    alt="header"
+                  ></img>
 
-                <div className="video-title text-white">{single.title}</div>
+                  <div className="video-title text-white">{single.title}</div>
 
-                <div
-                  className="add-to-playlist"
-                  onClick={(event) =>
-                    event.preventDefault() && event.stopPropagation()
-                  }
-                >
-                  <DropdownButton
-                    id="dropdown-basic-button"
-                    title={plusIcon}
-                    drop="down-centered"
-                    style={{
-                      background: "none",
-                      border: "none",
-                      boxShadow: "none",
-                      padding: 0,
-                    }}
-                    onClick={() => setCurrentVid(single)}
+                  <div
+                    className="add-to-playlist"
+                    onClick={(event) =>
+                      event.preventDefault() && event.stopPropagation()
+                    }
                   >
-                    <Dropdown.Header>Add to playlist:</Dropdown.Header>
-                    <Dropdown.Divider />
-                    {playlistNames}
-                  </DropdownButton>
+                    <DropdownButton
+                      id="dropdown-basic-button"
+                      title={plusIcon}
+                      drop="down-centered"
+                      style={{
+                        background: "none",
+                        border: "none",
+                        boxShadow: "none",
+                        padding: 0,
+                      }}
+                      onClick={() => setCurrentVid(single)}
+                    >
+                      <Dropdown.Header>Add to playlist:</Dropdown.Header>
+                      <Dropdown.Divider />
+                      {playlistNames}
+                    </DropdownButton>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          </div>
+              </Link>
+            </div>
+          </>
         );
       }
     });
