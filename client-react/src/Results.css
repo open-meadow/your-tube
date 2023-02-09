@@ -15,7 +15,8 @@
 }
 
 .video-result:hover {
-  box-shadow: 5px 5px white;
+  box-shadow: 5px 5px 15px white;
+  transition: 0.25s ease-in-out;
 }
 
 .preview {
