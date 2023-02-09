@@ -11,15 +11,20 @@ export default function Video(props) {
   const { loadingState } = useGlobalContext();
 
   return (
-    <div className="Video">
+    <div className="Video-Page">
       <Navigation />
       <hr className="break-line"></hr>
-      {loadingState && (
-        <Spinner animation="border" variant="light" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-      )}
-      {!loadingState && <VideoPlayer className="video-player" />}
+      <div className="video">
+        {loadingState && (
+          <Spinner
+            className="loading-spin"
+            animation="border"
+            variant="light"
+            role="status"
+          />
+        )}
+        {!loadingState && <VideoPlayer />}
+      </div>
     </div>
   );
 }
