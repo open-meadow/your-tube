@@ -24,6 +24,9 @@ export const AppProvider = (props) => {
   const [subCountText, setSubCountText] = useState(null);
   const [likeCount, setLikeCount] = useState(null);
 
+  // use to show success message
+  const [show, setShow] = useState(false);
+
   return (
     <AppContext.Provider
       value={{
@@ -56,7 +59,9 @@ export const AppProvider = (props) => {
         subCountText,
         setSubCountText,
         likeCount,
-        setLikeCount
+        setLikeCount,
+        show,
+        setShow,
       }}
     >
       {props.children}
