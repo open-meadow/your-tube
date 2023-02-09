@@ -19,7 +19,9 @@ export const AppProvider = (props) => {
   // use to get video details
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
-  const [videoId, setVideoId] = useState(null);
+  const [author, setAuthor] = useState(null);
+  const [subCountText, setSubCountText] = useState(null);
+  const [likeCount, setLikeCount] = useState(null);
 
   return (
     <AppContext.Provider
@@ -46,8 +48,12 @@ export const AppProvider = (props) => {
         setTitle,
         description,
         setDescription,
-        videoId,
-        setVideoId,
+        author,
+        setAuthor,
+        subCountText,
+        setSubCountText,
+        likeCount,
+        setLikeCount
       }}
     >
       {props.children}
