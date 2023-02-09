@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const playlistQueries = require("../db/queries/playlists");
 const { addToPlaylist } = require("../db/queries/addToPlaylist");
+const { createPlaylist } = require("../db/queries/createPlaylist");
 
 router.get("/:id", (req, res) => {
   const id = req.params.id;
@@ -23,6 +24,21 @@ router.put("/:id", (req, res) => {
   addToPlaylist(vidId, title, plId)
     .then((data) => {
       console.log("data====", data)
+      return res.send(data)
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    })
+})
+
+router.post("/", (req, res) => {
+  console.log("body two====+++++", req.body)
+  const name = req.body.playlistName
+  const description = req.body.playlistDesc
+  const user_id = req.body.userid
+  createPlaylist(name, description, user_id)
+    .then((data) => {
+      console.log("new pl data====", data)
       return res.send(data)
     })
     .catch((err) => {
