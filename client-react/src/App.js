@@ -39,21 +39,6 @@ export default function App() {
     setUpdatePL,
   } = useGlobalContext();
 
-  const itemsPerPage = 5;
-
-  useEffect(() => {
-    setSearchData([]);
-    setLoadingState(true);
-
-    fetch(`https://invidious.sethforprivacy.com/api/v1/search?q=${searchTerm}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setSearchData(data);
-        setLoadingState(false);
-        setTotalPages(Math.ceil(data.length / itemsPerPage));
-      });
-  }, [searchTerm]);
-
   useEffect(() => {
     axios
       .get("/api/status")
@@ -97,7 +82,7 @@ export default function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element={<Home itemsPerPage={itemsPerPage} />} />
+          <Route path="/" element={<Home />} />
           <Route path="/video/:id" element={<Video />} />
         </Routes>
       </Router>
