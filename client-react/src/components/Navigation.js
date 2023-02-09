@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 
 import Button from "react-bootstrap/Button";
 import Navbar from "react-bootstrap/Navbar";
+import Playlist from "./Playlist";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faDesktop } from "@fortawesome/free-solid-svg-icons";
 
 export default function Nav(props) {
   const [show, setShow] = useState(false);
@@ -13,12 +14,27 @@ export default function Nav(props) {
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
 
-  console.log("props:", props);
+  // console.log("props:", props.playlists);
+
+  const arrayOfPlaylists = props.playlists;
+
+  const allThePlaylists = arrayOfPlaylists.map((playlist) => {
+    // console.log("props:", props.playlists);
+    return (
+      <Playlist
+        key={playlist.playlist_id}
+        playlist_name={playlist.playlist_name}
+        playlist_desc={playlist.playlist_desc}
+        videos={playlist.videos}
+      />
+    );
+  });
 
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar sticky="top" bg="dark" variant="dark">
       <Navbar.Brand className="home-link" href="/">
-        YourTube
+        <FontAwesomeIcon icon={faDesktop} />
+        <span id="brand-home-link">YourTube</span>
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse className="justify-content-end" id="user-name">
@@ -31,15 +47,7 @@ export default function Nav(props) {
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Playlists</Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>
-          <h2>Hello World!</h2>
-          <ul>
-            <li>Song 1</li>
-            <li>Song 2</li>
-            <li>Song 3</li>
-            <li>Song 4</li>
-          </ul>
-        </Offcanvas.Body>
+        <Offcanvas.Body>{allThePlaylists}</Offcanvas.Body>
       </Offcanvas>
     </Navbar>
   );

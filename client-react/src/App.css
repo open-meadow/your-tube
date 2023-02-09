@@ -49,6 +49,10 @@ li:hover a {
   color: white;
 }
 
+#brand-home-link {
+  padding-left: 10px;
+}
+
 #user-name {
   margin-right: 10px;
 }

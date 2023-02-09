@@ -83,8 +83,7 @@ export default function App() {
     axios
       .get(`/api/playlists/${loggedInUser}`)
       .then((res) => {
-        // Set 'user' states
-        console.log("playlist data:", res.data.playlists);
+        // Set 'playlist' state
         setPlaylists(res.data.playlists);
       })
       .catch((err) => {
