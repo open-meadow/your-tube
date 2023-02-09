@@ -26,6 +26,8 @@ export default function Home(props) {
     setLoadingState,
     totalPages,
     setTotalPages,
+    updatePL,
+    setUpdatePL,
   } = useGlobalContext();
 
   const { itemsPerPage } = props;

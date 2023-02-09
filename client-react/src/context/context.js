@@ -13,6 +13,9 @@ export const AppProvider = (props) => {
   const [loadingState, setLoadingState] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
 
+  // Used to update playlist sidebar on add video
+  const [updatePL, setUpdatePL] = useState();
+
   return (
     <AppContext.Provider
       value={{
@@ -31,7 +34,9 @@ export const AppProvider = (props) => {
         loadingState,
         setLoadingState,
         totalPages,
-        setTotalPages
+        setTotalPages,
+        updatePL,
+        setUpdatePL,
       }}
     >
       {props.children}
