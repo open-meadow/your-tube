@@ -60,12 +60,16 @@ export default function VideoPlayer(props) {
   //   };
   // }, []);
 
+  const opts = {
+    width: "1280",
+    height: "720",
+  };
+
   return (
     // <video
     //   ref={videoNode}
     //   className="video-js vjs-default-skin vjs-big-play-centered"
     // />
-    <YouTube videoId={id} />
+    <YouTube videoId={id} opts={opts} />
   );
-
 }

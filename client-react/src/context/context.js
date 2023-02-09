@@ -16,6 +16,11 @@ export const AppProvider = (props) => {
   // Used to update playlist sidebar on add video
   const [updatePL, setUpdatePL] = useState();
 
+  // use to get video details
+  const [title, setTitle] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [videoId, setVideoId] = useState(null);
+
   return (
     <AppContext.Provider
       value={{
@@ -37,6 +42,12 @@ export const AppProvider = (props) => {
         setTotalPages,
         updatePL,
         setUpdatePL,
+        title,
+        setTitle,
+        description,
+        setDescription,
+        videoId,
+        setVideoId,
       }}
     >
       {props.children}
