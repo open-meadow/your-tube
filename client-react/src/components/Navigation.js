@@ -1,12 +1,18 @@
+// Import React
 import React from "react";
 import { useEffect, useState } from "react";
 
+// React Bootstrap
 import Button from "react-bootstrap/Button";
 import Navbar from "react-bootstrap/Navbar";
-import Playlist from "./Playlist";
 import Offcanvas from "react-bootstrap/Offcanvas";
+
+// Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faDesktop } from "@fortawesome/free-solid-svg-icons";
+
+// Other Imports
+import Playlist from "./Playlist";
 import { useGlobalContext } from "context/context";
 
 export default function Nav(props) {
