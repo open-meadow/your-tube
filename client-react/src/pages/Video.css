@@ -1,0 +1,10 @@
+.Video {
+  background-color: #333333;
+}
+
+.video-player {
+  border: 3px solid red;
+  display: flex;
+  justify-content: center;
+  left: 100px;
+}
