@@ -1,3 +1,5 @@
+import React, { useEffect } from "react";
+
 // import components
 import Navigation from "components/Navigation";
 import MainContent from "components/MainContent";
@@ -30,7 +32,20 @@ export default function Home(props) {
     setUpdatePL,
   } = useGlobalContext();
 
-  const { itemsPerPage } = props;
+  const itemsPerPage = 5;
+
+  useEffect(() => {
+    setSearchData([]);
+    setLoadingState(true);
+
+    fetch(`https://invidious.sethforprivacy.com/api/v1/search?q=${searchTerm}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setSearchData(data);
+        setLoadingState(false);
+        setTotalPages(Math.ceil(data.length / itemsPerPage));
+      });
+  }, [searchTerm]);
 
   return (
     <div className="App">

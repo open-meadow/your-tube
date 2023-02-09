@@ -1,0 +1,55 @@
+.Video-Page {
+  background-color: #333333;
+  color: aliceblue;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loading-spin {
+  display: flex;
+  margin-top: 4em;
+}
+
+.video {
+  display: flex;
+  justify-content: center;
+}
+
+.below-video {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 90%;
+}
+
+.video-details {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.channel-details {
+  display: flex;
+  align-items: center;
+  border: 1px solid gray;
+  border-radius: 50px;
+}
+
+.channel-details img {
+  border-radius: 50px;
+}
+
+.channel-details h3 {
+  padding: 0.5em;
+}
+
+.add-line {
+  border-left: 1px solid gray;
+}
+
+.thumbs-up-icon {
+  padding: 0.5em;
+}
