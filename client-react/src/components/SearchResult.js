@@ -14,6 +14,8 @@ import Spinner from "react-bootstrap/Spinner";
 import Pagination from "./Pagination";
 import { Popover } from "react-bootstrap";
 import axios from "axios";
+import { Link, Route, Routes } from "react-router-dom";
+import Video from "pages/Video";
 
 export default function SearchResult(props) {
   const { searchData, loadingState, totalPages, itemsPerPage } = props;
@@ -48,17 +50,19 @@ export default function SearchResult(props) {
     };
 
     return currentData.map((single) => {
-      if (single.title) {
+      if (single.type === "video") {
         return (
           <div className="video-result">
-            <a href="/">
+            <Link to={`/video/${single.videoId}`}>
               <div className="preview">
                 <img
                   className="video-header"
                   src={single.videoThumbnails && single.videoThumbnails[1].url}
                   alt="header"
                 ></img>
-                <p className="video-title text-white">{single.title}</p>
+
+                <div className="video-title text-white">{single.title}</div>
+
                 <div
                   className="add-to-playlist"
                   onClick={(event) =>
@@ -97,7 +101,7 @@ export default function SearchResult(props) {
                   </DropdownButton>
                 </div>
               </div>
-            </a>
+            </Link>
           </div>
         );
       }

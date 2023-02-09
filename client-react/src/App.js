@@ -1,5 +1,7 @@
 import axios from "axios";
-import { React, useEffect, useState } from "react";
+import { React, useEffect, useState, useContext } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useGlobalContext } from "context/context";
 import YouTube from "react-youtube";
 
 // CSS Imports ///////////////////////////////
@@ -10,23 +12,29 @@ import "Results.css";
 
 ////////////////////////////////////////////////////
 
-// Import components
-import Navigation from "components/Navigation";
-import MainContent from "components/MainContent";
-import Footer from "components/Footer";
-import SearchResult from "components/SearchResult";
-import SearchBar from "components/SearchBar";
+// Import pages
+import Home from "pages/Home";
+import Video from "pages/Video";
 
 export default function App() {
-  const [status, setStatus] = useState({});
-  const [username, setUsername] = useState();
-  const [userid, setUserid] = useState();
-  const [playlists, setPlaylists] = useState([]);
-
-  const [searchData, setSearchData] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [loadingState, setLoadingState] = useState(false);
-  const [totalPages, setTotalPages] = useState(0);
+  const {
+    status,
+    setStatus,
+    username,
+    setUsername,
+    userid,
+    setUserid,
+    playlists,
+    setPlaylists,
+    searchData,
+    setSearchData,
+    searchTerm,
+    setSearchTerm,
+    loadingState,
+    setLoadingState,
+    totalPages,
+    setTotalPages,
+  } = useGlobalContext();
 
   // Used to update playlist sidebar on add video
   const [updatePL, setUpdatePL] = useState();
@@ -88,69 +96,19 @@ export default function App() {
 
   console.log("playlist state:", playlists);
 
-  const opts = {
-    playerVars: {
-      rel: 0,
-    },
-  };
-
-  const invidiousEndpoint = "https://invidio.us/api/v1/videos/";
-  const videoId = "MWQkvbe5nyY";
-
-  const getVideoSource = async function (videoId) {
-    const response = await fetch(invidiousEndpoint + videoId);
-    console.log("response: ", response);
-    const data = await response.json();
-    return data.files[0].url;
-  };
-
-  // Videoplayer (not in use right now)
-  const VideoPlayer = ({ videoId }) => {
-    const [source, setSource] = useState("");
-
-    useEffect(() => {
-      getVideoSource(videoId).then((source) => {
-        setSource(source);
-      });
-    }, [videoId]);
-
-    return <video controls={true} src={source} style={{ width: "100%" }} />;
-  };
-
-  // const API_KEY = "AIzaSyBZ9Mr5A7JlJO2sqYsG09v1UR1TCKtkRk8";
-  // const searchTerm = "pitch meeting";
-
   fetch(`https://invidious.sethforprivacy.com/api/v1/search?q=${searchTerm}`)
     .then((response) => response.json())
     .then((data) => console.log(data))
     .catch((error) => console.error(error));
 
-  // fetch(
-  //   `https://www.googleapis.com/youtube/v3/search?q=${searchTerm}&part=snippet&type=video&key=${API_KEY}`
-  // )
-  //   .then((response) => response.json())
-  //   .then((data) => console.log(data))
-  //   .catch((error) => console.error(error));
-
-  // youtubesearchapi
-  //   .GetListByKeyword("pitch+meeting")
-  //   .then((data) => console.log("this is data: ", data))
-  //   .catch((err) => console.error("this is err: ", err));
-
   return (
     <div className="App">
-      <Navigation username={username} playlists={playlists} />
-      <hr className="break-line"></hr>
-      <MainContent />
-      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <SearchResult
-        loadingState={loadingState}
-        searchData={searchData}
-        totalPages={totalPages}
-        itemsPerPage={itemsPerPage}
-        setUpdatePL={setUpdatePL}
-      />
-      <Footer />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home itemsPerPage={itemsPerPage} />} />
+          <Route path="/video/:id" element={<Video />} />
+        </Routes>
+      </Router>
 
       {/* <div>
         <section>
