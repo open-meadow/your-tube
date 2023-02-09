@@ -23,7 +23,6 @@ export default function App() {
   const [userid, setUserid] = useState();
   const [playlists, setPlaylists] = useState([]);
 
-
   const [searchData, setSearchData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loadingState, setLoadingState] = useState(false);
@@ -76,8 +75,7 @@ export default function App() {
     axios
       .get(`/api/playlists/${loggedInUser}`)
       .then((res) => {
-        // Set 'user' states
-        console.log("playlist data:", res.data.playlists);
+        // Set 'playlist' state
         setPlaylists(res.data.playlists);
       })
       .catch((err) => {
