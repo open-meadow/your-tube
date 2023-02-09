@@ -1,6 +1,5 @@
 // Import React
 import { useState, useEffect } from "react";
-import { useGlobalContext } from "context/context";
 
 // Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,27 +17,33 @@ import axios from "axios";
 import { Link, Route, Routes } from "react-router-dom";
 import Video from "pages/Video";
 
+// Other Imports
+import { useGlobalContext } from "context/context";
+
 export default function SearchResult(props) {
   const { searchData, loadingState, totalPages, itemsPerPage } = props;
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentVid, setCurrentVid] = useState({});
+
+  // Get playlists from global context
+  const { playlists } = useGlobalContext();
 
   const plusIcon = (
     <FontAwesomeIcon className="plus-icon" icon={faPlusCircle} size="3x" />
   );
-  
+
   const {
     // Used to update playlist sidebar on add video
     setUpdatePL,
   } = useGlobalContext();
 
-
-  // divide obtained data by page number
+  // Divide obtained data by page number
   const currentData = searchData.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
 
-  // get actual data from components
+  // Get actual data from components
   const getSearchData = () => {
     if (loadingState) {
       return (
@@ -48,13 +53,35 @@ export default function SearchResult(props) {
       );
     }
 
-    // add video to playlist
+    // Add video to playlist
     const handleSubmit = (vidId, title, plId) => {
-      axios.put("/api/playlists/1", { vidId, title, plId }).then((res) => {
-        console.log(res);
-        setUpdatePL(vidId);
-      });
+      axios
+        .put(`/api/playlists/${plId}`, { vidId, title, plId })
+        .then((res) => {
+          console.log(res);
+          setUpdatePL(vidId);
+        });
     };
+
+    // Seed playlists into the "add to playlist" button
+    const arrayOfPlaylists = playlists;
+
+    const playlistNames = arrayOfPlaylists.map((playlist) => {
+      return (
+        <Dropdown.Item
+          key={playlist.playlist_id}
+          onClick={() =>
+            handleSubmit(
+              currentVid.videoId,
+              currentVid.title,
+              playlist.playlist_id
+            )
+          }
+        >
+          {playlist.playlist_name}
+        </Dropdown.Item>
+      );
+    });
 
     return currentData.map((single) => {
       if (single.type === "video") {
@@ -86,25 +113,11 @@ export default function SearchResult(props) {
                       boxShadow: "none",
                       padding: 0,
                     }}
+                    onClick={() => setCurrentVid(single)}
                   >
                     <Dropdown.Header>Add to playlist:</Dropdown.Header>
                     <Dropdown.Divider />
-                    <Dropdown.Item
-                      onClick={() => handleSubmit(single.videoId, single.title)}
-                    >
-                      Playlist 1
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                      onClick={() => console.log("Link 2 got clicked!")}
-                    >
-                      Playlist 2
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                      onClick={() => console.log("Link 3 got clicked!")}
-                    >
-                      {" "}
-                      Playlist 3
-                    </Dropdown.Item>
+                    {playlistNames}
                   </DropdownButton>
                 </div>
               </div>
