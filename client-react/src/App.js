@@ -28,6 +28,9 @@ export default function App() {
   const [loadingState, setLoadingState] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
 
+  // Used to update playlist sidebar on add video
+  const [updatePL, setUpdatePL] = useState();
+
   const itemsPerPage = 5;
 
   useEffect(() => {
@@ -81,7 +84,7 @@ export default function App() {
       .catch((err) => {
         console.log(err.message);
       });
-  }, []);
+  }, [updatePL]);
 
   console.log("playlist state:", playlists);
 
@@ -145,6 +148,7 @@ export default function App() {
         searchData={searchData}
         totalPages={totalPages}
         itemsPerPage={itemsPerPage}
+        setUpdatePL={setUpdatePL}
       />
       <Footer />
 
