@@ -16,7 +16,6 @@ import { Popover } from "react-bootstrap";
 import Pagination from "./Pagination";
 import axios from "axios";
 import { Link, Route, Routes } from "react-router-dom";
-import Video from "pages/Video";
 
 export default function SearchResult(props) {
   const { searchData, loadingState, totalPages, itemsPerPage } = props;

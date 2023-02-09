@@ -49,3 +49,7 @@ main {
 .add-line {
   border-left: 1px solid gray;
 }
+
+.thumbs-up-icon {
+  padding: 0.5em;
+}

@@ -2,6 +2,10 @@
 import "./Video.css";
 import Spinner from "react-bootstrap/Spinner";
 
+// Font Awesome
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlusCircle, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+
 // import components
 import Navigation from "components/Navigation";
 import VideoPlayer from "components/VideoPlayer";
@@ -72,7 +76,10 @@ export default function Video(props) {
                 <h3>{author}</h3>
                 <h3 className="add-line">{subCountText}</h3>
               </div>
-              <h3>{likeCount}</h3>
+              <div className="channel-details">
+                <FontAwesomeIcon className="thumbs-up-icon" icon={faThumbsUp} size="3x" />
+                <h3 className="add-line">{likeCount}</h3>
+              </div>
             </div>
           )}
           <hr className="break-line"></hr>
