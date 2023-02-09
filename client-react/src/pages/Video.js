@@ -19,6 +19,8 @@ export default function Video(props) {
     setDescription,
     author,
     setAuthor,
+    authorThumbnails,
+    setAuthorThumbnails,
     subCountText,
     setSubCountText,
     likeCount,
@@ -39,6 +41,7 @@ export default function Video(props) {
         setAuthor(data.author);
         setSubCountText(data.subCountText);
         setLikeCount(data.likeCount);
+        setAuthorThumbnails(data.authorThumbnails[2].url);
       });
   }, [id]);
 
@@ -59,15 +62,22 @@ export default function Video(props) {
           {!loadingState && <VideoPlayer />}
         </div>
         <hr className="break-line"></hr>
-        {!loadingState && (
-          <div className="video-details">
-            <h1>{title}</h1>
-            <h3>{author}</h3>
-            <h3>{subCountText}</h3>
-            <h3>{likeCount}</h3>
-          </div>
-        )}
-        {!loadingState && <div>{description}</div>}
+        <section className="below-video">
+          {!loadingState && <h1>{title}</h1>}
+          <hr className="break-line"></hr>
+          {!loadingState && (
+            <div className="video-details">
+              <div className="channel-details">
+                <img src={authorThumbnails} />
+                <h3>{author}</h3>
+                <h3 className="add-line">{subCountText}</h3>
+              </div>
+              <h3>{likeCount}</h3>
+            </div>
+          )}
+          <hr className="break-line"></hr>
+          {!loadingState && <div>{description}</div>}
+        </section>
       </main>
     </div>
   );

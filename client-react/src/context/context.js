@@ -20,6 +20,7 @@ export const AppProvider = (props) => {
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
   const [author, setAuthor] = useState(null);
+  const [authorThumbnails, setAuthorThumbnails] = useState(null);
   const [subCountText, setSubCountText] = useState(null);
   const [likeCount, setLikeCount] = useState(null);
 
@@ -50,6 +51,8 @@ export const AppProvider = (props) => {
         setDescription,
         author,
         setAuthor,
+        authorThumbnails,
+        setAuthorThumbnails,
         subCountText,
         setSubCountText,
         likeCount,

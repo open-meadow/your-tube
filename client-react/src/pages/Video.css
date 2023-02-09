@@ -19,6 +19,33 @@ main {
   justify-content: center;
 }
 
-.video-details {
+.below-video {
+  display: flex;
+  flex-direction: column;
   text-align: center;
+  width: 90%;
+}
+
+.video-details {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.channel-details {
+  display: flex;
+  align-items: center;
+  border: 1px solid gray;
+  border-radius: 50px;
+}
+
+.channel-details img {
+  border-radius: 50px;
+}
+
+.channel-details h3 {
+  padding: 0.5em;
+}
+
+.add-line {
+  border-left: 1px solid gray;
 }
