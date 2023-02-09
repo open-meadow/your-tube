@@ -59,7 +59,7 @@ export default function SearchResult(props) {
     return currentData.map((single) => {
       if (single.type === "video") {
         return (
-          <div className="video-result">
+          <div className="video-result" key={single.videoId}>
             <Link to={`/video/${single.videoId}`}>
               <div className="preview">
                 <img

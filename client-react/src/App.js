@@ -48,7 +48,6 @@ export default function App() {
     fetch(`https://invidious.sethforprivacy.com/api/v1/search?q=${searchTerm}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log("this is data: ", data);
         setSearchData(data);
         setLoadingState(false);
         setTotalPages(Math.ceil(data.length / itemsPerPage));
@@ -93,13 +92,6 @@ export default function App() {
         console.log(err.message);
       });
   }, [updatePL]);
-
-  console.log("playlist state:", playlists);
-
-  fetch(`https://invidious.sethforprivacy.com/api/v1/search?q=${searchTerm}`)
-    .then((response) => response.json())
-    .then((data) => console.log(data))
-    .catch((error) => console.error(error));
 
   return (
     <div className="App">

@@ -1,11 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Playlist(props) {
   const arrayOfVideos = props.videos;
 
   // Map through the array of videos and return a li with the video title
   const allTheVideos = arrayOfVideos.map((video) => {
-    return <li key={Object.keys(video)}>{Object.values(video)}</li>;
+    console.log("here is video: ", video);
+    return (
+      <Link to={`/video/${Object.keys(video)}`}>
+        <li key={Object.keys(video)}>{Object.values(video)}</li>
+      </Link>
+    );
   });
 
   return (
