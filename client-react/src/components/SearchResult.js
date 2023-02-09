@@ -18,19 +18,19 @@ import axios from "axios";
 import { Link, Route, Routes } from "react-router-dom";
 import Video from "pages/Video";
 
+import Success from "./Success";
+
 export default function SearchResult(props) {
   const { searchData, loadingState, totalPages, itemsPerPage } = props;
   const [currentPage, setCurrentPage] = useState(1);
 
+  const [successMsg, setSuccessMsg] = useState("");
+
   const plusIcon = (
     <FontAwesomeIcon className="plus-icon" icon={faPlusCircle} size="3x" />
   );
-  
-  const {
-    // Used to update playlist sidebar on add video
-    setUpdatePL,
-  } = useGlobalContext();
 
+  const { setUpdatePL, setShow } = useGlobalContext();
 
   // divide obtained data by page number
   const currentData = searchData.slice(
@@ -53,6 +53,8 @@ export default function SearchResult(props) {
       axios.put("/api/playlists/1", { vidId, title, plId }).then((res) => {
         console.log(res);
         setUpdatePL(vidId);
+        setSuccessMsg(`${title} successfully added to playlist!`);
+        setShow(true);
       });
     };
 
@@ -60,6 +62,7 @@ export default function SearchResult(props) {
       if (single.type === "video") {
         return (
           <div className="video-result" key={single.videoId}>
+            <Success message={successMsg} />;
             <Link to={`/video/${single.videoId}`}>
               <div className="preview">
                 <img
