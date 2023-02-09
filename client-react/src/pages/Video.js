@@ -38,7 +38,6 @@ export default function Video(props) {
     fetch(`https://inv.riverside.rocks/api/v1/videos/${id}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log("video data: ", data);
         setLoadingState(false);
         setTitle(data.title);
         setDescription(data.description);
