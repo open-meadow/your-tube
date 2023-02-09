@@ -34,10 +34,10 @@ export default function App() {
     setLoadingState,
     totalPages,
     setTotalPages,
+    // Used to update playlist sidebar on add video
+    updatePL,
+    setUpdatePL,
   } = useGlobalContext();
-
-  // Used to update playlist sidebar on add video
-  const [updatePL, setUpdatePL] = useState();
 
   const itemsPerPage = 5;
 

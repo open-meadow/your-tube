@@ -1,5 +1,6 @@
 // Import React
 import { useState, useEffect } from "react";
+import { useGlobalContext } from "context/context";
 
 // Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,6 +21,11 @@ import Video from "pages/Video";
 export default function SearchResult(props) {
   const { searchData, loadingState, totalPages, itemsPerPage } = props;
   const [currentPage, setCurrentPage] = useState(1);
+
+  const {
+    // Used to update playlist sidebar on add video
+    setUpdatePL,
+  } = useGlobalContext();
 
   const plusIcon = (
     <FontAwesomeIcon className="plus-icon" icon={faPlusCircle} size="3x" />
@@ -45,7 +51,7 @@ export default function SearchResult(props) {
     const handleSubmit = (vidId, title, plId) => {
       axios.put("/api/playlists/1", { vidId, title, plId }).then((res) => {
         console.log(res);
-        props.setUpdatePL(vidId);
+        setUpdatePL(vidId);
       });
     };
 
