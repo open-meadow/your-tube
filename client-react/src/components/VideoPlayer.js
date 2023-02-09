@@ -24,44 +24,48 @@ export default function VideoPlayer(props) {
   // };
 
   const { id } = useParams();
-  console.log("IDIDIDID:", id);
-  const videoId = id;
-  const invidiousEndpoint = "https://invidious.sethforprivacy.com/watch?v=";
-  const finalLink = invidiousEndpoint + videoId;
-  console.log("final link is ", finalLink);
+  // const invidiousEndpoint = "https://invidious.sethforprivacy.com/watch?v=";
+  // const finalLink = invidiousEndpoint + videoId;
+  // console.log("final link is ", finalLink);
 
-  const videoNode = useRef(null);
+  // const videoNode = useRef(null);
 
-  useEffect(() => {
-    const player = videojs(videoNode.current, {
-      autoplay: true,
-      controls: true,
-      sources: [
-        // {
-        //   src: "https://www.youtube.com/watch?v=7WY04KJb0fk",
-        //   type: "video/mp4",
-        // },
-      ],
-    });
+  // useEffect(() => {
+  //   const player = videojs(videoNode.current, {
+  //     autoplay: true,
+  //     controls: true,
+  //     sources: [
+  //       {
+  //         src: `invidio.us/latest_version?id=BpwJeXrC5Kg&itag=22&local=true`,
+  //         type: "video/mp4",
+  //       },
+  //     ],
+  //     crossOrigin: 'anonymous'
+  //   });
 
-    fetch("https://www.youtube.com/watch?v=7WY04KJb0fk")
-      .then((response) => response.blob())
-      .then((blob) => {
-        player.src({
-          src: URL.createObjectURL(blob),
-          type: "video/mp4",
-        });
-      });
+  //   fetch(
+  //     "invidio.us/latest_version?id=BpwJeXrC5Kg&itag=22&local=true"
+  //   )
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log("dataaaaa: ", data);
+  //       player.src({
+  //         src: data.url,
+  //         type: data.type,
+  //       });
+  //     });
 
-    return () => {
-      player.dispose();
-    };
-  }, []);
+  //   return () => {
+  //     player.dispose();
+  //   };
+  // }, []);
 
   return (
-    <video
-      ref={videoNode}
-      className="video-js vjs-default-skin vjs-big-play-centered"
-    />
+    // <video
+    //   ref={videoNode}
+    //   className="video-js vjs-default-skin vjs-big-play-centered"
+    // />
+    <YouTube videoId={id} />
   );
+
 }
