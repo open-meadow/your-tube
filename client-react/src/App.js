@@ -36,6 +36,9 @@ export default function App() {
     setTotalPages,
   } = useGlobalContext();
 
+  // Used to update playlist sidebar on add video
+  const [updatePL, setUpdatePL] = useState();
+
   const itemsPerPage = 5;
 
   useEffect(() => {
@@ -89,7 +92,7 @@ export default function App() {
       .catch((err) => {
         console.log(err.message);
       });
-  }, []);
+  }, [updatePL]);
 
   console.log("playlist state:", playlists);
 

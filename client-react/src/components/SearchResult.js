@@ -40,16 +40,14 @@ export default function SearchResult(props) {
         </Spinner>
       );
     }
-    
-    
-  // add video to playlist
-  const handleSubmit = (vidId, title, plId) => {
-    axios
-      .put("/api/playlists/1", {vidId, title, plId})
-      .then((res) => {
-        console.log(res)
-      })
-  }
+
+    // add video to playlist
+    const handleSubmit = (vidId, title, plId) => {
+      axios.put("/api/playlists/1", { vidId, title, plId }).then((res) => {
+        console.log(res);
+        props.setUpdatePL(vidId);
+      });
+    };
 
     return currentData.map((single) => {
       if (single.type === "video") {
