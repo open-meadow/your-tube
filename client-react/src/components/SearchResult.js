@@ -85,9 +85,9 @@ export default function SearchResult(props) {
       );
     });
 
-    // if (show) {
-    //   return <Success message={successMsg} />;
-    // }
+    if (show) {
+      return <Success message={successMsg} />;
+    }
 
     return currentData.map((single) => {
       if (single.type === "video") {
