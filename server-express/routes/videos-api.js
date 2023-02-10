@@ -4,10 +4,10 @@ const videoQueries = require("../db/queries/videos");
 
 // Delete video by key
 router.delete("/delete/", (req, res) => {
-  // const key = req.body.key[0];
+  const key = req.body.key[0];
   // console.log(key);
   videoQueries
-    .deleteVideoByKey(req.body.key[0])
+    .deleteVideoByKey(key)
     .then(() => {
       res.json();
     })
