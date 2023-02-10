@@ -8,9 +8,11 @@ router.delete("/:key", (req, res) => {
   videoQueries
     .deleteVideoByKey(key)
     .then(() => {
-      res.json({});
+      // res.json();
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
     });
 });
+
+module.exports = router;
