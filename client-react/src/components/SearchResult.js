@@ -92,47 +92,43 @@ export default function SearchResult(props) {
     return currentData.map((single) => {
       if (single.type === "video") {
         return (
-          <>
-            <div className="video-result" key={single.videoId}>
-              <Link to={`/video/${single.videoId}`}>
-                <div className="preview">
-                  <img
-                    className="video-header"
-                    src={
-                      single.videoThumbnails && single.videoThumbnails[1].url
-                    }
-                    alt="header"
-                  ></img>
+          <div className="video-result" key={single.videoId}>
+            <Link to={`/video/${single.videoId}`}>
+              <div className="preview">
+                <img
+                  className="video-header"
+                  src={single.videoThumbnails && single.videoThumbnails[1].url}
+                  alt="header"
+                ></img>
 
-                  <div className="video-title text-white">{single.title}</div>
+                <div className="video-title text-white">{single.title}</div>
 
-                  <div
-                    className="add-to-playlist"
-                    onClick={(event) =>
-                      event.preventDefault() && event.stopPropagation()
-                    }
+                <div
+                  className="add-to-playlist"
+                  onClick={(event) =>
+                    event.preventDefault() && event.stopPropagation()
+                  }
+                >
+                  <DropdownButton
+                    id="dropdown-basic-button"
+                    title={plusIcon}
+                    drop="down-centered"
+                    style={{
+                      background: "none",
+                      border: "none",
+                      boxShadow: "none",
+                      padding: 0,
+                    }}
+                    onClick={() => setCurrentVid(single)}
                   >
-                    <DropdownButton
-                      id="dropdown-basic-button"
-                      title={plusIcon}
-                      drop="down-centered"
-                      style={{
-                        background: "none",
-                        border: "none",
-                        boxShadow: "none",
-                        padding: 0,
-                      }}
-                      onClick={() => setCurrentVid(single)}
-                    >
-                      <Dropdown.Header>Add to playlist:</Dropdown.Header>
-                      <Dropdown.Divider />
-                      {playlistNames}
-                    </DropdownButton>
-                  </div>
+                    <Dropdown.Header>Add to playlist:</Dropdown.Header>
+                    <Dropdown.Divider />
+                    {playlistNames}
+                  </DropdownButton>
                 </div>
-              </Link>
-            </div>
-          </>
+              </div>
+            </Link>
+          </div>
         );
       }
     });
