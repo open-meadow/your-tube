@@ -53,3 +53,7 @@ main {
 .thumbs-up-icon {
   padding: 0.5em;
 }
+
+.download-button {
+  border-radius: 30px;
+}
