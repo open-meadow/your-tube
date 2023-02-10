@@ -3,13 +3,14 @@ const db = require("../connection");
 const deletePlaylist = (name, desc) => {
   return db
     .query(`
-    DELETE FROM playlists (name, description)
+    DELETE FROM playlists
     WHERE name = $1
     AND description = $2
-    RETURNING *
+    RETURNING *;
     `, [name, desc])
     .then((data) => {
-      return data.rows[0]
+      // console.log("Successful deletion!", data)
+      return "Success!"
     })
     .catch((err) => {
       throw new Error(err.message)
