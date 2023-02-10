@@ -37,6 +37,7 @@ export default function App() {
     // Used to update playlist sidebar on add video
     updatePL,
     setUpdatePL,
+    deleteVid,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -77,6 +78,8 @@ export default function App() {
         console.log(err.message);
       });
   }, [updatePL]);
+
+  console.log("pl", playlists);
 
   return (
     <div className="App">
