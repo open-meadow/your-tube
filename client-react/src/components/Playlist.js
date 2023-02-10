@@ -1,12 +1,28 @@
+// Import React
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
+// Font Awesome
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+
+// React Bootstrap
+import Button from "react-bootstrap/Button";
+
+// Other Impots
 import "./Playlist.css";
+import axios from "axios";
+import { useGlobalContext } from "context/context";
+
+
+
 
 export default function Playlist(props) {
   const arrayOfVideos = props.videos;
 
-  console.log(props);
+  const { setUpdatePL } = useGlobalContext();
+
+  // console.log(props);
 
   const getRidOfBlankObject = (array) => {
     for (let obj of array) {
@@ -38,9 +54,32 @@ export default function Playlist(props) {
     );
   });
 
+  const deletePlaylist = (name, description) => {
+
+    // console.log(props)
+
+    axios
+      .put(`/api/playlists`, {name, description})
+      .then((res) => {
+        // console.log(res);
+        setUpdatePL(name);
+      })
+      .catch((err) => {
+        throw new Error(err.message)
+      })
+  };
+
   return (
     <div>
-      <h2>{props.playlist_name}</h2>
+      <h2>
+        {props.playlist_name}
+        <Button
+          className="delete-playlist-button"
+          onClick={() => deletePlaylist(props.playlist_name, props.playlist_desc)}
+        >
+          <FontAwesomeIcon icon={faTrashAlt} />
+        </Button>
+      </h2>
       <p>{props.playlist_desc}</p>
       <ul>{allTheVideos}</ul>
     </div>
