@@ -2,19 +2,15 @@ import React, { useState } from "react";
 import Alert from "react-bootstrap/Alert";
 import { useGlobalContext } from "context/context";
 
-export default function Success(props) {
-  const {
-    // Used to update playlist sidebar on add video
-    show,
-    setShow,
-  } = useGlobalContext();
+import "./success.css";
 
-  if (show) {
-    return (
-      <Alert variant="success" onClose={() => setShow(false)} dismissible>
-        <Alert.Heading>Success!</Alert.Heading>
-        <p>{props.message}</p>
-      </Alert>
-    );
-  }
+export default function Success(props) {
+  const { show, setShow } = useGlobalContext();
+
+  return (
+    <Alert variant="success" onClose={() => setShow(false)} dismissible>
+      <Alert.Heading>Success!</Alert.Heading>
+      <p>{props.message}</p>
+    </Alert>
+  );
 }
