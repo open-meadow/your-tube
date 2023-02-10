@@ -28,7 +28,7 @@ export const AppProvider = (props) => {
   const [show, setShow] = useState(false);
 
   // use to delete vid
-  const [deleteVid, setDeleteVid] = useState();
+  const [deleteVid, setDeleteVid] = useState("");
 
   return (
     <AppContext.Provider
