@@ -43,29 +43,6 @@ app.get("/download/:id", (req, res) => {
   const videoId = req.params.id;
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
 
-  // ytdl.getInfo(videoUrl, (err, info) => {
-  // if (err) {
-  //   console.error(err.message);
-  //   return res.status(400).send({ error: err.message });
-  // }
-
-  // console.log("Info", info);
-  // const video = ytdl(videoUrl, {
-  //   quality: 'highestaudio',
-  //   filter: 'audioonly'
-  // });
-
-  // res.setHeader('Content-Disposition', `attachment; filename="${info.title}.mp3"`);
-  // res.setHeader('Content-Type', 'audio/mpeg');
-
-  // video.pipe(res);
-  // });
-
-  // ytdl.getInfo(videoUrl)
-  // .then(response => {
-  //   console.log("this is getInfo: ", response);
-  // })
-
   const output = path.resolve(__dirname, `${videoId}.mp4`);
 
   // Get audio and video streams
@@ -97,8 +74,7 @@ app.get("/download/:id", (req, res) => {
       "-c:v",
       "copy",
       // Define output file
-      `${videoId}.mkv`,
-      output
+      output,
     ],
     {
       windowsHide: true,
