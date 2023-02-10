@@ -18,8 +18,7 @@
 }
 
 .delete-playlist-button {
-  position: fixed;
-  right: 20px;
+  float: right;
   --bs-btn-color: null;
   --bs-btn-bg: null;
   --bs-btn-border-color: null;
