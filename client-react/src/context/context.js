@@ -27,6 +27,9 @@ export const AppProvider = (props) => {
   // use to show success message
   const [show, setShow] = useState(false);
 
+  // use to delete vid
+  const [deleteVid, setDeleteVid] = useState();
+
   return (
     <AppContext.Provider
       value={{
@@ -62,6 +65,8 @@ export const AppProvider = (props) => {
         setLikeCount,
         show,
         setShow,
+        deleteVid,
+        setDeleteVid,
       }}
     >
       {props.children}
