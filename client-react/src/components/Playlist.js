@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import CloseButton from "react-bootstrap/CloseButton";
 
 import "./Playlist.css";
 
@@ -22,6 +23,10 @@ export default function Playlist(props) {
 
   getRidOfBlankObject(props.videos);
 
+  const deleteVideo = (key) => {
+    console.log(`I'm gonna delete video ${key}`);
+  };
+
   // Map through the array of videos and return a li with the video title
   const allTheVideos = arrayOfVideos.map((video) => {
     const thumbnail = `https://inv.riverside.rocks/vi/${Object.keys(
@@ -29,12 +34,14 @@ export default function Playlist(props) {
     )}/default.jpg`;
 
     return (
-      <Link to={`/video/${Object.keys(video)}`} key={Object.keys(video)}>
-        <div className="playlist-item">
+      <div className="playlist-item">
+        <Link to={`/video/${Object.keys(video)}`} key={Object.keys(video)}>
           <img src={thumbnail} />
-          <div className="title">{Object.values(video)}</div>
-        </div>
-      </Link>
+        </Link>
+        <div className="title">{Object.values(video)}</div>
+
+        <CloseButton onClick={() => deleteVideo(Object.keys(video))} />
+      </div>
     );
   });
 
