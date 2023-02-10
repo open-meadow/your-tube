@@ -1,10 +1,11 @@
 // import css
 import "./Video.css";
 import Spinner from "react-bootstrap/Spinner";
+import Button from "react-bootstrap/Button";
 
 // Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusCircle, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 
 // import components
 import Navigation from "components/Navigation";
@@ -13,7 +14,10 @@ import { useGlobalContext } from "context/context";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 
+import axios from "axios";
+
 export default function Video(props) {
+  const [video, setVideo] = useState(null);
   const {
     loadingState,
     setLoadingState,
@@ -48,6 +52,16 @@ export default function Video(props) {
       });
   }, [id]);
 
+  const downloadVideo = () => {
+    console.log("you are in downloadVideo");
+    axios
+      .get(`/download/${id}`, {
+        responseType: "blob",
+      })
+      .then((res) => setVideo(URL.createObjectURL(new Blob([res.data]))))
+      .catch((err) => console.error(err));
+  };
+
   return (
     <div className="Video-Page">
       <Navigation />
@@ -76,9 +90,20 @@ export default function Video(props) {
                 <h3 className="add-line">{subCountText}</h3>
               </div>
               <div className="channel-details">
-                <FontAwesomeIcon className="thumbs-up-icon" icon={faThumbsUp} size="3x" />
+                <FontAwesomeIcon
+                  className="thumbs-up-icon"
+                  icon={faThumbsUp}
+                  size="3x"
+                />
                 <h3 className="add-line">{likeCount}</h3>
               </div>
+              <Button
+                variant="outline-light"
+                className="download-button"
+                onClick={downloadVideo}
+              >
+                Download
+              </Button>
             </div>
           )}
           <hr className="break-line"></hr>
