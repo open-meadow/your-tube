@@ -3,8 +3,10 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const ytdl = require("ytdl-core");
 const fs = require("fs");
+const cp = require('child_process');
 const path = require("path");
-const readline = require('readline');
+const readline = require("readline");
+const ffmpeg = require('ffmpeg-static');
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -66,38 +68,138 @@ app.get("/download/:id", (req, res) => {
 
   const output = path.resolve(__dirname, "video.mp4");
 
-  const video = ytdl(videoUrl, { itag: 18 });
-  let starttime;
-  video.pipe(fs.createWriteStream(output));
-  video.once("response", () => {
-    starttime = Date.now();
-  });
+  const tracker = {
+    start: Date.now(),
+    audio: { downloaded: 0, total: Infinity },
+    video: { downloaded: 0, total: Infinity },
+    merged: { frame: 0, speed: "0x", fps: 0 },
+  };
 
-  video.on("progress", (chunkLength, downloaded, total) => {
-    const percent = downloaded / total;
-    const downloadedMinutes = (Date.now() - starttime) / 1000 / 60;
-    const estimatedDownloadTime =
-      downloadedMinutes / percent - downloadedMinutes;
+  // Get audio and video streams
+  const audio = ytdl(videoUrl, { quality: "highestaudio" }).on(
+    "progress",
+    (_, downloaded, total) => {
+      tracker.audio = { downloaded, total };
+    }
+  );
+  const video = ytdl(videoUrl, { quality: "highestvideo" }).on(
+    "progress",
+    (_, downloaded, total) => {
+      tracker.video = { downloaded, total };
+    }
+  );
+
+  // Prepare the progress bar
+  let progressbarHandle = null;
+  const progressbarInterval = 1000;
+  const showProgress = () => {
     readline.cursorTo(process.stdout, 0);
-    process.stdout.write(`${(percent * 100).toFixed(2)}% downloaded `);
+    const toMB = (i) => (i / 1024 / 1024).toFixed(2);
+
     process.stdout.write(
-      `(${(downloaded / 1024 / 1024).toFixed(2)}MB of ${(
-        total /
-        1024 /
-        1024
-      ).toFixed(2)}MB)\n`
+      `Audio  | ${(
+        (tracker.audio.downloaded / tracker.audio.total) *
+        100
+      ).toFixed(2)}% processed `
     );
-    process.stdout.write(`running for: ${downloadedMinutes.toFixed(2)}minutes`);
     process.stdout.write(
-      `, estimated time left: ${estimatedDownloadTime.toFixed(2)}minutes `
+      `(${toMB(tracker.audio.downloaded)}MB of ${toMB(
+        tracker.audio.total
+      )}MB).${" ".repeat(10)}\n`
     );
-    readline.moveCursor(process.stdout, 0, -1);
+
+    process.stdout.write(
+      `Video  | ${(
+        (tracker.video.downloaded / tracker.video.total) *
+        100
+      ).toFixed(2)}% processed `
+    );
+    process.stdout.write(
+      `(${toMB(tracker.video.downloaded)}MB of ${toMB(
+        tracker.video.total
+      )}MB).${" ".repeat(10)}\n`
+    );
+
+    process.stdout.write(`Merged | processing frame ${tracker.merged.frame} `);
+    process.stdout.write(
+      `(at ${tracker.merged.fps} fps => ${tracker.merged.speed}).${" ".repeat(
+        10
+      )}\n`
+    );
+
+    process.stdout.write(
+      `running for: ${((Date.now() - tracker.start) / 1000 / 60).toFixed(
+        2
+      )} Minutes.`
+    );
+    readline.moveCursor(process.stdout, 0, -3);
+  };
+
+  // Start the ffmpeg child process
+  const ffmpegProcess = cp.spawn(
+    ffmpeg,
+    [
+      // Remove ffmpeg's console spamming
+      "-loglevel",
+      "8",
+      "-hide_banner",
+      // Redirect/Enable progress messages
+      "-progress",
+      "pipe:3",
+      // Set inputs
+      "-i",
+      "pipe:4",
+      "-i",
+      "pipe:5",
+      // Map audio & video from streams
+      "-map",
+      "0:a",
+      "-map",
+      "1:v",
+      // Keep encoding
+      "-c:v",
+      "copy",
+      // Define output file
+      "out.mkv",
+    ],
+    {
+      windowsHide: true,
+      stdio: [
+        /* Standard: stdin, stdout, stderr */
+        "inherit",
+        "inherit",
+        "inherit",
+        /* Custom: pipe:3, pipe:4, pipe:5 */
+        "pipe",
+        "pipe",
+        "pipe",
+      ],
+    }
+  );
+  ffmpegProcess.on("close", () => {
+    console.log("done");
+    // Cleanup
+    process.stdout.write("\n\n\n\n");
+    clearInterval(progressbarHandle);
   });
 
-  video.on("end", () => {
-    process.stdout.write("\n\n");
+  // Link streams
+  // FFmpeg creates the transformer streams and we just have to insert / read data
+  ffmpegProcess.stdio[3].on("data", (chunk) => {
+    // Start the progress bar
+    if (!progressbarHandle)
+      progressbarHandle = setInterval(showProgress, progressbarInterval);
+    // Parse the param=value list returned by ffmpeg
+    const lines = chunk.toString().trim().split("\n");
+    const args = {};
+    for (const l of lines) {
+      const [key, value] = l.split("=");
+      args[key.trim()] = value.trim();
+    }
+    tracker.merged = args;
   });
-
+  audio.pipe(ffmpegProcess.stdio[4]);
+  video.pipe(ffmpegProcess.stdio[5]);
 });
 
 app.use(function (req, res) {
