@@ -11,8 +11,11 @@ import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import Navigation from "components/Navigation";
 import VideoPlayer from "components/VideoPlayer";
 import { useGlobalContext } from "context/context";
+
+// import from React
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { useSearchParams } from "react-router-dom";
 
 import axios from "axios";
 
@@ -33,9 +36,22 @@ export default function Video(props) {
     setSubCountText,
     likeCount,
     setLikeCount,
+    playlists,
+    setPlaylists,
+    currentPlaylist,
+    setCurrentPlaylist,
   } = useGlobalContext();
 
   const { id } = useParams();
+  let [searchParams, setSearchParams] = useSearchParams();
+
+  // let playlistID = searchParams.get('playlistID');
+  // console.log("searchParams", playlistID);
+
+
+  // for (const [key, value] of searchParams) {
+  //   console.log(key, value);
+  // }
 
   useEffect(() => {
     setLoadingState(true);

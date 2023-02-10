@@ -40,6 +40,7 @@ export default function Nav(props) {
     return (
       <Playlist
         key={playlist.playlist_id}
+        playlist_id={playlist.playlist_id}
         playlist_name={playlist.playlist_name}
         playlist_desc={playlist.playlist_desc}
         videos={playlist.videos}
