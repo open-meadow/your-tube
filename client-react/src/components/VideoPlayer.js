@@ -36,24 +36,12 @@ export default function VideoPlayer(props) {
   //     controls: true,
   //     sources: [
   //       {
-  //         src: `invidio.us/latest_version?id=BpwJeXrC5Kg&itag=22&local=true`,
+  //         src: `//vjs.zencdn.net/v/oceans.mp4`,
   //         type: "video/mp4",
   //       },
   //     ],
-  //     crossOrigin: 'anonymous'
+  //     crossOrigin: "anonymous",
   //   });
-
-  //   fetch(
-  //     "invidio.us/latest_version?id=BpwJeXrC5Kg&itag=22&local=true"
-  //   )
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log("dataaaaa: ", data);
-  //       player.src({
-  //         src: data.url,
-  //         type: data.type,
-  //       });
-  //     });
 
   //   return () => {
   //     player.dispose();
