@@ -5,9 +5,11 @@ import { React, useEffect, useState, useRef } from "react";
 import {
   BrowserRouter as Router,
   Link,
+  redirect,
   Route,
   Routes,
   useParams,
+  useNavigate
 } from "react-router-dom";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
@@ -23,7 +25,7 @@ export default function VideoPlayer(props) {
   //   return data.files[0].url;
   // };
 
-  const { id } = props;
+  const { id, opts, onEnd } = props;
   // const invidiousEndpoint = "https://invidious.sethforprivacy.com/watch?v=";
   // const finalLink = invidiousEndpoint + videoId;
   // console.log("final link is ", finalLink);
@@ -60,16 +62,18 @@ export default function VideoPlayer(props) {
   //   };
   // }, []);
 
-  const opts = {
-    width: "1280",
-    height: "720",
-  };
+  const navigate = useNavigate();
+
+  // const red = () => {
+  //   console.log("video ended");
+  //   navigate("/");
+  // }
 
   return (
     // <video
     //   ref={videoNode}
     //   className="video-js vjs-default-skin vjs-big-play-centered"
     // />
-    <YouTube videoId={id} opts={opts} />
+    <YouTube videoId={id} opts={opts} onEnd={onEnd} />
   );
 }

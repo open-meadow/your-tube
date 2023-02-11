@@ -19,8 +19,8 @@ import { useGlobalContext } from "context/context";
 
 // import from React
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { Link, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
+import { Link, useSearchParams, redirect } from "react-router-dom";
 
 import axios from "axios";
 import { Container, Nav, Navbar } from "react-bootstrap";
@@ -49,6 +49,7 @@ export default function Video(props) {
   } = useGlobalContext();
 
   const { id } = useParams();
+  const navigate = useNavigate();
   let [searchParams, setSearchParams] = useSearchParams();
 
   let playlistId = searchParams.get("playlistId");
@@ -97,7 +98,7 @@ export default function Video(props) {
 
     return (
       <>
-        {previousVideo && (
+        {!loadingState && previousVideo && (
           <Link
             to={`/video/${previousVideo}?playlistId=${
               thisPlaylist[0].playlist_id
@@ -109,19 +110,18 @@ export default function Video(props) {
           </Link>
         )}
 
-        <div className="playlist-title"><h1>{thisPlaylist[0].playlist_name}</h1></div>
+        <div className="playlist-title">
+          <h1>{thisPlaylist[0].playlist_name}</h1>
+        </div>
 
-        {nextVideo && (
+        {!loadingState && nextVideo && (
           <Link
             to={`/video/${nextVideo}?playlistId=${
               thisPlaylist[0].playlist_id
             }&index=${Number(videoIndex) + 1}`}
           >
             <Container className="arrow right">
-              <FontAwesomeIcon
-                icon={faArrowRight}
-                size="3x"
-              />
+              <FontAwesomeIcon icon={faArrowRight} size="3x" />
             </Container>
           </Link>
         )}
@@ -129,7 +129,29 @@ export default function Video(props) {
     );
   };
 
-  const showVideoPlayer = () => {
+  const onEnd = () => {
+    const nextVideo = thisPlaylist[0].videos[Number(videoIndex) + 1]
+      ? Object.keys(thisPlaylist[0].videos[Number(videoIndex) + 1])
+      : null;
+
+    return navigate(
+      `/video/${nextVideo}?playlistId=${thisPlaylist[0].playlist_id}&index=${
+        Number(videoIndex) + 1
+      }`
+    );
+  };
+
+  const showVideoPlayer = (autoplay) => {
+    console.log("autoplay value: ", autoplay);
+
+    const opts = {
+      width: "1280",
+      height: "720",
+      playerVars: {
+        autoplay: autoplay,
+      },
+    };
+
     return (
       <>
         {loadingState ? (
@@ -140,7 +162,7 @@ export default function Video(props) {
             role="status"
           />
         ) : (
-          <VideoPlayer id={id} />
+          <VideoPlayer id={id} opts={opts} onEnd={onEnd} />
         )}
       </>
     );
@@ -164,12 +186,12 @@ export default function Video(props) {
         {thisPlaylist.length !== 0 && (
           <div className="playlist-border">
             <div className="playlist-nav">{showPlaylistInfo(thisPlaylist)}</div>
-            <div className="video">{showVideoPlayer()}</div>
+            <div className="video">{showVideoPlayer(1)}</div>
           </div>
         )}
         {thisPlaylist.length === 0 && (
           <div className="video">
-            <div className="video">{showVideoPlayer()}</div>
+            <div className="video">{showVideoPlayer(0)}</div>
           </div>
         )}
         <hr className="break-line"></hr>

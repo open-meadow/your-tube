@@ -76,6 +76,12 @@ main {
   right: 3em;
 }
 
+.playlist-nav:nth-child(2) {
+  border: 3px solid red;
+}
+
+/* .playlist-nav:last-child  > span { margin-left: auto;  } */
+
 .arrow {
   position: absolute;
   display: flex;
