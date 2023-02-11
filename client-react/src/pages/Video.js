@@ -5,19 +5,27 @@ import Button from "react-bootstrap/Button";
 
 // Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import {
+  faThumbsUp,
+  faArrowLeft,
+  faArrowRight,
+  faArrowRightArrowLeft,
+} from "@fortawesome/free-solid-svg-icons";
 
 // import components
 import Navigation from "components/Navigation";
 import VideoPlayer from "components/VideoPlayer";
 import { useGlobalContext } from "context/context";
+
+// import from React
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import { Link, useSearchParams, redirect } from "react-router-dom";
 
 import axios from "axios";
+import { Container, Nav, Navbar } from "react-bootstrap";
 
 export default function Video(props) {
-  const [video, setVideo] = useState(null);
   const {
     loadingState,
     setLoadingState,
@@ -33,9 +41,24 @@ export default function Video(props) {
     setSubCountText,
     likeCount,
     setLikeCount,
+    playlists,
+    setPlaylists,
+    currentPlaylist,
+    setCurrentPlaylist,
+    video,
+    setVideo
   } = useGlobalContext();
 
   const { id } = useParams();
+  const navigate = useNavigate();
+  let [searchParams, setSearchParams] = useSearchParams();
+
+  let playlistId = searchParams.get("playlistId");
+  let videoIndex = searchParams.get("index");
+
+  const thisPlaylist = playlists.filter(
+    (playlist) => playlist.playlist_id == playlistId
+  );
 
   useEffect(() => {
     setLoadingState(true);
@@ -52,6 +75,90 @@ export default function Video(props) {
       });
   }, [id]);
 
+  const showPlaylistInfo = (thisPlaylist) => {
+    console.log("this playlist", thisPlaylist);
+    console.log("videoID; ", videoIndex);
+
+    const previousVideo = thisPlaylist[0].videos[Number(videoIndex) - 1]
+      ? Object.keys(thisPlaylist[0].videos[Number(videoIndex) - 1])
+      : null;
+
+    const nextVideo = thisPlaylist[0].videos[Number(videoIndex) + 1]
+      ? Object.keys(thisPlaylist[0].videos[Number(videoIndex) + 1])
+      : null;
+
+    return (
+      <>
+        {!loadingState && previousVideo && (
+          <Link
+            to={`/video/${previousVideo}?playlistId=${
+              thisPlaylist[0].playlist_id
+            }&index=${Number(videoIndex) - 1}`}
+          >
+            <Container className="arrow left">
+              <FontAwesomeIcon icon={faArrowLeft} size="3x" />
+            </Container>
+          </Link>
+        )}
+
+        <div className="playlist-title">
+          <h1>{thisPlaylist[0].playlist_name}</h1>
+        </div>
+
+        {!loadingState && nextVideo && (
+          <Link
+            to={`/video/${nextVideo}?playlistId=${
+              thisPlaylist[0].playlist_id
+            }&index=${Number(videoIndex) + 1}`}
+          >
+            <Container className="arrow right">
+              <FontAwesomeIcon icon={faArrowRight} size="3x" />
+            </Container>
+          </Link>
+        )}
+      </>
+    );
+  };
+
+  const onEnd = () => {
+    const nextVideo = thisPlaylist[0].videos[Number(videoIndex) + 1]
+      ? Object.keys(thisPlaylist[0].videos[Number(videoIndex) + 1])
+      : null;
+
+    if (nextVideo) {
+      return navigate(
+        `/video/${nextVideo}?playlistId=${thisPlaylist[0].playlist_id}&index=${
+          Number(videoIndex) + 1
+        }`
+      );
+    }
+  };
+
+  const showVideoPlayer = (autoplay) => {
+    const opts = {
+      width: "1280",
+      height: "720",
+      playerVars: {
+        autoplay: autoplay,
+      },
+    };
+
+    return (
+      <>
+        {loadingState ? (
+          <Spinner
+            className="loading-spin"
+            animation="border"
+            variant="light"
+            role="status"
+          />
+        ) : (
+          <VideoPlayer id={id} opts={opts} onEnd={onEnd} />
+        )}
+      </>
+    );
+  };
+
   const downloadVideo = () => {
     console.log("you are in downloadVideo");
     axios
@@ -67,17 +174,15 @@ export default function Video(props) {
       <Navigation />
       <hr className="break-line"></hr>
       <main>
-        <div className="video">
-          {loadingState && (
-            <Spinner
-              className="loading-spin"
-              animation="border"
-              variant="light"
-              role="status"
-            />
-          )}
-          {!loadingState && <VideoPlayer />}
-        </div>
+        {thisPlaylist.length !== 0 && (
+          <div className="playlist-border">
+            <div className="playlist-nav">{showPlaylistInfo(thisPlaylist)}</div>
+            <div className="video">{showVideoPlayer(1)}</div>
+          </div>
+        )}
+        {thisPlaylist.length === 0 && (
+          <div className="video">{showVideoPlayer(0)}</div>
+        )}
         <hr className="break-line"></hr>
         <section className="below-video">
           {!loadingState && <h1>{title}</h1>}

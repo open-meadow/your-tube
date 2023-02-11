@@ -1,4 +1,5 @@
 // Import React
+import { useGlobalContext } from "context/context";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -18,6 +19,8 @@ import { useGlobalContext } from "context/context";
 
 
 export default function Playlist(props) {
+  const { currentPlaylist, setCurrentPlaylist } = useGlobalContext();
+
   const arrayOfVideos = props.videos;
 
   const { setUpdatePL } = useGlobalContext();
@@ -39,13 +42,13 @@ export default function Playlist(props) {
   getRidOfBlankObject(props.videos);
 
   // Map through the array of videos and return a li with the video title
-  const allTheVideos = arrayOfVideos.map((video) => {
+  const allTheVideos = arrayOfVideos.map((video, i) => {
     const thumbnail = `https://inv.riverside.rocks/vi/${Object.keys(
       video
     )}/default.jpg`;
 
     return (
-      <Link to={`/video/${Object.keys(video)}`} key={Object.keys(video)}>
+      <Link to={`/video/${Object.keys(video)}?playlistId=${props.playlist_id}&index=${i}`} key={Object.keys(video)}>
         <div className="playlist-item">
           <img src={thumbnail} />
           <div className="title">{Object.values(video)}</div>
