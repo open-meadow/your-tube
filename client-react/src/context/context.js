@@ -30,6 +30,8 @@ export const AppProvider = (props) => {
   // use to show success message
   const [show, setShow] = useState(false);
 
+  const [video, setVideo] = useState(null);
+
   return (
     <AppContext.Provider
       value={{
@@ -66,7 +68,9 @@ export const AppProvider = (props) => {
         show,
         setShow,
         currentPlaylist,
-        setCurrentPlaylist
+        setCurrentPlaylist,
+        video,
+        setVideo
       }}
     >
       {props.children}

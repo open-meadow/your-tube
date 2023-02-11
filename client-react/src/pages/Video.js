@@ -26,7 +26,6 @@ import axios from "axios";
 import { Container, Nav, Navbar } from "react-bootstrap";
 
 export default function Video(props) {
-  const [video, setVideo] = useState(null);
   const {
     loadingState,
     setLoadingState,
@@ -46,6 +45,8 @@ export default function Video(props) {
     setPlaylists,
     currentPlaylist,
     setCurrentPlaylist,
+    video,
+    setVideo
   } = useGlobalContext();
 
   const { id } = useParams();
@@ -54,20 +55,10 @@ export default function Video(props) {
 
   let playlistId = searchParams.get("playlistId");
   let videoIndex = searchParams.get("index");
-  // console.log("searchParams", playlistId);
-  // console.log("searchParams", videoIndex);
-  // for (const [key, value] of searchParams) {
-  //   console.log(key, value);
-  // }
 
   const thisPlaylist = playlists.filter(
     (playlist) => playlist.playlist_id == playlistId
   );
-
-  // console.log("playlistid exists");
-  // console.log("playlists", playlists);
-
-  // console.log("thisPlaylist: ", thisPlaylist);
 
   useEffect(() => {
     setLoadingState(true);
@@ -134,16 +125,16 @@ export default function Video(props) {
       ? Object.keys(thisPlaylist[0].videos[Number(videoIndex) + 1])
       : null;
 
-    return navigate(
-      `/video/${nextVideo}?playlistId=${thisPlaylist[0].playlist_id}&index=${
-        Number(videoIndex) + 1
-      }`
-    );
+    if (nextVideo) {
+      return navigate(
+        `/video/${nextVideo}?playlistId=${thisPlaylist[0].playlist_id}&index=${
+          Number(videoIndex) + 1
+        }`
+      );
+    }
   };
 
   const showVideoPlayer = (autoplay) => {
-    console.log("autoplay value: ", autoplay);
-
     const opts = {
       width: "1280",
       height: "720",
@@ -190,9 +181,7 @@ export default function Video(props) {
           </div>
         )}
         {thisPlaylist.length === 0 && (
-          <div className="video">
-            <div className="video">{showVideoPlayer(0)}</div>
-          </div>
+          <div className="video">{showVideoPlayer(0)}</div>
         )}
         <hr className="break-line"></hr>
         <section className="below-video">
