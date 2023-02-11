@@ -13,7 +13,6 @@ import Button from "react-bootstrap/Button";
 
 // Other Impots
 import "./Playlist.css";
-import axios from "axios";
 
 export default function Playlist(props) {
   const {
