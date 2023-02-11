@@ -23,7 +23,7 @@ export default function VideoPlayer(props) {
   //   return data.files[0].url;
   // };
 
-  const { id } = useParams();
+  const { id } = props;
   // const invidiousEndpoint = "https://invidious.sethforprivacy.com/watch?v=";
   // const finalLink = invidiousEndpoint + videoId;
   // console.log("final link is ", finalLink);

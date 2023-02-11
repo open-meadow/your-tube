@@ -15,9 +15,10 @@ import { useGlobalContext } from "context/context";
 // import from React
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 import axios from "axios";
+import { Nav, Navbar } from "react-bootstrap";
 
 export default function Video(props) {
   const [video, setVideo] = useState(null);
@@ -45,13 +46,22 @@ export default function Video(props) {
   const { id } = useParams();
   let [searchParams, setSearchParams] = useSearchParams();
 
-  // let playlistID = searchParams.get('playlistID');
-  // console.log("searchParams", playlistID);
-
-
+  let playlistId = searchParams.get("playlistId");
+  let videoIndex = searchParams.get("index");
+  // console.log("searchParams", playlistId);
+  // console.log("searchParams", videoIndex);
   // for (const [key, value] of searchParams) {
   //   console.log(key, value);
   // }
+
+  const thisPlaylist = playlists.filter(
+    (playlist) => playlist.playlist_id == playlistId
+  );
+
+  // console.log("playlistid exists");
+  // console.log("playlists", playlists);
+
+  // console.log("thisPlaylist: ", thisPlaylist);
 
   useEffect(() => {
     setLoadingState(true);
@@ -68,6 +78,45 @@ export default function Video(props) {
       });
   }, [id]);
 
+  const showPlaylistInfo = (thisPlaylist) => {
+    console.log("this playlist", thisPlaylist);
+    console.log("videoID; ", videoIndex);
+
+    const previousVideo = thisPlaylist[0].videos[Number(videoIndex) - 1]
+      ? Object.keys(thisPlaylist[0].videos[Number(videoIndex) - 1])
+      : null;
+
+    const nextVideo = thisPlaylist[0].videos[Number(videoIndex) + 1]
+      ? Object.keys(thisPlaylist[0].videos[Number(videoIndex) + 1])
+      : null;
+
+    return (
+      <>
+        {previousVideo && (
+          <Link
+            to={`/video/${previousVideo}?playlistId=${
+              thisPlaylist[0].playlist_id
+            }&index=${Number(videoIndex) - 1}`}
+          >
+            <div>Previous</div>
+          </Link>
+        )}
+
+        <>{thisPlaylist[0].playlist_name}</>
+
+        {nextVideo && (
+          <Link
+            to={`/video/${nextVideo}?playlistId=${
+              thisPlaylist[0].playlist_id
+            }&index=${Number(videoIndex) + 1}`}
+          >
+            <div>Next</div>
+          </Link>
+        )}
+      </>
+    );
+  };
+
   const downloadVideo = () => {
     console.log("you are in downloadVideo");
     axios
@@ -83,6 +132,9 @@ export default function Video(props) {
       <Navigation />
       <hr className="break-line"></hr>
       <main>
+        {thisPlaylist.length !== 0 && (
+          <div className="playlist-nav">{showPlaylistInfo(thisPlaylist)}</div>
+        )}
         <div className="video">
           {loadingState && (
             <Spinner
@@ -92,7 +144,7 @@ export default function Video(props) {
               role="status"
             />
           )}
-          {!loadingState && <VideoPlayer />}
+          {!loadingState && <VideoPlayer id={id} />}
         </div>
         <hr className="break-line"></hr>
         <section className="below-video">

@@ -57,3 +57,12 @@ main {
 .download-button {
   border-radius: 30px;
 }
+
+.playlist-nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100em;
+  background-color: aliceblue;
+  color: black;
+  padding: 1em;
+}
