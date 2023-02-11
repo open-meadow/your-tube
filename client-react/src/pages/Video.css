@@ -58,11 +58,45 @@ main {
   border-radius: 30px;
 }
 
+.playlist-border {
+  border: 1px solid gray;
+  border-radius: 3em;
+  padding: 1em;
+}
+
 .playlist-nav {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100em;
-  background-color: aliceblue;
-  color: black;
   padding: 1em;
+}
+
+.playlist-title {
+  right: 3em;
+}
+
+.arrow {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3em;
+  width: 8em;
+  height: 75%;
+  color: azure;
+}
+
+.arrow:hover {
+  background-color:#8d8d8d;
+  opacity: 50%;
+  transition: 0.2s ease-in-out;
+}
+
+/* .left {
+  border: 3px solid red;
+} */
+
+.right {
+  right: 10em
 }

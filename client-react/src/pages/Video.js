@@ -5,7 +5,12 @@ import Button from "react-bootstrap/Button";
 
 // Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import {
+  faThumbsUp,
+  faArrowLeft,
+  faArrowRight,
+  faArrowRightArrowLeft,
+} from "@fortawesome/free-solid-svg-icons";
 
 // import components
 import Navigation from "components/Navigation";
@@ -18,7 +23,7 @@ import { useParams } from "react-router";
 import { Link, useSearchParams } from "react-router-dom";
 
 import axios from "axios";
-import { Nav, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 
 export default function Video(props) {
   const [video, setVideo] = useState(null);
@@ -98,11 +103,13 @@ export default function Video(props) {
               thisPlaylist[0].playlist_id
             }&index=${Number(videoIndex) - 1}`}
           >
-            <div>Previous</div>
+            <Container className="arrow left">
+              <FontAwesomeIcon icon={faArrowLeft} size="3x" />
+            </Container>
           </Link>
         )}
 
-        <>{thisPlaylist[0].playlist_name}</>
+        <div className="playlist-title"><h1>{thisPlaylist[0].playlist_name}</h1></div>
 
         {nextVideo && (
           <Link
@@ -110,8 +117,30 @@ export default function Video(props) {
               thisPlaylist[0].playlist_id
             }&index=${Number(videoIndex) + 1}`}
           >
-            <div>Next</div>
+            <Container className="arrow right">
+              <FontAwesomeIcon
+                icon={faArrowRight}
+                size="3x"
+              />
+            </Container>
           </Link>
+        )}
+      </>
+    );
+  };
+
+  const showVideoPlayer = () => {
+    return (
+      <>
+        {loadingState ? (
+          <Spinner
+            className="loading-spin"
+            animation="border"
+            variant="light"
+            role="status"
+          />
+        ) : (
+          <VideoPlayer id={id} />
         )}
       </>
     );
@@ -133,19 +162,16 @@ export default function Video(props) {
       <hr className="break-line"></hr>
       <main>
         {thisPlaylist.length !== 0 && (
-          <div className="playlist-nav">{showPlaylistInfo(thisPlaylist)}</div>
+          <div className="playlist-border">
+            <div className="playlist-nav">{showPlaylistInfo(thisPlaylist)}</div>
+            <div className="video">{showVideoPlayer()}</div>
+          </div>
         )}
-        <div className="video">
-          {loadingState && (
-            <Spinner
-              className="loading-spin"
-              animation="border"
-              variant="light"
-              role="status"
-            />
-          )}
-          {!loadingState && <VideoPlayer id={id} />}
-        </div>
+        {thisPlaylist.length === 0 && (
+          <div className="video">
+            <div className="video">{showVideoPlayer()}</div>
+          </div>
+        )}
         <hr className="break-line"></hr>
         <section className="below-video">
           {!loadingState && <h1>{title}</h1>}
