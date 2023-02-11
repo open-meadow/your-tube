@@ -31,6 +31,8 @@ export const AppProvider = (props) => {
   const [show, setShow] = useState(false);
 
   const [video, setVideo] = useState(null);
+  // use to delete vid
+  const [deleteVid, setDeleteVid] = useState("");
 
   return (
     <AppContext.Provider
@@ -70,7 +72,9 @@ export const AppProvider = (props) => {
         currentPlaylist,
         setCurrentPlaylist,
         video,
-        setVideo
+        setVideo,
+        deleteVid,
+        setDeleteVid,
       }}
     >
       {props.children}

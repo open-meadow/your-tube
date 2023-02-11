@@ -1,7 +1,8 @@
-// Import React
-import { useGlobalContext } from "context/context";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import CloseButton from "react-bootstrap/CloseButton";
+import axios from "axios";
+import { useGlobalContext } from "context/context";
 
 // Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,15 +15,16 @@ import Button from "react-bootstrap/Button";
 import "./Playlist.css";
 import axios from "axios";
 
-
-
-
 export default function Playlist(props) {
-  const { currentPlaylist, setCurrentPlaylist } = useGlobalContext();
+  const {
+    currentPlaylist,
+    setCurrentPlaylist,
+    setUpdatePL,
+    setDeleteVid,
+    deleteVid,
+  } = useGlobalContext();
 
   const arrayOfVideos = props.videos;
-
-  const { setUpdatePL } = useGlobalContext();
 
   // console.log(props);
 
@@ -40,6 +42,22 @@ export default function Playlist(props) {
 
   getRidOfBlankObject(props.videos);
 
+  useEffect(() => {
+    axios
+      .delete(`/api/videos/delete/`, { data: { key: deleteVid } })
+      .then((res) => {
+        console.log("delete response:", res.status);
+        setUpdatePL(deleteVid);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [deleteVid]);
+
+  const deleteVideo = (key) => {
+    setDeleteVid(key);
+  };
+
   // Map through the array of videos and return a li with the video title
   const allTheVideos = arrayOfVideos.map((video, i) => {
     const thumbnail = `https://inv.riverside.rocks/vi/${Object.keys(
@@ -47,28 +65,34 @@ export default function Playlist(props) {
     )}/default.jpg`;
 
     return (
-      <Link to={`/video/${Object.keys(video)}?playlistId=${props.playlist_id}&index=${i}`} key={Object.keys(video)}>
-        <div className="playlist-item">
+      <div className="playlist-item">
+        <Link
+          to={`/video/${Object.keys(video)}?playlistId=${
+            props.playlist_id
+          }&index=${i}`}
+          key={Object.keys(video)}
+        >
           <img src={thumbnail} />
-          <div className="title">{Object.values(video)}</div>
-        </div>
-      </Link>
+        </Link>
+        <div className="title">{Object.values(video)}</div>
+
+        <CloseButton onClick={() => deleteVideo(Object.keys(video))} />
+      </div>
     );
   });
 
   const deletePlaylist = (name, description) => {
-
     // console.log(props)
 
     axios
-      .put(`/api/playlists`, {name, description})
+      .put(`/api/playlists`, { name, description })
       .then((res) => {
         // console.log(res);
         setUpdatePL(name);
       })
       .catch((err) => {
-        throw new Error(err.message)
-      })
+        throw new Error(err.message);
+      });
   };
 
   return (
@@ -77,7 +101,9 @@ export default function Playlist(props) {
         {props.playlist_name}
         <Button
           className="delete-playlist-button"
-          onClick={() => deletePlaylist(props.playlist_name, props.playlist_desc)}
+          onClick={() =>
+            deletePlaylist(props.playlist_name, props.playlist_desc)
+          }
         >
           <FontAwesomeIcon icon={faTrashAlt} />
         </Button>

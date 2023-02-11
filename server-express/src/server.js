@@ -3,10 +3,10 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const ytdl = require("ytdl-core");
 const fs = require("fs");
-const cp = require('child_process');
+const cp = require("child_process");
 const path = require("path");
 const readline = require("readline");
-const ffmpeg = require('ffmpeg-static');
+const ffmpeg = require("ffmpeg-static");
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -20,6 +20,7 @@ app.use(express.static(public));
 // Separate routes for each resource here
 const userApiRoutes = require("../routes/users-api");
 const playlistApiRoutes = require("../routes/playlists-api");
+const videoApiRoutes = require("../routes/videos-api");
 
 // Body Parser
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -28,6 +29,7 @@ app.use(bodyParser.json());
 // Mount the resource routes here
 app.use("/api/users", userApiRoutes);
 app.use("/api/playlists", playlistApiRoutes);
+app.use("/api/videos", videoApiRoutes);
 
 // Do Not make a route for "/" or it will override public
 
