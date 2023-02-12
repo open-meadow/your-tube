@@ -48,6 +48,8 @@ export default function Video(props) {
     setCurrentPlaylist,
     video,
     setVideo,
+    audio,
+    setAudio,
   } = useGlobalContext();
 
   const { id } = useParams();
@@ -144,6 +146,9 @@ export default function Video(props) {
       },
     };
 
+    // const audioValue = getAudioFromSessionStorage();
+    const itag = audio ? 18 : 140;
+
     return (
       <>
         {loadingState ? (
@@ -155,7 +160,8 @@ export default function Video(props) {
           />
         ) : (
           <div>
-            <VideoPlayer id={id} opts={opts} onEnd={onEnd} />
+            <InvVideoPlayer id={id} itag={itag} />
+            {/* <VideoPlayer id={id} opts={opts} onEnd={onEnd} /> */}
           </div>
         )}
       </>
@@ -163,7 +169,6 @@ export default function Video(props) {
   };
 
   const downloadVideo = () => {
-    console.log("you are in downloadVideo");
     axios
       .get(`/download/${id}`, {
         responseType: "blob",
@@ -171,6 +176,23 @@ export default function Video(props) {
       .then((res) => setVideo(URL.createObjectURL(new Blob([res.data]))))
       .catch((err) => console.error(err));
   };
+
+  const audioSwitch = () => {
+    console.log("this is audio: ", audio);
+    if (audio === true) {
+      setAudio(false);
+      sessionStorage.setItem("audio", false);
+    } else {
+      setAudio(true);
+      sessionStorage.setItem("audio", true);
+    }
+    window.location.reload();
+  };
+
+  // const getAudioFromSessionStorage = () => {
+  //   const audioValue = sessionStorage.getItem("audio");
+  //   return audioValue ? JSON.parse(audioValue) : false;
+  // };
 
   return (
     <div className="Video-Page">
@@ -211,6 +233,13 @@ export default function Video(props) {
                 onClick={downloadVideo}
               >
                 Download
+              </Button>
+              <Button
+                variant="outline-light"
+                className="download-button"
+                onClick={audioSwitch}
+              >
+                Audio
               </Button>
             </div>
           )}
