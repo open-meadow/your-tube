@@ -153,6 +153,7 @@ export default function Video(props) {
       },
     };
 
+    console.log("AUDIO:  ", audio);
     const itag = audio ? 18 : 140;
 
     return (
@@ -167,13 +168,13 @@ export default function Video(props) {
         ) : (
           <Tabs
             defaultActiveKey="invidious"
-            id="justify-tab-example"
+            className="tabs nav-pills"
+            variant="primary"
             activeKey={currentTab}
             onSelect={(k) => setCurrentTab(k)}
-            className="mb-3"
-            justify
+            fill
           >
-            <Tab eventKey="invidious" title="Invidious">
+            <Tab eventKey="invidious" title="Invidious" className="fade-in nav-item">
               {currentTab === 'invidious' && (
                 <div>
                   <InvVideoPlayer
@@ -185,7 +186,7 @@ export default function Video(props) {
                 </div>
               )}
             </Tab>
-            <Tab eventKey="youtube" title="YouTube">
+            <Tab eventKey="youtube" title="YouTube" className="fade-in nav-item">
               {currentTab === 'youtube' && (
                 <div>
                   <VideoPlayer id={id} opts={opts} onEnd={onEnd} />
@@ -272,7 +273,7 @@ export default function Video(props) {
               </Button>
 
               {/* Audio/Video buttons */}
-              {audio && (
+              {currentTab === 'invidious' && audio && (
                 <Button
                   variant="outline-light"
                   className="download-button"
@@ -281,7 +282,7 @@ export default function Video(props) {
                   Audio
                 </Button>
               )}
-              {!audio && (
+              {currentTab === 'invidious' && !audio && (
                 <Button
                   variant="outline-light"
                   className="download-button"

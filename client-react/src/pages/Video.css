@@ -17,8 +17,12 @@ main {
 .video {
   display: flex;
   flex-direction: column;
+}
+
+.tabs {
+  display: flex;
   justify-content: center;
-  align-items: center;
+  border: 3px solid red;
 }
 
 .below-video {

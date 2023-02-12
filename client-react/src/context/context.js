@@ -32,7 +32,7 @@ export const AppProvider = (props) => {
 
   const [video, setVideo] = useState(null);
   const [audio, setAudio] = useState(
-    sessionStorage.getItem("audio") === "false"
+    sessionStorage.getItem("audio") === "true" ? true : false
   );
   const [currentTab, setCurrentTab] = useState("invidious");
 
