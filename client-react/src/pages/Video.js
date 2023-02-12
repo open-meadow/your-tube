@@ -59,8 +59,9 @@ export default function Video(props) {
 
   const { id } = useParams();
   const navigate = useNavigate();
-  let [searchParams, setSearchParams] = useSearchParams();
 
+  // get playlist id and video index from params
+  let [searchParams, setSearchParams] = useSearchParams();
   let playlistId = searchParams.get("playlistId");
   let videoIndex = searchParams.get("index");
 
@@ -85,9 +86,6 @@ export default function Video(props) {
 
   // function to show playlist name and navigation buttons
   const showPlaylistInfo = (thisPlaylist) => {
-    console.log("this playlist", thisPlaylist);
-    console.log("videoID; ", videoIndex);
-
     const previousVideo = thisPlaylist[0].videos[Number(videoIndex) - 1]
       ? Object.keys(thisPlaylist[0].videos[Number(videoIndex) - 1])
       : null;
@@ -154,7 +152,6 @@ export default function Video(props) {
       },
     };
 
-    console.log("AUDIO:  ", audio);
     const itag = audio ? 18 : 140;
 
     return (
@@ -224,7 +221,6 @@ export default function Video(props) {
 
   // function to switch between audio and video
   const audioSwitch = () => {
-    console.log("this is audio: ", audio);
     if (audio === true) {
       setAudio(false);
       sessionStorage.setItem("audio", false);

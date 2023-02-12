@@ -1,19 +1,7 @@
 import "App.css";
-import axios from "axios";
-import YouTube from "react-youtube";
 import { React, useEffect, useState, useRef } from "react";
-import {
-  BrowserRouter as Router,
-  Link,
-  redirect,
-  Route,
-  Routes,
-  useParams,
-  useNavigate,
-} from "react-router-dom";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
-import { useGlobalContext } from "context/context";
 
 export default function InvVideoPlayer(props) {
   const { id, itag, opts, onEnd } = props;
@@ -52,6 +40,7 @@ export default function InvVideoPlayer(props) {
 
   const videoNode = useRef(null);
 
+  // create sources from instanceArray
   let currentSourceIndex = 0;
   const sources = [];
   for (let i = 0; i < instanceList.length; i++) {
