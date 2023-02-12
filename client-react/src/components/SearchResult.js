@@ -101,7 +101,7 @@ export default function SearchResult(props) {
                   alt="header"
                 ></img>
 
-                <div className="video-title text-white">{single.title}</div>
+                <div className="video-title">{single.title}</div>
 
                 <div
                   className="add-to-playlist"

@@ -9,7 +9,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 
 // Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faDesktop} from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faDesktop } from "@fortawesome/free-solid-svg-icons";
 
 // Other Imports
 import "./Navigation.css";
@@ -57,7 +57,7 @@ export default function Nav(props) {
   };
 
   return (
-    <Navbar sticky="top" bg="dark" variant="dark">
+    <Navbar sticky="top" variant="dark">
       <Navbar.Brand className="home-link" href="/">
         <FontAwesomeIcon icon={faDesktop} />
         <span id="brand-home-link">YourTube</span>

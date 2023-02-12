@@ -1,3 +1,5 @@
+import "./main.css";
+
 export default function MainContent() {
   return (
     <div className="main-content">
@@ -6,9 +8,9 @@ export default function MainContent() {
       </div>
 
       <div className="get-started">
-        <h5 className="welcome-text text-white">
+        <h3 className="welcome-text text-white">
           Get started by adding a video to your study playlist
-        </h5>
+        </h3>
       </div>
     </div>
   );
