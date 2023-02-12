@@ -71,7 +71,7 @@ export default function Nav(props) {
       </Button>
       <Offcanvas placement="end" show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Playlists</Offcanvas.Title>
+          <Offcanvas.Title>{username}'s Playlists</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <h3>Create new playlist:</h3>
