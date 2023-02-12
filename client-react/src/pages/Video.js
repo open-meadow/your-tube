@@ -47,7 +47,7 @@ export default function Video(props) {
     currentPlaylist,
     setCurrentPlaylist,
     video,
-    setVideo
+    setVideo,
   } = useGlobalContext();
 
   const { id } = useParams();
@@ -154,7 +154,9 @@ export default function Video(props) {
             role="status"
           />
         ) : (
-          <VideoPlayer id={id} opts={opts} onEnd={onEnd} />
+          <div>
+            <VideoPlayer id={id} opts={opts} onEnd={onEnd} />
+          </div>
         )}
       </>
     );
@@ -175,7 +177,6 @@ export default function Video(props) {
       <Navigation />
       <hr className="break-line"></hr>
       <main>
-        <InvVideoPlayer/>
         {thisPlaylist.length !== 0 && (
           <div className="playlist-border">
             <div className="playlist-nav">{showPlaylistInfo(thisPlaylist)}</div>

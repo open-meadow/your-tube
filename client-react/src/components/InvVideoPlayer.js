@@ -14,7 +14,7 @@ import {
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 
-export default function InvVideoPlayer() {
+export default function InvVideoPlayer(props) {
   // const invidiousEndpoint = "https://invidio.us/api/v1/videos/";
   // const videoId = "MWQkvbe5nyY";
 
@@ -29,6 +29,8 @@ export default function InvVideoPlayer() {
   // const finalLink = invidiousEndpoint + videoId;
   // console.log("final link is ", finalLink);
 
+  const { id } = props
+
   const videoNode = useRef(null);
 
   useEffect(() => {
@@ -38,7 +40,7 @@ export default function InvVideoPlayer() {
       sources: [
         {
           // src: `//vjs.zencdn.net/v/oceans.mp4`,
-          src: `https://piped.video/watch?v=32RAq6JzY-w`,
+          src: `https://invidious.nerdvpn.de/latest_version?id=_EvYpjTECGI&itag=22`,
           type: "video/mp4",
         },
       ],
