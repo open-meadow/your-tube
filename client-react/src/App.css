@@ -7,7 +7,7 @@ a:hover { text-decoration: none; }
 a:active { text-decoration: none; }
 
 html {
-  background-color: #333333;
+  background-color: 14213D;
 }
 
 input {
@@ -51,15 +51,19 @@ li:hover a {
 
 #brand-home-link {
   padding-left: 10px;
+  font-size: 1.2em;
+  font-weight:600;
 }
 
 #user-name {
   margin-right: 10px;
+  font-size: 1.2em;
+  color: #fff;
 }
 
 #footer {
   padding: 5px 0 0 0;
-  background-color: #f2f2f2;
+  background-color: #FCA311;
   position: fixed;
   left: 0;
   bottom: 0;
@@ -68,16 +72,17 @@ li:hover a {
 }
 
 .App {
-  background-color: #333333;
+  background-color: #14213D;
+  min-height: 100vh;
 }
 
-.break-line {
+/* .break-line {
   color: grey;
   height: 3px;
   size: 1em;
   width: 90%;
   margin-left: 5%;
-}
+} */
 
 .main-words {
   margin: 10em 0;
@@ -95,11 +100,6 @@ li:hover a {
   margin-bottom: 1em;
 }
 
-.main-content {
-  justify-content: center;
-  background-color: #333333;
-}
-
 .text-white {
   color: white;
 }
@@ -107,13 +107,21 @@ li:hover a {
 .search-bar {
   display: block;
   margin: auto;
-  width: 100vh;
-  height: 5vh;
+  width: 60vw;
+  height: 50px;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .button {
   width: auto;
   margin-top: 1em;
+  min-width: 100px;
+  border-radius: 10px;
+}
+
+.search button:hover {
+  background-color: #FCA311;
 }
 
 .welcome-text {
@@ -121,4 +129,9 @@ li:hover a {
   justify-content: center;
   color: white;
   margin: 10px 0 0 10px ;
+}
+
+.navbar {
+  border-bottom: 3px solid #FCA311;
+  height: 75px;
 }
