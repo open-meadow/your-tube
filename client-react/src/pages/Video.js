@@ -1,5 +1,6 @@
 // import css
 import "./Video.css";
+import "App.css";
 import Spinner from "react-bootstrap/Spinner";
 import Button from "react-bootstrap/Button";
 
@@ -15,6 +16,7 @@ import {
 // import components
 import Navigation from "components/Navigation";
 import VideoPlayer from "components/VideoPlayer";
+import Footer from "components/Footer";
 import { useGlobalContext } from "context/context";
 
 // import from React
@@ -197,7 +199,7 @@ export default function Video(props) {
                 <FontAwesomeIcon
                   className="thumbs-up-icon"
                   icon={faThumbsUp}
-                  size="3x"
+                  size="2x"
                 />
                 <h3 className="add-line">{likeCount}</h3>
               </div>
@@ -214,6 +216,7 @@ export default function Video(props) {
           {!loadingState && <div>{description}</div>}
         </section>
       </main>
+      <Footer />
     </div>
   );
 }
