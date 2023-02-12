@@ -2,6 +2,7 @@
 import "./Video.css";
 import Spinner from "react-bootstrap/Spinner";
 import Button from "react-bootstrap/Button";
+import ToggleButton from "react-bootstrap/ToggleButton";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 
@@ -53,7 +54,7 @@ export default function Video(props) {
     audio,
     setAudio,
     currentTab,
-    setCurrentTab
+    setCurrentTab,
   } = useGlobalContext();
 
   const { id } = useParams();
@@ -166,16 +167,9 @@ export default function Video(props) {
             role="status"
           />
         ) : (
-          <Tabs
-            defaultActiveKey="invidious"
-            className="tabs nav-pills"
-            variant="primary"
-            activeKey={currentTab}
-            onSelect={(k) => setCurrentTab(k)}
-            fill
-          >
-            <Tab eventKey="invidious" title="Invidious" className="fade-in nav-item">
-              {currentTab === 'invidious' && (
+          <>
+            <div className="video-player">
+              {currentTab === "invidious" && (
                 <div>
                   <InvVideoPlayer
                     id={id}
@@ -185,15 +179,34 @@ export default function Video(props) {
                   />
                 </div>
               )}
-            </Tab>
-            <Tab eventKey="youtube" title="YouTube" className="fade-in nav-item">
-              {currentTab === 'youtube' && (
+              {currentTab === "youtube" && (
                 <div>
                   <VideoPlayer id={id} opts={opts} onEnd={onEnd} />
                 </div>
               )}
-            </Tab>
-          </Tabs>
+            </div>
+
+            <div className="video-buttons">
+              <Button
+                className="single-video-button"
+                variant="outline-light"
+                size="lg"
+                onClick={() => setCurrentTab("invidious")}
+                active={currentTab === "invidious"}
+              >
+                Invidious
+              </Button>
+              <Button
+                className="single-video-button"
+                variant="outline-light"
+                size="lg"
+                onClick={() => setCurrentTab("youtube")}
+                active={currentTab === "youtube"}
+              >
+                Youtube
+              </Button>
+            </div>
+          </>
         )}
       </>
     );
@@ -273,7 +286,7 @@ export default function Video(props) {
               </Button>
 
               {/* Audio/Video buttons */}
-              {currentTab === 'invidious' && audio && (
+              {currentTab === "invidious" && audio && (
                 <Button
                   variant="outline-light"
                   className="download-button"
@@ -282,7 +295,7 @@ export default function Video(props) {
                   Audio
                 </Button>
               )}
-              {currentTab === 'invidious' && !audio && (
+              {currentTab === "invidious" && !audio && (
                 <Button
                   variant="outline-light"
                   className="download-button"
