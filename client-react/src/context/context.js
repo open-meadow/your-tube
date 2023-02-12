@@ -32,8 +32,9 @@ export const AppProvider = (props) => {
 
   const [video, setVideo] = useState(null);
   const [audio, setAudio] = useState(
-    sessionStorage.getItem("audio") === "true"
+    sessionStorage.getItem("audio") === "false"
   );
+  const [currentTab, setCurrentTab] = useState("invidious");
 
   // use to delete vid
   const [deleteVid, setDeleteVid] = useState("");
@@ -81,6 +82,8 @@ export const AppProvider = (props) => {
         setDeleteVid,
         audio,
         setAudio,
+        currentTab,
+        setCurrentTab
       }}
     >
       {props.children}

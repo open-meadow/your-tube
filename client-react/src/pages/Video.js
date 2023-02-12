@@ -2,6 +2,8 @@
 import "./Video.css";
 import Spinner from "react-bootstrap/Spinner";
 import Button from "react-bootstrap/Button";
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
 
 // Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -50,6 +52,8 @@ export default function Video(props) {
     setVideo,
     audio,
     setAudio,
+    currentTab,
+    setCurrentTab
   } = useGlobalContext();
 
   const { id } = useParams();
@@ -78,6 +82,7 @@ export default function Video(props) {
       });
   }, [id]);
 
+  // function to show playlist name and navigation buttons
   const showPlaylistInfo = (thisPlaylist) => {
     console.log("this playlist", thisPlaylist);
     console.log("videoID; ", videoIndex);
@@ -123,6 +128,7 @@ export default function Video(props) {
     );
   };
 
+  // if video is part of a playlist, redirect to next video of playlist
   const onEnd = () => {
     const nextVideo = thisPlaylist[0].videos[Number(videoIndex) + 1]
       ? Object.keys(thisPlaylist[0].videos[Number(videoIndex) + 1])
@@ -137,6 +143,7 @@ export default function Video(props) {
     }
   };
 
+  // video player
   const showVideoPlayer = (autoplay) => {
     const opts = {
       width: "1280",
@@ -158,15 +165,40 @@ export default function Video(props) {
             role="status"
           />
         ) : (
-          <div>
-            <InvVideoPlayer id={id} itag={itag} opts={opts} onEnd={onEnd} />
-            {/* <VideoPlayer id={id} opts={opts} onEnd={onEnd} /> */}
-          </div>
+          <Tabs
+            defaultActiveKey="invidious"
+            id="justify-tab-example"
+            activeKey={currentTab}
+            onSelect={(k) => setCurrentTab(k)}
+            className="mb-3"
+            justify
+          >
+            <Tab eventKey="invidious" title="Invidious">
+              {currentTab === 'invidious' && (
+                <div>
+                  <InvVideoPlayer
+                    id={id}
+                    itag={itag}
+                    opts={opts}
+                    onEnd={onEnd}
+                  />
+                </div>
+              )}
+            </Tab>
+            <Tab eventKey="youtube" title="YouTube">
+              {currentTab === 'youtube' && (
+                <div>
+                  <VideoPlayer id={id} opts={opts} onEnd={onEnd} />
+                </div>
+              )}
+            </Tab>
+          </Tabs>
         )}
       </>
     );
   };
 
+  // function for downloading video
   const downloadVideo = () => {
     axios
       .get(`/download/${id}`, {
@@ -176,6 +208,7 @@ export default function Video(props) {
       .catch((err) => console.error(err));
   };
 
+  // function to switch between audio and video
   const audioSwitch = () => {
     console.log("this is audio: ", audio);
     if (audio === true) {
@@ -192,7 +225,9 @@ export default function Video(props) {
     <div className="Video-Page">
       <Navigation />
       <hr className="break-line"></hr>
+
       <main>
+        {/* show/hide playlist border */}
         {thisPlaylist.length !== 0 && (
           <div className="playlist-border">
             <div className="playlist-nav">{showPlaylistInfo(thisPlaylist)}</div>
@@ -202,17 +237,22 @@ export default function Video(props) {
         {thisPlaylist.length === 0 && (
           <div className="video">{showVideoPlayer(0)}</div>
         )}
+
         <hr className="break-line"></hr>
+
         <section className="below-video">
           {!loadingState && <h1>{title}</h1>}
           <hr className="break-line"></hr>
           {!loadingState && (
             <div className="video-details">
+              {/* Channel details */}
               <div className="channel-details">
                 <img src={authorThumbnails} />
                 <h3>{author}</h3>
                 <h3 className="add-line">{subCountText}</h3>
               </div>
+
+              {/* Like button */}
               <div className="channel-details">
                 <FontAwesomeIcon
                   className="thumbs-up-icon"
@@ -221,6 +261,8 @@ export default function Video(props) {
                 />
                 <h3 className="add-line">{likeCount}</h3>
               </div>
+
+              {/* Download button */}
               <Button
                 variant="outline-light"
                 className="download-button"
@@ -228,20 +270,26 @@ export default function Video(props) {
               >
                 Download
               </Button>
-              {audio &&<Button
-                variant="outline-light"
-                className="download-button"
-                onClick={audioSwitch}
-              >
-                Audio
-              </Button>}
-              {!audio &&<Button
-                variant="outline-light"
-                className="download-button"
-                onClick={audioSwitch}
-              >
-                Video
-              </Button>}
+
+              {/* Audio/Video buttons */}
+              {audio && (
+                <Button
+                  variant="outline-light"
+                  className="download-button"
+                  onClick={audioSwitch}
+                >
+                  Audio
+                </Button>
+              )}
+              {!audio && (
+                <Button
+                  variant="outline-light"
+                  className="download-button"
+                  onClick={audioSwitch}
+                >
+                  Video
+                </Button>
+              )}
             </div>
           )}
           <hr className="break-line"></hr>

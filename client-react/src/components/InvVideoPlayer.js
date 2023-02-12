@@ -83,7 +83,6 @@ export default function InvVideoPlayer(props) {
     });
 
     player.on("error", function (error) {
-      // Handle the error
       console.log("error: ", error);
       console.log("Current source URL:", player.currentSrc());
       switchSource(player); 

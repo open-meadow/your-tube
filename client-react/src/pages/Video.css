@@ -16,7 +16,9 @@ main {
 
 .video {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .below-video {
