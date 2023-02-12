@@ -16,23 +16,7 @@ import "video.js/dist/video-js.css";
 import { useGlobalContext } from "context/context";
 
 export default function InvVideoPlayer(props) {
-  // const invidiousEndpoint = "https://invidio.us/api/v1/videos/";
-  // const videoId = "MWQkvbe5nyY";
-
-  // const getVideoSource = async function (videoId) {
-  //   const response = await fetch(invidiousEndpoint + videoId);
-  //   console.log("response: ", response);
-  //   const data = await response.json();
-  //   return data.files[0].url;
-  // };
-
-  // const invidiousEndpoint = "https://invidious.sethforprivacy.com/watch?v=";
-  // const finalLink = invidiousEndpoint + videoId;
-  // console.log("final link is ", finalLink);
-
-  const { id, itag } = props;
-
-  const { audio, setAudio } = useGlobalContext();
+  const { id, itag, opts, onEnd } = props;
 
   const [workingInstance, setWorkingInstance] = useState(null);
 
@@ -97,7 +81,9 @@ export default function InvVideoPlayer(props) {
 
   useEffect(() => {
     const player = videojs(videoNode.current, {
-      autoplay: true,
+      width: opts.width,
+      height: opts.height,
+      autoplay: opts.playerVars.autoplay,
       controls: true,
       sources: [
         {
@@ -110,6 +96,8 @@ export default function InvVideoPlayer(props) {
       crossOrigin: "anonymous",
     });
 
+    player.on("ended", onEnd);
+
     return () => {
       player.dispose();
     };
@@ -120,22 +108,5 @@ export default function InvVideoPlayer(props) {
       ref={videoNode}
       className="video-js vjs-default-skin vjs-big-play-centered"
     />
-
-    // <div>
-    //   {workingInstance ? (
-    //     <video
-    //       ref={videoNode}
-    //       className="video-js vjs-default-skin vjs-big-play-centered"
-    //       sources={[
-    //         {
-    //           src: `${workingInstance}/latest_version?id=MWQkvbe5nyY`,
-    //           type: "video/mp4",
-    //         },
-    //       ]}
-    //     />
-    //   ) : (
-    //     <p>No working instance found</p>
-    //   )}
-    // </div>
   );
 }

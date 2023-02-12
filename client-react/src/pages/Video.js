@@ -160,7 +160,7 @@ export default function Video(props) {
           />
         ) : (
           <div>
-            <InvVideoPlayer id={id} itag={itag} />
+            <InvVideoPlayer id={id} itag={itag} opts={opts} onEnd={onEnd} />
             {/* <VideoPlayer id={id} opts={opts} onEnd={onEnd} /> */}
           </div>
         )}
@@ -234,13 +234,20 @@ export default function Video(props) {
               >
                 Download
               </Button>
-              <Button
+              {audio &&<Button
                 variant="outline-light"
                 className="download-button"
                 onClick={audioSwitch}
               >
                 Audio
-              </Button>
+              </Button>}
+              {!audio &&<Button
+                variant="outline-light"
+                className="download-button"
+                onClick={audioSwitch}
+              >
+                Video
+              </Button>}
             </div>
           )}
           <hr className="break-line"></hr>
