@@ -24,6 +24,7 @@ import { Link, useSearchParams, redirect } from "react-router-dom";
 
 import axios from "axios";
 import { Container, Nav, Navbar } from "react-bootstrap";
+import InvVideoPlayer from "components/InvVideoPlayer";
 
 export default function Video(props) {
   const {
@@ -174,6 +175,7 @@ export default function Video(props) {
       <Navigation />
       <hr className="break-line"></hr>
       <main>
+        <InvVideoPlayer/>
         {thisPlaylist.length !== 0 && (
           <div className="playlist-border">
             <div className="playlist-nav">{showPlaylistInfo(thisPlaylist)}</div>

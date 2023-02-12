@@ -79,8 +79,6 @@ export default function App() {
       });
   }, [updatePL]);
 
-  console.log("pl", playlists);
-
   return (
     <div className="App">
       <Router>
