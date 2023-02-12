@@ -69,6 +69,7 @@ li:hover a {
   bottom: 0;
   width: 100%;
   text-align: center;
+  color: #14213D;
 }
 
 .App {
@@ -118,6 +119,7 @@ li:hover a {
   margin-top: 1em;
   min-width: 100px;
   border-radius: 10px;
+  transition: 0.2s ease-in-out;
 }
 
 .search button:hover {

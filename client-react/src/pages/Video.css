@@ -1,6 +1,6 @@
 .Video-Page {
-  background-color: #333333;
-  color: aliceblue;
+  background-color: #14213D;
+  color: #fff;
 }
 
 main {
@@ -17,6 +17,7 @@ main {
 .video {
   display: flex;
   justify-content: center;
+  margin-top: 50px;
 }
 
 .below-video {
@@ -24,30 +25,35 @@ main {
   flex-direction: column;
   text-align: center;
   width: 90%;
+  margin-bottom: 50px;
 }
 
 .video-details {
   display: flex;
   justify-content: space-evenly;
+  height: 50px;
 }
 
 .channel-details {
   display: flex;
   align-items: center;
-  border: 1px solid gray;
-  border-radius: 50px;
+  /* border: 1px solid gray; */
+  border-radius: 10px;
 }
 
 .channel-details img {
-  border-radius: 50px;
+  border-radius: 10px;
+  max-height: 50px;
 }
 
 .channel-details h3 {
   padding: 0.5em;
+  font-size: 1.2em;
+  margin-bottom: 0;
 }
 
 .add-line {
-  border-left: 1px solid gray;
+  border-left: 1px solid #fff;
 }
 
 .thumbs-up-icon {
@@ -55,14 +61,23 @@ main {
 }
 
 .download-button {
-  border-radius: 30px;
+  width: auto;
+  min-width: 100px;
+  border-radius: 10px;
+  background-color: #fff;
+  color: #14213D;
+  border: none;
 }
 
-.playlist-border {
+.download-button:hover {
+  background-color: #FCA311;
+}
+
+/* .playlist-border {
   border: 1px solid gray;
   border-radius: 3em;
   padding: 1em;
-}
+} */
 
 .playlist-nav {
   display: flex;
@@ -85,16 +100,19 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 3em;
-  width: 8em;
-  height: 75%;
-  color: azure;
+  border-radius: 10px;
+  width: 5em;
+  height: 5em;
+  color: #14213D;
+  margin-top: 400px;
+  background-color: #fff;
 }
 
 .arrow:hover {
-  background-color:#8d8d8d;
-  opacity: 50%;
+  background-color:#FCA311;
+  /* opacity: 50%; */
   transition: 0.2s ease-in-out;
+  color: #14213D;
 }
 
 /* .left {
@@ -102,5 +120,5 @@ main {
 } */
 
 .right {
-  right: 10em
+  right: 5.7em
 }

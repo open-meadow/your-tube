@@ -21,6 +21,10 @@
   color: #FCA311;
 }
 
+.navbar-brand {
+  transition: 0.2s ease-in-out;
+}
+
 .navbar-brand:hover {
   color: #FCA311;
 }
