@@ -11,8 +11,23 @@
   transition: 0.25s ease-in-out;
 }
 
+.item-link {
+  display: flex;
+}
+
 .title {
   padding: 0.5em;
   text-decoration: none;
   color: black;
+}
+
+.delete-playlist-button {
+  float: right;
+  --bs-btn-color: null;
+  --bs-btn-bg: null;
+  --bs-btn-border-color: null;
+  --bs-btn-hover-color: white;
+  --bs-btn-hover-bg: #272729;
+  --bs-btn-hover-border-color: null;
+  --bs-btn-active-bg: red;
 }

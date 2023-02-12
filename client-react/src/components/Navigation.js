@@ -9,7 +9,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 
 // Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft, faDesktop } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faDesktop} from "@fortawesome/free-solid-svg-icons";
 
 // Other Imports
 import "./Navigation.css";
@@ -40,6 +40,7 @@ export default function Nav(props) {
     return (
       <Playlist
         key={playlist.playlist_id}
+        playlist_id={playlist.playlist_id}
         playlist_name={playlist.playlist_name}
         playlist_desc={playlist.playlist_desc}
         videos={playlist.videos}

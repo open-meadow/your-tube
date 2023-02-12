@@ -8,6 +8,7 @@ export const AppProvider = (props) => {
   const [userid, setUserid] = useState();
   const [playlists, setPlaylists] = useState([]);
 
+  // search results
   const [searchData, setSearchData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loadingState, setLoadingState] = useState(false);
@@ -15,6 +16,8 @@ export const AppProvider = (props) => {
 
   // Used to update playlist sidebar on add video
   const [updatePL, setUpdatePL] = useState();
+
+  const [currentPlaylist, setCurrentPlaylist] = useState();
 
   // use to get video details
   const [title, setTitle] = useState(null);
@@ -26,6 +29,10 @@ export const AppProvider = (props) => {
 
   // use to show success message
   const [show, setShow] = useState(false);
+
+  const [video, setVideo] = useState(null);
+  // use to delete vid
+  const [deleteVid, setDeleteVid] = useState("");
 
   return (
     <AppContext.Provider
@@ -62,6 +69,12 @@ export const AppProvider = (props) => {
         setLikeCount,
         show,
         setShow,
+        currentPlaylist,
+        setCurrentPlaylist,
+        video,
+        setVideo,
+        deleteVid,
+        setDeleteVid,
       }}
     >
       {props.children}
