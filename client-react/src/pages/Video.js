@@ -46,7 +46,7 @@ export default function Video(props) {
     currentPlaylist,
     setCurrentPlaylist,
     video,
-    setVideo
+    setVideo,
   } = useGlobalContext();
 
   const { id } = useParams();
@@ -172,7 +172,6 @@ export default function Video(props) {
   return (
     <div className="Video-Page">
       <Navigation />
-      <hr className="break-line"></hr>
       <main>
         {thisPlaylist.length !== 0 && (
           <div className="playlist-border">
