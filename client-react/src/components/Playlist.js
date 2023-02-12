@@ -66,14 +66,15 @@ export default function Playlist(props) {
     return (
       <div className="playlist-item">
         <Link
+          className="item-link"
           to={`/video/${Object.keys(video)}?playlistId=${
             props.playlist_id
           }&index=${i}`}
           key={Object.keys(video)}
         >
           <img src={thumbnail} />
+          <h6 className="title">{Object.values(video)}</h6>
         </Link>
-        <div className="title">{Object.values(video)}</div>
 
         <CloseButton onClick={() => deleteVideo(Object.keys(video))} />
       </div>

@@ -11,6 +11,10 @@
   transition: 0.25s ease-in-out;
 }
 
+.item-link {
+  display: flex;
+}
+
 .title {
   padding: 0.5em;
   text-decoration: none;
