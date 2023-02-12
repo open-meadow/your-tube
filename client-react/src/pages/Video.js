@@ -146,7 +146,6 @@ export default function Video(props) {
       },
     };
 
-    // const audioValue = getAudioFromSessionStorage();
     const itag = audio ? 18 : 140;
 
     return (
@@ -188,11 +187,6 @@ export default function Video(props) {
     }
     window.location.reload();
   };
-
-  // const getAudioFromSessionStorage = () => {
-  //   const audioValue = sessionStorage.getItem("audio");
-  //   return audioValue ? JSON.parse(audioValue) : false;
-  // };
 
   return (
     <div className="Video-Page">

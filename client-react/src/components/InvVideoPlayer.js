@@ -18,12 +18,11 @@ import { useGlobalContext } from "context/context";
 export default function InvVideoPlayer(props) {
   const { id, itag, opts, onEnd } = props;
 
-  const [workingInstance, setWorkingInstance] = useState(null);
-
   const instanceList = [
     "https://invidious.baczek.me",
     "https://vid.puffyan.us",
     "https://inv.riverside.rocks",
+    "https://yewtu.be",
     "https://invidious.kavin.rocks",
     "https://watch.thekitty.zone",
     "https://y.com.sb",
@@ -49,35 +48,25 @@ export default function InvVideoPlayer(props) {
     "https://invidious.privacydev.net",
     "https://invidious.lidarshield.cloud",
     "https://invidious.namazso.eu",
-    "https://yewtu.be",
   ];
 
   const videoNode = useRef(null);
 
-  async function getWorkingInstance(instanceList) {
-    for (let instance of instanceList) {
-      const response = await fetch(
-        `${instance}/embed/W6NZfCO5SIk`
-      );
-      console.log("response: ", response);
-      if (response.ok) {
-        return instance;
-      }
+  let currentSourceIndex = 0;
+  const sources = [];
+  for (let i = 0; i < instanceList.length; i++) {
+    let srcObj = {
+      src: `${instanceList[i]}/latest_version?id=${id}&itag=${itag}`,
+      type: "video/mp4"
     }
-    return null;
+    sources.push(srcObj);
   }
 
-  useEffect(() => {
-    (async () => {
-      const instance = await getWorkingInstance(instanceList);
-      console.log("this is instance", instance);
-      setWorkingInstance(instance);
-      console.log("working instance", workingInstance);
-    })();
-  }, []);
-
-
-  console.log("itag: ", itag);
+  const switchSource = (player) => {
+    currentSourceIndex += 1;
+    player.src(sources[currentSourceIndex]);
+    player.load();
+  };
 
   useEffect(() => {
     const player = videojs(videoNode.current, {
@@ -85,15 +74,19 @@ export default function InvVideoPlayer(props) {
       height: opts.height,
       autoplay: opts.playerVars.autoplay,
       controls: true,
-      sources: [
-        {
-          // src: `//vjs.zencdn.net/v/oceans.mp4`,
-          // src: `${workingInstance}/latest_version?id=W6NZfCO5SIk&itag=22`,
-          src: `https://invidious.baczek.me/latest_version?id=${id}&itag=${itag}`,
-          type: "video/mp4",
-        },
-      ],
+      sources: sources,
       crossOrigin: "anonymous",
+    });
+
+    player.ready(function () {
+      console.log("Current source URL:", player.currentSrc());
+    });
+
+    player.on("error", function (error) {
+      // Handle the error
+      console.log("error: ", error);
+      console.log("Current source URL:", player.currentSrc());
+      switchSource(player); 
     });
 
     player.on("ended", onEnd);
