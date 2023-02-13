@@ -13,6 +13,9 @@ import {
   faArrowLeft,
   faArrowRight,
   faArrowRightArrowLeft,
+  faDownload,
+  faVideo,
+  faHeadphones,
 } from "@fortawesome/free-solid-svg-icons";
 
 // import components
@@ -200,7 +203,7 @@ export default function Video(props) {
                 onClick={() => setCurrentTab("youtube")}
                 active={currentTab === "youtube"}
               >
-                Youtube
+                YouTube
               </Button>
             </div>
           </>
@@ -288,7 +291,12 @@ export default function Video(props) {
                 className="download-button"
                 onClick={downloadVideo}
               >
-                Download
+                <FontAwesomeIcon
+                  className="thumbs-up-icon"
+                  icon={faDownload}
+                  size="3x"
+                />
+                <h3>Download</h3>
               </Button>
 
               {/* Audio/Video buttons */}
@@ -298,7 +306,12 @@ export default function Video(props) {
                   className="download-button"
                   onClick={audioSwitch}
                 >
-                  Audio
+                  <FontAwesomeIcon
+                    className="thumbs-up-icon"
+                    icon={faHeadphones}
+                    size="3x"
+                  />
+                  <h3>Audio</h3>
                 </Button>
               )}
               {currentTab === "invidious" && !audio && (
@@ -307,7 +320,12 @@ export default function Video(props) {
                   className="download-button"
                   onClick={audioSwitch}
                 >
-                  Video
+                  <FontAwesomeIcon
+                    className="thumbs-up-icon"
+                    icon={faVideo}
+                    size="3x"
+                  />
+                  <h3>Video</h3>
                 </Button>
               )}
             </div>
