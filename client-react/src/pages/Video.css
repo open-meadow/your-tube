@@ -121,8 +121,10 @@ main {
 
 .left {
   left: 50px;
+  top: 60%;
 }
 
 .right {
   right: 50px;
+  top: 60%;
 } 
