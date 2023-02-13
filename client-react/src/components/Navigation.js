@@ -22,7 +22,6 @@ export default function Nav(props) {
   const [show, setShow] = useState(false);
   const [playlistName, setPlaylistName] = useState("");
   const [playlistDesc, setPlaylistDesc] = useState("");
-  const [over, setOver] = useState(false);
 
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
@@ -60,10 +59,7 @@ export default function Nav(props) {
 
   return (
     <Navbar id="navigation-bar" sticky="top" variant="dark">
-      <Navbar.Brand className="home-link" href="/" 
-      onMouseOver={() => setOver(true)}
-      onMouseOut={() => setOver(false)}
-      >
+      <Navbar.Brand className="home-link" href="/" >
         <img id="main-logo" src={projectLogo} alt="logo" 
         />
       </Navbar.Brand>
