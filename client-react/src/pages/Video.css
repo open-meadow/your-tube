@@ -25,19 +25,6 @@ main {
   justify-content: space-evenly;
 }
 
-
-.below-video {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  width: 90%;
-}
-
-.video-details {
-  display: flex;
-  justify-content: space-around;
-}
-
 .single-video-button {
   margin: 0.5em;
   border-radius: 0px;
@@ -51,31 +38,48 @@ main {
   transition: 0.3s ease-in-out;
 }
 
-.channel-details {
+.below-video {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 90%;
+}
+
+
+.video-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.video-details-buttons {
   display: flex;
   align-items: center;
   border: 1px solid gray;
   border-radius: 50px;
-}
-
-.channel-details img {
-  border-radius: 50px;
-}
-
-.channel-details h3 {
   padding: 0.5em;
+}
+
+.video-details-buttons img {
+  border-radius: 50px;
+  padding: 0.5em;
+}
+
+.video-details-buttons h3 {
+  padding: 0.75em;
 }
 
 .add-line {
   border-left: 1px solid gray;
 }
 
-.thumbs-up-icon {
+.video-details-icons {
   padding: 0.5em;
 }
 
 .download-button {
-  border-radius: 30px;
+  border-radius: 50px;
+  width: 20em;
+  display: flex;
 }
 
 .playlist-border {

@@ -269,16 +269,16 @@ export default function Video(props) {
           {!loadingState && (
             <div className="video-details">
               {/* Channel details */}
-              <div className="channel-details">
+              <div className="video-details-buttons">
                 <img src={authorThumbnails} />
                 <h3>{author}</h3>
                 <h3 className="add-line">{subCountText}</h3>
               </div>
 
               {/* Like button */}
-              <div className="channel-details">
+              <div className="video-details-buttons">
                 <FontAwesomeIcon
-                  className="thumbs-up-icon"
+                  className="video-details-icons"
                   icon={faThumbsUp}
                   size="3x"
                 />
@@ -288,44 +288,44 @@ export default function Video(props) {
               {/* Download button */}
               <Button
                 variant="outline-light"
-                className="download-button"
+                className="video-details-buttons download-button"
                 onClick={downloadVideo}
               >
                 <FontAwesomeIcon
-                  className="thumbs-up-icon"
+                  className="video-details-icons"
                   icon={faDownload}
                   size="3x"
                 />
-                <h3>Download</h3>
+                <h3 className="add-line">Download</h3>
               </Button>
 
               {/* Audio/Video buttons */}
               {currentTab === "invidious" && audio && (
                 <Button
                   variant="outline-light"
-                  className="download-button"
+                  className="video-details-buttons download-button"
                   onClick={audioSwitch}
                 >
                   <FontAwesomeIcon
-                    className="thumbs-up-icon"
+                    className="video-details-icons"
                     icon={faHeadphones}
                     size="3x"
                   />
-                  <h3>Audio</h3>
+                  <h3 className="add-line">Audio</h3>
                 </Button>
               )}
               {currentTab === "invidious" && !audio && (
                 <Button
                   variant="outline-light"
-                  className="download-button"
+                  className="video-details-buttons download-button"
                   onClick={audioSwitch}
                 >
                   <FontAwesomeIcon
-                    className="thumbs-up-icon"
+                    className="video-details-icons"
                     icon={faVideo}
                     size="3x"
                   />
-                  <h3>Video</h3>
+                  <h3 className="add-line">Video</h3>
                 </Button>
               )}
             </div>
