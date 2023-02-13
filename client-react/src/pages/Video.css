@@ -34,9 +34,9 @@ main {
 .btn.active {
   background: none;
   color: floralwhite;
-  border-top: 3px solid floralwhite;
+  border-bottom: 3px solid #FCA311;
   transition: 0.3s ease-in-out;
-  margin-top: 50px;
+  /* margin-top: 50px; */
 }
 
 .below-video {
@@ -50,23 +50,19 @@ main {
 
 .video-details {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   height: 50px;
 }
 
 .video-details-buttons {
   display: flex;
   align-items: center;
-  /* border: 1px solid gray; */
   border-radius: 10px;
-  padding: 0.5em;
 }
 
 .video-details-buttons img {
   border-radius: 10px;
   max-height: 50px;
-  padding: 0.5em;
-  font-size: 1.2em;
   margin-bottom: 0;
 }
 
@@ -78,12 +74,16 @@ main {
   padding: 0.75em;
 }
 
-.add-line {
-  border-left: 1px solid #fff;
+.video-details-buttons h4 {
+  margin: 10px;
 }
 
+/* .add-line {
+  border-left: 1px solid #fff;
+} */
+
 .video-details-icons {
-  padding: 0.5em;
+  padding: 10px;
 }
 
 .download-button {
@@ -147,10 +147,10 @@ main {
 
 .left {
   left: 50px;
-  top: 60%;
+  top: 5%;
 }
 
 .right {
   right: 50px;
-  top: 60%;
-} 
+  top: 5%;
+}
