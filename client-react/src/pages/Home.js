@@ -50,7 +50,6 @@ export default function Home(props) {
   return (
     <div className="App">
       <Navigation username={username} playlists={playlists} />
-      <hr className="break-line"></hr>
       <MainContent />
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <SearchResult

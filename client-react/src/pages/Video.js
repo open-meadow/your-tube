@@ -1,5 +1,6 @@
 // import css
 import "./Video.css";
+import "App.css";
 import Spinner from "react-bootstrap/Spinner";
 import Button from "react-bootstrap/Button";
 import ToggleButton from "react-bootstrap/ToggleButton";
@@ -21,6 +22,7 @@ import {
 // import components
 import Navigation from "components/Navigation";
 import VideoPlayer from "components/VideoPlayer";
+import Footer from "components/Footer";
 import { useGlobalContext } from "context/context";
 
 // import from React
@@ -31,7 +33,6 @@ import { Link, useSearchParams, redirect } from "react-router-dom";
 import axios from "axios";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import InvVideoPlayer from "components/InvVideoPlayer";
-import Footer from "components/Footer";
 
 export default function Video(props) {
   const {
@@ -281,7 +282,7 @@ export default function Video(props) {
                 <FontAwesomeIcon
                   className="video-details-icons"
                   icon={faThumbsUp}
-                  size="3x"
+                  size="2x"
                 />
                 <h3 className="add-line">{likeCount}</h3>
               </div>
@@ -333,9 +334,10 @@ export default function Video(props) {
           )}
           <hr className="break-line"></hr>
           {!loadingState && <div>{description}</div>}
-          <br/>
+          <br />
         </section>
       </main>
+      <Footer />
     </div>
   );
 }

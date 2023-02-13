@@ -96,7 +96,7 @@ export default function Playlist(props) {
   };
 
   return (
-    <div>
+    <div className="playlist-container">
       <h2>
         {props.playlist_name}
         <Button

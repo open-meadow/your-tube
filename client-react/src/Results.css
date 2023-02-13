@@ -8,15 +8,18 @@
 }
 
 .video-result {
-  width: 70%;
+  width: 60vw;
   margin: 1em 0;
-  border: 5px solid #212529;
-  margin: 1em auto
+  border: 3px solid #E5E5E5;
+  margin: 1em auto;
+  background: #E5E5E5;
+  border-radius: 10px;
 }
 
 .video-result:hover {
-  box-shadow: 5px 5px 15px white;
-  transition: 0.25s ease-in-out;
+  border: 3px solid #FCA311;
+  background-color: #fff;
+  color: #fff;
 }
 
 .preview {
@@ -28,23 +31,26 @@
 
 .video-header {
   display: flex;
-  padding: 10px;
-  width: 125px;
   height: 100px;
 }
 
 .video-title {
   display: flex;
-  margin: auto 0;
-  font-size: 25px;
+  margin: 0 0 0 20px;
+  font-size: 20px;
   font-weight: 600;
   text-align: left;
+  color: #14213D;
 }
 
 .plus-icon {
-  color: white;
+  color: #14213D;
   margin-right: 1em;
   size: 25px;
+}
+
+.plus-icon:hover {
+  color: #FCA311;
 }
 
 .dropdown-toggle {

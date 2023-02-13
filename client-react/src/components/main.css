@@ -1,0 +1,15 @@
+.main-words .welcome-text {
+  font-family: 'Rubik', sans-serif;
+  font-size: 5em;
+}
+
+.glitch {
+  font-family: 'Rubik Glitch', cursive;
+  margin-left: 20px;
+  color: #FCA311;
+}
+
+.main-content {
+  justify-content: center;
+  background-color: #14213D;
+}
