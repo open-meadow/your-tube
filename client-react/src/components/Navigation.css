@@ -1,3 +1,16 @@
+#navigation-bar {
+  background-color: #080d16;
+}
+
+#main-logo {
+  height: 50px;
+}
+
+#main-logo:hover {
+  opacity: 70%;
+  height: 50px;
+}
+
 #create-new-playlist {
   margin-bottom: 1em;
 }
@@ -12,9 +25,10 @@
 }
 
 .open-sidebar {
+  --bs-btn-border-color: null;
   font-size: 1.3em;
   color: #fff;
-  background: #000;
+  background: #080d16;
 }
 
 .open-sidebar:hover {
