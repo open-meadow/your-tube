@@ -63,13 +63,14 @@ li:hover a {
 
 #footer {
   padding: 5px 0 0 0;
-  background-color: #FCA311;
+  background-color: #080d16;
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
   text-align: center;
-  color: #14213D;
+  color: white;
+  border-top: 3px solid #FCA311;
 }
 
 .App {
