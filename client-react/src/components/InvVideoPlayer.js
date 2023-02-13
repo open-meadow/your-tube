@@ -62,7 +62,6 @@ export default function InvVideoPlayer(props) {
       width: opts.width,
       height: opts.height,
       autoplay: opts.playerVars.autoplay,
-      poster: `https://cdn.pixabay.com/photo/2014/03/04/07/14/music-279332_960_720.jpg`,
       controls: true,
       sources: sources,
       crossOrigin: "anonymous",
