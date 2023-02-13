@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faDesktop } from "@fortawesome/free-solid-svg-icons";
 
 // Other Imports
+import projectLogo from "../images/projectLogo.png"
 import "./Navigation.css";
 import Playlist from "./Playlist";
 import { useGlobalContext } from "context/context";
@@ -21,6 +22,7 @@ export default function Nav(props) {
   const [show, setShow] = useState(false);
   const [playlistName, setPlaylistName] = useState("");
   const [playlistDesc, setPlaylistDesc] = useState("");
+  const [over, setOver] = useState(false);
 
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
@@ -57,10 +59,13 @@ export default function Nav(props) {
   };
 
   return (
-    <Navbar sticky="top" variant="dark">
-      <Navbar.Brand className="home-link" href="/">
-        <FontAwesomeIcon icon={faDesktop} />
-        <span id="brand-home-link">YourTube</span>
+    <Navbar id="navigation-bar" sticky="top" variant="dark">
+      <Navbar.Brand className="home-link" href="/" 
+      onMouseOver={() => setOver(true)}
+      onMouseOut={() => setOver(false)}
+      >
+        <img id="main-logo" src={projectLogo} alt="logo" 
+        />
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse className="justify-content-end" id="user-name">
