@@ -31,6 +31,7 @@ import { Link, useSearchParams, redirect } from "react-router-dom";
 import axios from "axios";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import InvVideoPlayer from "components/InvVideoPlayer";
+import Footer from "components/Footer";
 
 export default function Video(props) {
   const {
@@ -332,6 +333,7 @@ export default function Video(props) {
           )}
           <hr className="break-line"></hr>
           {!loadingState && <div>{description}</div>}
+          <br/>
         </section>
       </main>
     </div>
