@@ -70,7 +70,7 @@ export default function Nav(props) {
         <FontAwesomeIcon icon={faArrowLeft} />
       </Button>
       <Offcanvas placement="end" show={show} onHide={handleClose}>
-        <Offcanvas.Header closeButton>
+        <Offcanvas.Header closeButton closeVariant="white">
           <Offcanvas.Title>{username}'s Playlists</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
