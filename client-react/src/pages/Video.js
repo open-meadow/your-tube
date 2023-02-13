@@ -249,7 +249,6 @@ export default function Video(props) {
   return (
     <div className="Video-Page">
       <Navigation />
-      <hr className="break-line"></hr>
 
       <main>
         {/* show/hide playlist border */}
@@ -273,8 +272,8 @@ export default function Video(props) {
               {/* Channel details */}
               <div className="video-details-buttons">
                 <img src={authorThumbnails} />
-                <h3>{author}</h3>
-                <h3 className="add-line">{subCountText}</h3>
+                <h4>{author}</h4>
+                <h4 className="add-line">{subCountText}</h4>
               </div>
 
               {/* Like button */}
@@ -284,7 +283,7 @@ export default function Video(props) {
                   icon={faThumbsUp}
                   size="2x"
                 />
-                <h3 className="add-line">{likeCount}</h3>
+                <h4 className="add-line">{likeCount}</h4>
               </div>
 
               {/* Download button */}
@@ -296,9 +295,9 @@ export default function Video(props) {
                 <FontAwesomeIcon
                   className="video-details-icons"
                   icon={faDownload}
-                  size="3x"
+                  size="2x"
                 />
-                <h3 className="add-line">Download</h3>
+                Download
               </Button>
 
               {/* Audio/Video buttons */}
@@ -311,9 +310,9 @@ export default function Video(props) {
                   <FontAwesomeIcon
                     className="video-details-icons"
                     icon={faHeadphones}
-                    size="3x"
+                    size="2x"
                   />
-                  <h3 className="add-line">Audio</h3>
+                  Audio
                 </Button>
               )}
               {currentTab === "invidious" && !audio && (
@@ -327,7 +326,7 @@ export default function Video(props) {
                     icon={faVideo}
                     size="3x"
                   />
-                  <h3 className="add-line">Video</h3>
+                  Video
                 </Button>
               )}
             </div>
