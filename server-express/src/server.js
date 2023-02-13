@@ -53,26 +53,30 @@ app.get("/download/:id", (req, res) => {
 
   // Start the ffmpeg child process
   const ffmpegProcess = cp.spawn(
+    // execute ffmpeg command
     ffmpeg,
+    // array of options for ffmpeg process
     [
       // Remove ffmpeg's console spamming
       "-loglevel",
       "8",
       "-hide_banner",
-      // Redirect/Enable progress messages
-      "-progress",
+
+      // Set inputs - pipe 3 takes audio, pipe 4 takes video
+      "-i",
       "pipe:3",
-      // Set inputs
       "-i",
       "pipe:4",
-      "-i",
-      "pipe:5",
+
       // Map audio & video from streams
       "-map",
+      // audio
       "0:a",
       "-map",
+      // video
       "1:v",
-      // Keep encoding
+
+      // Keep encoding - copy input source to output file without re-encoding
       "-c:v",
       "copy",
       // Define output file
@@ -88,27 +92,34 @@ app.get("/download/:id", (req, res) => {
         /* Custom: pipe:3, pipe:4, pipe:5 */
         "pipe",
         "pipe",
-        "pipe",
       ],
     }
   );
+
+  res.setHeader("Content-disposition", `attachment; filename=${videoId}.mp4`);
+  res.setHeader("Content-Type", "video/mp4");
+
   ffmpegProcess.on("close", () => {
+    const readStream = fs.createReadStream(output);
+    readStream.pipe(res);
+
+    res.on("finish", () => {
+      fs.unlink(output, (err) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log(`${output} was deleted`);
+        }
+      });
+    });
+
     console.log("done");
   });
 
   // Link streams
-  // FFmpeg creates the transformer streams and we just have to insert / read data
-  ffmpegProcess.stdio[3].on("data", (chunk) => {
-    // Parse the param=value list returned by ffmpeg
-    const lines = chunk.toString().trim().split("\n");
-    const args = {};
-    for (const l of lines) {
-      const [key, value] = l.split("=");
-      args[key.trim()] = value.trim();
-    }
-  });
-  audio.pipe(ffmpegProcess.stdio[4]);
-  video.pipe(ffmpegProcess.stdio[5]);
+
+  audio.pipe(ffmpegProcess.stdio[3]);
+  video.pipe(ffmpegProcess.stdio[4]);
 });
 
 app.use(function (req, res) {
