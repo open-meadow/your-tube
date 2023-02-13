@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faDesktop } from "@fortawesome/free-solid-svg-icons";
 
 // Other Imports
-import projectLogo from "../images/projectLogo.png"
+import projectLogo from "../images/projectLogo.png";
 import "./Navigation.css";
 import Playlist from "./Playlist";
 import { useGlobalContext } from "context/context";
