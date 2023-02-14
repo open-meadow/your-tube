@@ -153,11 +153,11 @@ export default function Video(props) {
   // video player
   const showVideoPlayer = (autoplay) => {
     console.log("indow: ", window.innerWidth);
-    const [width, height] = (window.innerWidth > 1400) ? [1280, 720] : [640, 360];
+    const [width, height] = window.innerWidth > 1400 ? [1280, 720] : [640, 360];
 
     const opts = {
-      width: width,
-      height: height,
+      width: "1280",
+      height: "720",
       playerVars: {
         autoplay: autoplay,
       },
