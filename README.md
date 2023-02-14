@@ -20,28 +20,28 @@ This is a final project created during my studies at Lighthouse Labs. It is a co
 
 ## Final Product
 > Screenshot of Home Page
-![screenshot]()
+![screenshot](https://github.com/open-meadow/your-tube/blob/87262de1adb3b7e7bdfa6803a7632f8a6f786cce/docs/home_page.png)
 
 > Screenshot of Search Results
-![screenshot]()
+![screenshot](https://github.com/open-meadow/your-tube/blob/87262de1adb3b7e7bdfa6803a7632f8a6f786cce/docs/search_results.png)
 
 > Screenshot of Video Page
-![screenshot]()
+![screenshot](https://github.com/open-meadow/your-tube/blob/87262de1adb3b7e7bdfa6803a7632f8a6f786cce/docs/video_page_invidious_video.png)
 
 > Screenshot of Video Page playing Video in Audio mode
-![screenshot]()
+![screenshot](https://github.com/open-meadow/your-tube/blob/87262de1adb3b7e7bdfa6803a7632f8a6f786cce/docs/video_page_invidious_audio_mode.png)
 
 > Screenshot of Downloaded File
-![screenshot]()
+![screenshot](https://github.com/open-meadow/your-tube/blob/master/docs/video_page_downloads.png)
 
 > Screenshot of Playlist Sidebar
-![screenshot]()
+![screenshot](https://github.com/open-meadow/your-tube/blob/87262de1adb3b7e7bdfa6803a7632f8a6f786cce/docs/playlist_sidebar.png)
 
 > Screenshot of Video Page in Playlist View
-![screenshot]()
+![screenshot](https://github.com/open-meadow/your-tube/blob/87262de1adb3b7e7bdfa6803a7632f8a6f786cce/docs/video_page_playlist_view.png)
 
-> Screenshot of Success Modal
-![screenshot"]()
+> Screenshot of Add to Playlist button
+![screenshot](https://github.com/open-meadow/your-tube/blob/87262de1adb3b7e7bdfa6803a7632f8a6f786cce/docs/add_to_new_playlist.png)
 
 ## Getting Started
 - You need to have Node JS installed on your computer. You can download it at (https://nodejs.org/en/).
