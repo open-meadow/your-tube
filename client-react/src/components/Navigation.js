@@ -51,7 +51,7 @@ export default function Nav(props) {
 
   const handleSubmit = (e) => {
     axios
-      .post(`/api/playlists`, { playlistName, playlistDesc, userid: 1 })
+      .post(`/api/playlists`, { playlistName, playlistDesc, userid: userid })
       .then((res) => {
         console.log(res);
       });
@@ -59,9 +59,8 @@ export default function Nav(props) {
 
   return (
     <Navbar id="navigation-bar" sticky="top" variant="dark">
-      <Navbar.Brand className="home-link" href="/" >
-        <img id="main-logo" src={projectLogo} alt="logo" 
-        />
+      <Navbar.Brand className="home-link" href="/">
+        <img id="main-logo" src={projectLogo} alt="logo" />
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse className="justify-content-end" id="user-name">
