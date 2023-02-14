@@ -6,7 +6,6 @@ import MainContent from "components/MainContent";
 import Footer from "components/Footer";
 import SearchResult from "components/SearchResult";
 import SearchBar from "components/SearchBar";
-import VideoPlayer from "components/VideoPlayer";
 
 import { useGlobalContext } from "context/context";
 

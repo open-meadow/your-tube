@@ -99,8 +99,10 @@ export default function Video(props) {
       ? Object.keys(thisPlaylist[0].videos[Number(videoIndex) + 1])
       : null;
 
+    console.log("nextVideo: ", nextVideo);
+
     return (
-      <>
+      <div className="playlist-info">
         {!loadingState && previousVideo && (
           <Link
             to={`/video/${previousVideo}?playlistId=${
@@ -128,7 +130,7 @@ export default function Video(props) {
             </Container>
           </Link>
         )}
-      </>
+      </div>
     );
   };
 
@@ -149,9 +151,12 @@ export default function Video(props) {
 
   // video player
   const showVideoPlayer = (autoplay) => {
+    console.log("indow: ", window.innerWidth);
+    const [width, height] = (window.innerWidth > 1400) ? [1280, 720] : [640, 360];
+
     const opts = {
-      width: "1280",
-      height: "720",
+      width: width,
+      height: height,
       playerVars: {
         autoplay: autoplay,
       },
@@ -249,7 +254,7 @@ export default function Video(props) {
   return (
     <div className="Video-Page">
       <Navigation />
-
+      <br />
       <main>
         {/* show/hide playlist border */}
         {thisPlaylist.length !== 0 && (

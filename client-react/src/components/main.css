@@ -5,11 +5,18 @@
 
 .glitch {
   font-family: 'Rubik Glitch', cursive;
-  margin-left: 20px;
+  margin-left: 0.3em;
   color: #FCA311;
 }
 
 .main-content {
   justify-content: center;
   background-color: #14213D;
+}
+
+@media only screen and (max-width: 1280px) {
+  .main-words {
+    font-size: 0.9em;
+  }
+
 }

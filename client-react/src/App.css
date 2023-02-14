@@ -109,8 +109,8 @@ li:hover a {
 .search-bar {
   display: block;
   margin: auto;
-  width: 60vw;
-  height: 50px;
+  width: 80%;
+  height: 4em;
   padding: 10px;
   border-radius: 10px;
 }
@@ -138,4 +138,10 @@ li:hover a {
 .navbar {
   border-bottom: 3px solid #FCA311;
   height: 75px;
+}
+
+@media only screen and (max-width: 1280px) {
+  .search {
+    width: 100%;
+  }
 }
