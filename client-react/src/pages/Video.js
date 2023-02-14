@@ -17,6 +17,7 @@ import {
   faDownload,
   faVideo,
   faHeadphones,
+  faInfo,
 } from "@fortawesome/free-solid-svg-icons";
 
 // import components
@@ -246,6 +247,13 @@ export default function Video(props) {
     window.location.reload();
   };
 
+  const [isShown, setIsShown] = useState(true);
+
+  const handleClick = (event) => {
+    // 👇️ toggle visibility
+    setIsShown((current) => !current);
+  };
+
   return (
     <div className="Video-Page">
       <Navigation />
@@ -285,7 +293,18 @@ export default function Video(props) {
                 />
                 <h4 className="add-line">{likeCount}</h4>
               </div>
-
+              {/* DSescription button */}
+              <Button
+                className="toggle-description video-details-buttons"
+                onClick={handleClick}
+              >
+                <FontAwesomeIcon
+                  className="video-details-icons"
+                  icon={faInfo}
+                  size="2x"
+                />
+                Toggle Description
+              </Button>
               {/* Download button */}
               <Button
                 variant="outline-light"
@@ -324,7 +343,7 @@ export default function Video(props) {
                   <FontAwesomeIcon
                     className="video-details-icons"
                     icon={faVideo}
-                    size="3x"
+                    size="2x"
                   />
                   Video
                 </Button>
@@ -332,7 +351,16 @@ export default function Video(props) {
             </div>
           )}
           <hr className="break-line"></hr>
-          {!loadingState && <div>{description}</div>}
+          {!loadingState && (
+            <div>
+              <div
+                className="video-description"
+                style={{ display: isShown ? "none" : "block" }}
+              >
+                {description}
+              </div>
+            </div>
+          )}
           <br />
         </section>
       </main>
