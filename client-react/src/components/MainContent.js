@@ -5,7 +5,7 @@ export default function MainContent() {
     <div className="main-content">
       <div className="main-words">
         <h1 className="welcome-text text-white">
-          Study without <span className="glitch">distraction</span>
+          Study without <p className="glitch">distraction</p>
         </h1>
       </div>
 
