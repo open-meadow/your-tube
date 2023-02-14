@@ -86,16 +86,19 @@ main {
   padding: 10px;
 }
 
-.download-button {
+.download-button,
+.toggle-description {
   width: auto;
   min-width: 100px;
   border-radius: 10px;
   background-color: #E5E5E5;
   color: #14213D;
   border: none;
+  transition: .2s ease-in-out;
 }
 
-.download-button:hover {
+.download-button:hover,
+.toggle-description:hover {
   background-color: #FCA311;
 }
 
@@ -153,4 +156,27 @@ main {
 .right {
   right: 50px;
   top: 5%;
+}
+
+:not(.btn-check)+.btn {
+  border-radius: 10px;
+}
+
+:not(.btn-check)+.btn:hover {
+  background-color: #FCA311;
+  color: #14213D;
+}
+
+.toggle-description {
+  height: 50px;
+  width: 200px;
+  border-radius: 10px;
+  background-color: #E5E5E5;
+  color: #14213D;
+  border: none;
+  transition: .2s ease-in-out;
+}
+
+.toggle-description:hover {
+  background-color: #FCA311;
 }
