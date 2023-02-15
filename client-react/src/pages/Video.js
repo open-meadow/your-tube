@@ -132,18 +132,13 @@ export default function Video(props) {
     fetchVideoData(0); // start with the first instance
   }, [id]);
 
-  // function to show playlist name and navigation buttons
-  const showPlaylistInfo = (thisPlaylist) => {
+  const playlistLeftButton = (thisPlaylist) => {
     const previousVideo = thisPlaylist[0].videos[Number(videoIndex) - 1]
       ? Object.keys(thisPlaylist[0].videos[Number(videoIndex) - 1])
       : null;
 
-    const nextVideo = thisPlaylist[0].videos[Number(videoIndex) + 1]
-      ? Object.keys(thisPlaylist[0].videos[Number(videoIndex) + 1])
-      : null;
-
     return (
-      <div className="playlist-info">
+      <>
         {!loadingState && previousVideo && (
           <Link
             to={`/video/${previousVideo}?playlistId=${
@@ -155,11 +150,17 @@ export default function Video(props) {
             </Container>
           </Link>
         )}
+      </>
+    );
+  };
 
-        <div className="playlist-title">
-          <h1>{thisPlaylist[0].playlist_name}</h1>
-        </div>
+  const playlistRightButton = (thisPlaylist) => {
+    const nextVideo = thisPlaylist[0].videos[Number(videoIndex) + 1]
+      ? Object.keys(thisPlaylist[0].videos[Number(videoIndex) + 1])
+      : null;
 
+    return (
+      <>
         {!loadingState && nextVideo && (
           <Link
             to={`/video/${nextVideo}?playlistId=${
@@ -171,7 +172,50 @@ export default function Video(props) {
             </Container>
           </Link>
         )}
+      </>
+    );
+  };
+
+  // function to show playlist name and navigation buttons
+  const showPlaylistInfo = (thisPlaylist) => {
+    // const previousVideo = thisPlaylist[0].videos[Number(videoIndex) - 1]
+    //   ? Object.keys(thisPlaylist[0].videos[Number(videoIndex) - 1])
+    //   : null;
+
+    // const nextVideo = thisPlaylist[0].videos[Number(videoIndex) + 1]
+    //   ? Object.keys(thisPlaylist[0].videos[Number(videoIndex) + 1])
+    //   : null;
+
+    return (
+      // <div className="playlist-info">
+      //   {!loadingState && previousVideo && (
+      //     <Link
+      //       to={`/video/${previousVideo}?playlistId=${
+      //         thisPlaylist[0].playlist_id
+      //       }&index=${Number(videoIndex) - 1}`}
+      //     >
+      //       <Container className="arrow left">
+      //         <FontAwesomeIcon icon={faArrowLeft} size="3x" />
+      //       </Container>
+      //     </Link>
+      //   )}
+
+      <div className="playlist-title">
+        <h1>{thisPlaylist[0].playlist_name}</h1>
       </div>
+
+      //   {!loadingState && nextVideo && (
+      //     <Link
+      //       to={`/video/${nextVideo}?playlistId=${
+      //         thisPlaylist[0].playlist_id
+      //       }&index=${Number(videoIndex) + 1}`}
+      //     >
+      //       <Container className="arrow right">
+      //         <FontAwesomeIcon icon={faArrowRight} size="3x" />
+      //       </Container>
+      //     </Link>
+      //   )}
+      // </div>
     );
   };
 
@@ -307,7 +351,11 @@ export default function Video(props) {
         {thisPlaylist.length !== 0 && (
           <div className="playlist-border">
             <div className="playlist-nav">{showPlaylistInfo(thisPlaylist)}</div>
-            <div className="video">{showVideoPlayer(1)}</div>
+            <div className="video-and-plButtons">
+              {playlistLeftButton(thisPlaylist)}
+              <div className="video">{showVideoPlayer(1)}</div>
+              {playlistRightButton(thisPlaylist)}
+            </div>
           </div>
         )}
         {thisPlaylist.length === 0 && (
