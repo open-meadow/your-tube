@@ -35,6 +35,8 @@ import axios from "axios";
 import { Container, Nav, Navbar } from "react-bootstrap";
 import InvVideoPlayer from "components/InvVideoPlayer";
 
+import { instanceList } from "helpers/selectInstance";
+
 export default function Video(props) {
   const {
     loadingState,
@@ -75,9 +77,37 @@ export default function Video(props) {
     (playlist) => playlist.playlist_id == playlistId
   );
 
-  useEffect(() => {
+  // let instanceIndex = 0;
+  // let currentInstance = instanceList[instanceIndex];
+
+  // useEffect(() => {
+  //   setLoadingState(true);
+
+  //   fetch(`${currentInstance}/api/v1/videos/${id}`)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setLoadingState(false);
+  //       setTitle(data.title);
+  //       setDescription(data.description);
+  //       setAuthor(data.author);
+  //       setSubCountText(data.subCountText);
+  //       setLikeCount(data.likeCount);
+  //       setAuthorThumbnails(data.authorThumbnails[2].url);
+  //     })
+  //     .catch(err => {
+  //       console.log("error: ", err);
+  //       instanceIndex++;
+  //       currentInstance = instanceList[instanceIndex];
+  //     })
+  // }, [id]);
+
+  const fetchVideoData = (instanceIndex) => {
+    const currentInstance = instanceList[instanceIndex];
     setLoadingState(true);
-    fetch(`https://inv.riverside.rocks/api/v1/videos/${id}`)
+
+    console.log("current instance: ", currentInstance);
+
+    fetch(`${currentInstance}/api/v1/videos/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setLoadingState(false);
@@ -87,7 +117,19 @@ export default function Video(props) {
         setSubCountText(data.subCountText);
         setLikeCount(data.likeCount);
         setAuthorThumbnails(data.authorThumbnails[2].url);
+      })
+      .catch((err) => {
+        console.log("error: ", err);
+        if (instanceIndex + 1 < instanceList.length) {
+          fetchVideoData(instanceIndex + 1); // try the next instance
+        } else {
+          console.log("All instances failed."); // handle the failure
+        }
       });
+  };
+
+  useEffect(() => {
+    fetchVideoData(0); // start with the first instance
   }, [id]);
 
   // function to show playlist name and navigation buttons

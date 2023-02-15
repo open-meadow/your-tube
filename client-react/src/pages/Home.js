@@ -9,6 +9,8 @@ import SearchBar from "components/SearchBar";
 
 import { useGlobalContext } from "context/context";
 
+import { instanceList } from "helpers/selectInstance";
+
 export default function Home(props) {
   const {
     status,
@@ -33,17 +35,30 @@ export default function Home(props) {
 
   const itemsPerPage = 5;
 
-  useEffect(() => {
+  const fetchSearchData = (instanceIndex) => {
+    const currentInstance = instanceList[instanceIndex];
     setSearchData([]);
     setLoadingState(true);
 
-    fetch(`https://invidious.sethforprivacy.com/api/v1/search?q=${searchTerm}`)
+    fetch(`${currentInstance}/api/v1/search?q=${searchTerm}`)
       .then((response) => response.json())
       .then((data) => {
         setSearchData(data);
         setLoadingState(false);
         setTotalPages(Math.ceil(data.length / itemsPerPage));
+      })
+      .catch((err) => {
+        console.log("error: ", err);
+        if (instanceIndex + 1 < instanceList.length) {
+          fetchSearchData(instanceIndex + 1); // try the next instance
+        } else {
+          console.log("All instances failed."); // handle the failure
+        }
       });
+  };
+
+  useEffect(() => {
+    fetchSearchData(0);
   }, [searchTerm]);
 
   return (
