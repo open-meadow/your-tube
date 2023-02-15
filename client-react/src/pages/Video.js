@@ -100,8 +100,6 @@ export default function Video(props) {
       ? Object.keys(thisPlaylist[0].videos[Number(videoIndex) + 1])
       : null;
 
-    console.log("nextVideo: ", nextVideo);
-
     return (
       <div className="playlist-info">
         {!loadingState && previousVideo && (
@@ -152,7 +150,6 @@ export default function Video(props) {
 
   // video player
   const showVideoPlayer = (autoplay) => {
-    console.log("indow: ", window.innerWidth);
     const [width, height] = window.innerWidth > 1400 ? [1280, 720] : [640, 360];
 
     const opts = {

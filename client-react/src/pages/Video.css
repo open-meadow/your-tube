@@ -95,12 +95,12 @@ main {
   background-color: #e5e5e5;
   color: #14213d;
   border: none;
-  transition: .2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .download-button:hover,
 .toggle-description:hover {
-  background-color: #FCA311;
+  background-color: #fca311;
 }
 
 .playlist-border {
@@ -168,25 +168,24 @@ main {
   border-radius: 10px;
 } */
 
-:not(.btn-check)+.btn:hover {
-  background-color: #FCA311;
-  color: #14213D;
+:not(.btn-check) + .btn:hover {
+  background-color: #fca311;
+  color: #14213d;
 }
 
 .toggle-description {
   height: 50px;
   width: 200px;
   border-radius: 10px;
-  background-color: #E5E5E5;
-  color: #14213D;
+  background-color: #e5e5e5;
+  color: #14213d;
   border: none;
-  transition: .2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .toggle-description:hover {
-  background-color: #FCA311;
+  background-color: #fca311;
 }
-
 
 @media only screen and (max-width: 1280px) {
   .arrow {

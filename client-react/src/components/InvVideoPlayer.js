@@ -1,7 +1,12 @@
 import "App.css";
 import { React, useEffect, useState, useRef } from "react";
+
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
+import "@videojs/themes/dist/city/index.css";
+import "@videojs/themes/dist/fantasy/index.css";
+import "@videojs/themes/dist/forest/index.css";
+import "@videojs/themes/dist/sea/index.css";
 
 export default function InvVideoPlayer(props) {
   const { id, itag, opts, onEnd } = props;
@@ -46,8 +51,8 @@ export default function InvVideoPlayer(props) {
   for (let i = 0; i < instanceList.length; i++) {
     let srcObj = {
       src: `${instanceList[i]}/latest_version?id=${id}&itag=${itag}`,
-      type: "video/mp4"
-    }
+      type: "video/mp4",
+    };
     sources.push(srcObj);
   }
 
@@ -65,16 +70,19 @@ export default function InvVideoPlayer(props) {
       controls: true,
       sources: sources,
       crossOrigin: "anonymous",
+      audioOnlyMode: itag === 140,
+      audioPosterMode: "none",
     });
 
     player.ready(function () {
-      console.log("Current source URL:", player.currentSrc());
+      // console.log("Current source URL:", player.currentSrc());
+      console.log("audio? ", player.isAudio());
     });
 
     player.on("error", function (error) {
       console.log("error: ", error);
       console.log("Current source URL:", player.currentSrc());
-      switchSource(player); 
+      switchSource(player);
     });
 
     player.on("ended", onEnd);
@@ -85,9 +93,13 @@ export default function InvVideoPlayer(props) {
   }, []);
 
   return (
-    <video
-      ref={videoNode}
-      className="video-js vjs-theme-forest"
-    />
+    <>
+      {itag === 18 && (
+        <video ref={videoNode} className="video-js vjs-theme-forest" />
+      )}
+      {itag === 140 && (
+        <audio ref={videoNode} className="video-js vjs-theme-fantasy" />
+      )}
+    </>
   );
 }
