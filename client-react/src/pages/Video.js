@@ -351,6 +351,7 @@ export default function Video(props) {
         {thisPlaylist.length !== 0 && (
           <div className="playlist-border">
             <div className="playlist-nav">{showPlaylistInfo(thisPlaylist)}</div>
+            {/* flexbox for video and playlist buttons */}
             <div className="video-and-plButtons">
               {playlistLeftButton(thisPlaylist)}
               <div className="video">{showVideoPlayer(1)}</div>
