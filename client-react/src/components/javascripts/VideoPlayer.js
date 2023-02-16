@@ -1,4 +1,4 @@
-import "App.css";
+import "../styles/App.css";
 import YouTube from "react-youtube";
 import { React, useEffect, useState, useRef } from "react";
 

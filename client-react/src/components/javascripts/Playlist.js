@@ -12,7 +12,7 @@ import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import Button from "react-bootstrap/Button";
 
 // Other Impots
-import "./Playlist.css";
+import "../styles/Playlist.css";
 
 export default function Playlist(props) {
   const {

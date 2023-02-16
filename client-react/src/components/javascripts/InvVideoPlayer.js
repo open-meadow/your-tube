@@ -1,4 +1,4 @@
-import "App.css";
+import "../styles/App.css";
 import { React, useEffect, useRef } from "react";
 
 import videojs from "video.js";

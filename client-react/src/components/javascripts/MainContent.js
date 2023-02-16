@@ -1,4 +1,4 @@
-import "./main.css";
+import "../styles/main.css";
 
 export default function MainContent() {
   return (

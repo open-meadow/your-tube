@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import Alert from "react-bootstrap/Alert";
 import { useGlobalContext } from "context/context";
 
-import "./success.css";
+import "../styles/success.css";
 
 export default function Success(props) {
   const { show, setShow } = useGlobalContext();

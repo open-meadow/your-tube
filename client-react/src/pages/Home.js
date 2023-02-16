@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 
 // import components
-import Navigation from "components/Navigation";
-import MainContent from "components/MainContent";
-import Footer from "components/Footer";
-import SearchResult from "components/SearchResult";
-import SearchBar from "components/SearchBar";
+import Navigation from "../components/javascripts/Navigation";
+import MainContent from "../components/javascripts/MainContent";
+import Footer from "../components/javascripts/Footer";
+import SearchResult from "../components/javascripts/SearchResult";
+import SearchBar from "../components/javascripts/SearchBar";
 
 import { useGlobalContext } from "context/context";
 

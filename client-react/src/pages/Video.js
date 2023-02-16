@@ -1,6 +1,6 @@
 // import css
-import "./Video.css";
-import "App.css";
+import "../components/styles/Video.css";
+import "../components/styles/App.css";
 
 // Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,10 +15,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 // import components
-import Navigation from "components/Navigation";
-import VideoPlayer from "components/VideoPlayer";
-import Footer from "components/Footer";
-import InvVideoPlayer from "components/InvVideoPlayer";
+import Navigation from "components/javascripts/Navigation";
+import VideoPlayer from "components/javascripts/VideoPlayer";
+import Footer from "components/javascripts/Footer";
+import InvVideoPlayer from "components/javascripts/InvVideoPlayer";
 
 // import from React or React extensions
 import { useEffect } from "react";

@@ -12,8 +12,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faDesktop } from "@fortawesome/free-solid-svg-icons";
 
 // Other Imports
-import projectLogo from "../images/projectLogo.png";
-import "./Navigation.css";
+import projectLogo from "../../images/projectLogo.png";
+import "../styles/Navigation.css";
 import Playlist from "./Playlist";
 import { useGlobalContext } from "context/context";
 import axios from "axios";

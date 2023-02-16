@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, ButtonGroup, DropdownButton, Dropdown } from "react-bootstrap";
 import DropdownItem from "react-bootstrap/esm/DropdownItem";
-import "./Pagination.css";
+import "../styles/Pagination.css";
 
 // create pages at the end
 const Pagination = (props) => {
