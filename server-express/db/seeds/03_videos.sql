@@ -5,4 +5,4 @@ INSERT INTO videos (yt_video_key, title, playlist_id) VALUES
 ('4ZUi5EP6rAI', 'Stop Overthinking 🔮 - Lofi hip hop mix - Calm Down And Relax - Lofi For Life', '2'),
 ('o4IQRX8zSJ4', 'Night In Japan Lofi Hip Hop ☯ - relaxing music to sleep/chill', '2'),
 ('hQAHSlTtcmY', 'Learn React In 30 Minutes', '3'),
-('Tn6-PIqc4UM', 'React in 100 Seconds', '3');
+('O6P86uwfdR0', 'Learn useState In 15 Minutes - React Hooks Explained', '3');
