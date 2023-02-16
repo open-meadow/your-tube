@@ -21,14 +21,15 @@ import Footer from "components/Footer";
 import InvVideoPlayer from "components/InvVideoPlayer";
 
 // import from React or React extensions
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
-import { Link, useSearchParams, redirect } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Container, Button, Spinner } from "react-bootstrap";
 
 // import helper functions
 import { useGlobalContext } from "context/context";
 import { instanceList } from "helpers/selectInstance";
+// import { downloadVideo } from "helpers/videoHelpers";
 
 // other imports
 import axios from "axios";
@@ -54,25 +55,26 @@ export default function Video(props) {
     setAudio,
     currentTab,
     setCurrentTab,
+    isShown,
+    setIsShown,
   } = useGlobalContext();
 
+  // get id from query String
   const { id } = useParams();
   const navigate = useNavigate();
 
   // get playlist id and video index from params
-  let [searchParams, setSearchParams] = useSearchParams();
+  let [searchParams] = useSearchParams();
   let playlistId = searchParams.get("playlistId");
   let videoIndex = searchParams.get("index");
 
   const thisPlaylist = playlists.filter(
-    (playlist) => playlist.playlist_id == playlistId
+    (playlist) => playlist.playlist_id === Number(playlistId)
   );
 
   const fetchVideoData = (instanceIndex) => {
     const currentInstance = instanceList[instanceIndex];
     setLoadingState(true);
-
-    console.log("current instance: ", currentInstance);
 
     fetch(`${currentInstance}/api/v1/videos/${id}`)
       .then((response) => response.json())
@@ -97,8 +99,10 @@ export default function Video(props) {
 
   useEffect(() => {
     fetchVideoData(0); // start with the first instance
+    // eslint-disable-next-line
   }, [id]);
 
+  // Get left button for playlist
   const playlistLeftButton = (thisPlaylist) => {
     const previousVideo = thisPlaylist[0].videos[Number(videoIndex) - 1]
       ? Object.keys(thisPlaylist[0].videos[Number(videoIndex) - 1])
@@ -121,6 +125,7 @@ export default function Video(props) {
     );
   };
 
+  // Get right button for playlist
   const playlistRightButton = (thisPlaylist) => {
     const nextVideo = thisPlaylist[0].videos[Number(videoIndex) + 1]
       ? Object.keys(thisPlaylist[0].videos[Number(videoIndex) + 1])
@@ -179,6 +184,7 @@ export default function Video(props) {
       },
     };
 
+    // itag determines audio or video. 18 = video & 140 = audio
     const itag = audio ? 18 : 140;
 
     return (
@@ -269,8 +275,6 @@ export default function Video(props) {
     window.location.reload();
   };
 
-  const [isShown, setIsShown] = useState(true);
-
   const handleClick = (event) => {
     // 👇️ toggle visibility
     setIsShown((current) => !current);
@@ -306,7 +310,7 @@ export default function Video(props) {
             <div className="video-details">
               {/* Channel details */}
               <div className="video-details-buttons">
-                <img src={authorThumbnails} />
+                <img src={authorThumbnails} alt="Channel Thumbnail" />
                 <h4>{author}</h4>
                 <h4 className="add-line">{subCountText}</h4>
               </div>

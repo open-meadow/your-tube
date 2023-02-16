@@ -7,18 +7,14 @@ export const AppProvider = (props) => {
   const [username, setUsername] = useState();
   const [userid, setUserid] = useState();
   const [playlists, setPlaylists] = useState([]);
-
-  // search results
   const [searchData, setSearchData] = useState([]);
+  const [inputValue, setInputValue] = useState('');
   const [searchTerm, setSearchTerm] = useState("");
   const [loadingState, setLoadingState] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
-
   // Used to update playlist sidebar on add video
   const [updatePL, setUpdatePL] = useState();
-
   const [currentPlaylist, setCurrentPlaylist] = useState();
-
   // use to get video details
   const [title, setTitle] = useState(null);
   const [description, setDescription] = useState(null);
@@ -35,9 +31,10 @@ export const AppProvider = (props) => {
     sessionStorage.getItem("audio") === "false" ? false : true
   );
   const [currentTab, setCurrentTab] = useState("invidious");
-
   // use to delete vid
   const [deleteVid, setDeleteVid] = useState("");
+  // show description
+  const [isShown, setIsShown] = useState(true);
 
   return (
     <AppContext.Provider
@@ -50,6 +47,8 @@ export const AppProvider = (props) => {
         setUserid,
         playlists,
         setPlaylists,
+        inputValue,
+        setInputValue,
         searchData,
         setSearchData,
         searchTerm,
@@ -83,7 +82,9 @@ export const AppProvider = (props) => {
         audio,
         setAudio,
         currentTab,
-        setCurrentTab
+        setCurrentTab,
+        isShown,
+        setIsShown
       }}
     >
       {props.children}

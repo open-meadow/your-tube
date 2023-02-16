@@ -1,8 +1,7 @@
 import axios from "axios";
-import { React, useEffect, useState, useContext } from "react";
+import { React, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useGlobalContext } from "context/context";
-import YouTube from "react-youtube";
 
 // CSS Imports ///////////////////////////////
 
@@ -18,42 +17,15 @@ import Video from "pages/Video";
 
 export default function App() {
   const {
-    status,
-    setStatus,
-    username,
     setUsername,
-    userid,
     setUserid,
-    playlists,
     setPlaylists,
-    searchData,
-    setSearchData,
-    searchTerm,
-    setSearchTerm,
-    loadingState,
-    setLoadingState,
-    totalPages,
-    setTotalPages,
     // Used to update playlist sidebar on add video
     updatePL,
-    setUpdatePL,
-    deleteVid,
   } = useGlobalContext();
-
-  useEffect(() => {
-    axios
-      .get("/api/status")
-      .then((res) => {
-        setStatus(res.data);
-      })
-      .catch((err) => {
-        setStatus({ error: err.message });
-      });
-  }, []);
 
   // Change user: 1=BigJim48, 2=LabberLearner23, 3=iHEARTreact
   const loggedInUser = 3;
-
   useEffect(() => {
     axios
       .get(`/api/users/${loggedInUser}`)
@@ -65,8 +37,10 @@ export default function App() {
       .catch((err) => {
         console.log(err.message);
       });
+    // eslint-disable-next-line
   }, []);
 
+  // get playlists for logged in user
   useEffect(() => {
     axios
       .get(`/api/playlists/${loggedInUser}`)
@@ -77,6 +51,7 @@ export default function App() {
       .catch((err) => {
         console.log(err.message);
       });
+    // eslint-disable-next-line
   }, [updatePL]);
 
   return (
@@ -87,21 +62,6 @@ export default function App() {
           <Route path="/video/:id" element={<Video />} />
         </Routes>
       </Router>
-
-      {/* <div>
-        <section>
-        {!status.error && (
-          <>
-          API Version: <code>{status.version}</code>
-          </>
-          )}
-          {status.error && (
-            <>
-            API Error: <code>{status.error}</code>
-            </>
-          )}
-        </section>
-      </div> */}
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import "App.css";
-import { React, useEffect, useState, useRef } from "react";
+import { React, useEffect, useRef } from "react";
 
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
@@ -12,38 +12,6 @@ import { instanceList } from "helpers/selectInstance";
 
 export default function InvVideoPlayer(props) {
   const { id, itag, opts, onEnd } = props;
-
-  // const instanceList = [
-  //   "https://invidious.baczek.me",
-  //   "https://vid.puffyan.us",
-  //   "https://inv.riverside.rocks",
-  //   "https://yewtu.be",
-  //   "https://invidious.kavin.rocks",
-  //   "https://watch.thekitty.zone",
-  //   "https://y.com.sb",
-  //   "https://invidious.nerdvpn.de",
-  //   "https://invidious.tiekoetter.com",
-  //   "https://yt.artemislena.eu",
-  //   "https://invidious.flokinet.to",
-  //   "https://inv.bp.projectsegfau.lt",
-  //   "https://inv.odyssey346.dev",
-  //   "https://invidious.sethforprivacy.com",
-  //   "https://invidious.snopyta.org",
-  //   "https://yt.funami.tech",
-  //   "https://invidious.epicsite.xyz",
-  //   "https://iv.ggtyler.dev",
-  //   "https://inv.vern.cc",
-  //   "https://yt.oelrichsgarcia.de",
-  //   "https://invidious.silur.me",
-  //   "https://invidious.slipfox.xyz",
-  //   "https://invidious.weblibre.org",
-  //   "https://invidious.esmailelbob.xyz",
-  //   "https://iv.melmac.space",
-  //   "https://invidious.dhusch.de",
-  //   "https://invidious.privacydev.net",
-  //   "https://invidious.lidarshield.cloud",
-  //   "https://invidious.namazso.eu",
-  // ];
 
   const videoNode = useRef(null);
 
@@ -77,8 +45,8 @@ export default function InvVideoPlayer(props) {
     });
 
     player.ready(function () {
-      // console.log("Current source URL:", player.currentSrc());
-      console.log("audio? ", player.isAudio());
+      console.log("Current source URL:", player.currentSrc());
+      // console.log("audio? ", player.isAudio());
     });
 
     player.on("error", function (error) {
@@ -92,15 +60,13 @@ export default function InvVideoPlayer(props) {
     return () => {
       player.dispose();
     };
+    // eslint-disable-next-line
   }, []);
 
   return (
     <>
       {itag === 18 && (
-        <video
-          ref={videoNode}
-          className="video-js vjs-theme-forest"
-        />
+        <video ref={videoNode} className="video-js vjs-theme-forest" />
       )}
       {itag === 140 && (
         <audio ref={videoNode} className="video-js vjs-theme-fantasy" />

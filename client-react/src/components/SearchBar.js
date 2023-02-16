@@ -1,16 +1,7 @@
-import { useState } from "react";
+import { useGlobalContext } from "context/context";
 
 export default function SearchBar(props) {
-  // const {
-  //   searchData,
-  //   setSearchData,
-  //   searchTerm,
-  //   setSearchTerm,
-  //   getSearchData,
-  // } = useApplicationData();
-  const [inputValue, setInputValue] = useState('');
-
-  const { searchTerm, setSearchTerm } = props;
+  const { setSearchTerm, inputValue, setInputValue } = useGlobalContext();
 
   const handleSubmit = (event) => {
     event.preventDefault();
