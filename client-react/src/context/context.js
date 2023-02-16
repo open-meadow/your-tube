@@ -22,6 +22,9 @@ export const AppProvider = (props) => {
   const [authorThumbnails, setAuthorThumbnails] = useState(null);
   const [subCountText, setSubCountText] = useState(null);
   const [likeCount, setLikeCount] = useState(null);
+  const [successMsg, setSuccessMsg] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentVid, setCurrentVid] = useState({});
 
   // use to show success message
   const [show, setShow] = useState(false);
@@ -84,7 +87,13 @@ export const AppProvider = (props) => {
         currentTab,
         setCurrentTab,
         isShown,
-        setIsShown
+        setIsShown,
+        currentPage,
+        setCurrentPage,
+        currentVid,
+        setCurrentVid,
+        successMsg,
+        setSuccessMsg
       }}
     >
       {props.children}

@@ -8,7 +8,12 @@ export default function Success(props) {
   const { show, setShow } = useGlobalContext();
 
   return (
-    <Alert variant="success" onClose={() => setShow(false)} dismissible>
+    <Alert
+      variant="success"
+      onClose={() => setShow(false)}
+      dismissible
+      transition
+    >
       <Alert.Heading>Success!</Alert.Heading>
       <p>{props.message}</p>
     </Alert>

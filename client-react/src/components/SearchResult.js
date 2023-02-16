@@ -9,7 +9,6 @@ import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Spinner from "react-bootstrap/Spinner";
-import { Popover } from "react-bootstrap";
 
 // Import Pagination
 import Pagination from "./Pagination";
@@ -23,19 +22,24 @@ import Success from "./Success";
 
 export default function SearchResult(props) {
   const { searchData, loadingState, totalPages, itemsPerPage } = props;
-  const [currentPage, setCurrentPage] = useState(1);
-  const [currentVid, setCurrentVid] = useState({});
 
   // Get playlists from global context
-  const { playlists } = useGlobalContext();
-
-  const [successMsg, setSuccessMsg] = useState("");
+  const {
+    playlists,
+    currentPage,
+    setCurrentPage,
+    currentVid,
+    setCurrentVid,
+    setUpdatePL,
+    setShow,
+    show,
+    successMsg,
+    setSuccessMsg,
+  } = useGlobalContext();
 
   const plusIcon = (
     <FontAwesomeIcon className="plus-icon" icon={faPlusCircle} size="3x" />
   );
-
-  const { setUpdatePL, setShow, show } = useGlobalContext();
 
   // divide obtained data by page number
   const currentData = searchData.slice(
@@ -67,7 +71,6 @@ export default function SearchResult(props) {
 
     // Seed playlists into the "add to playlist" button
     const arrayOfPlaylists = playlists;
-
     const playlistNames = arrayOfPlaylists.map((playlist) => {
       return (
         <Dropdown.Item
