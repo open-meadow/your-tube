@@ -6,8 +6,8 @@ import { useGlobalContext } from "context/context";
 // CSS Imports ///////////////////////////////
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../styles/App.css";
-import "../styles/Results.css";
+import "./components/styles/App.css";
+import "./components/styles/Results.css";
 
 ////////////////////////////////////////////////////
 
