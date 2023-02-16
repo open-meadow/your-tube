@@ -1,11 +1,6 @@
 // import css
 import "./Video.css";
 import "App.css";
-import Spinner from "react-bootstrap/Spinner";
-import Button from "react-bootstrap/Button";
-import ToggleButton from "react-bootstrap/ToggleButton";
-import Tab from "react-bootstrap/Tab";
-import Tabs from "react-bootstrap/Tabs";
 
 // Font Awesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,7 +8,6 @@ import {
   faThumbsUp,
   faArrowLeft,
   faArrowRight,
-  faArrowRightArrowLeft,
   faDownload,
   faVideo,
   faHeadphones,
@@ -24,18 +18,20 @@ import {
 import Navigation from "components/Navigation";
 import VideoPlayer from "components/VideoPlayer";
 import Footer from "components/Footer";
-import { useGlobalContext } from "context/context";
+import InvVideoPlayer from "components/InvVideoPlayer";
 
-// import from React
+// import from React or React extensions
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { Link, useSearchParams, redirect } from "react-router-dom";
+import { Container, Button, Spinner } from "react-bootstrap";
 
-import axios from "axios";
-import { Container, Nav, Navbar } from "react-bootstrap";
-import InvVideoPlayer from "components/InvVideoPlayer";
-
+// import helper functions
+import { useGlobalContext } from "context/context";
 import { instanceList } from "helpers/selectInstance";
+
+// other imports
+import axios from "axios";
 
 export default function Video(props) {
   const {
@@ -54,11 +50,6 @@ export default function Video(props) {
     likeCount,
     setLikeCount,
     playlists,
-    setPlaylists,
-    currentPlaylist,
-    setCurrentPlaylist,
-    video,
-    setVideo,
     audio,
     setAudio,
     currentTab,
@@ -76,30 +67,6 @@ export default function Video(props) {
   const thisPlaylist = playlists.filter(
     (playlist) => playlist.playlist_id == playlistId
   );
-
-  // let instanceIndex = 0;
-  // let currentInstance = instanceList[instanceIndex];
-
-  // useEffect(() => {
-  //   setLoadingState(true);
-
-  //   fetch(`${currentInstance}/api/v1/videos/${id}`)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setLoadingState(false);
-  //       setTitle(data.title);
-  //       setDescription(data.description);
-  //       setAuthor(data.author);
-  //       setSubCountText(data.subCountText);
-  //       setLikeCount(data.likeCount);
-  //       setAuthorThumbnails(data.authorThumbnails[2].url);
-  //     })
-  //     .catch(err => {
-  //       console.log("error: ", err);
-  //       instanceIndex++;
-  //       currentInstance = instanceList[instanceIndex];
-  //     })
-  // }, [id]);
 
   const fetchVideoData = (instanceIndex) => {
     const currentInstance = instanceList[instanceIndex];
@@ -178,44 +145,10 @@ export default function Video(props) {
 
   // function to show playlist name and navigation buttons
   const showPlaylistInfo = (thisPlaylist) => {
-    // const previousVideo = thisPlaylist[0].videos[Number(videoIndex) - 1]
-    //   ? Object.keys(thisPlaylist[0].videos[Number(videoIndex) - 1])
-    //   : null;
-
-    // const nextVideo = thisPlaylist[0].videos[Number(videoIndex) + 1]
-    //   ? Object.keys(thisPlaylist[0].videos[Number(videoIndex) + 1])
-    //   : null;
-
     return (
-      // <div className="playlist-info">
-      //   {!loadingState && previousVideo && (
-      //     <Link
-      //       to={`/video/${previousVideo}?playlistId=${
-      //         thisPlaylist[0].playlist_id
-      //       }&index=${Number(videoIndex) - 1}`}
-      //     >
-      //       <Container className="arrow left">
-      //         <FontAwesomeIcon icon={faArrowLeft} size="3x" />
-      //       </Container>
-      //     </Link>
-      //   )}
-
       <div className="playlist-title">
         <h1>{thisPlaylist[0].playlist_name}</h1>
       </div>
-
-      //   {!loadingState && nextVideo && (
-      //     <Link
-      //       to={`/video/${nextVideo}?playlistId=${
-      //         thisPlaylist[0].playlist_id
-      //       }&index=${Number(videoIndex) + 1}`}
-      //     >
-      //       <Container className="arrow right">
-      //         <FontAwesomeIcon icon={faArrowRight} size="3x" />
-      //       </Container>
-      //     </Link>
-      //   )}
-      // </div>
     );
   };
 
@@ -239,8 +172,8 @@ export default function Video(props) {
     const [width, height] = window.innerWidth > 1400 ? [1280, 720] : [640, 360];
 
     const opts = {
-      width: "1280",
-      height: "720",
+      width: width,
+      height: height,
       playerVars: {
         autoplay: autoplay,
       },
@@ -325,12 +258,13 @@ export default function Video(props) {
 
   // function to switch between audio and video
   const audioSwitch = () => {
-    if (audio === true) {
-      setAudio(false);
-      sessionStorage.setItem("audio", false);
-    } else {
+    console.log("audio value: ", audio);
+    if (audio === false) {
       setAudio(true);
       sessionStorage.setItem("audio", true);
+    } else {
+      setAudio(false);
+      sessionStorage.setItem("audio", false);
     }
     window.location.reload();
   };
