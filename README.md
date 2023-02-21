@@ -29,16 +29,16 @@ This is a final project created during my studies at Lighthouse Labs. It is a co
 ![screenshot](https://github.com/open-meadow/your-tube/blob/87262de1adb3b7e7bdfa6803a7632f8a6f786cce/docs/video_page_invidious_video.png)
 
 > Screenshot of Video Page playing Video in Audio mode
-![screenshot](https://github.com/open-meadow/your-tube/blob/87262de1adb3b7e7bdfa6803a7632f8a6f786cce/docs/video_page_invidious_audio_mode.png)
+![screenshot](https://github.com/open-meadow/your-tube/blob/d1544a6569109e130df89d87fdefd5e0e36cd7c4/docs/video_page_invidious_audio_mode.png)
 
 > Screenshot of Downloaded File
-![screenshot](https://github.com/open-meadow/your-tube/blob/master/docs/video_page_downloads.png)
+![screenshot](https://github.com/open-meadow/your-tube/blob/d1544a6569109e130df89d87fdefd5e0e36cd7c4/docs/video_page_downloads.png)
 
 > Screenshot of Playlist Sidebar
 ![screenshot](https://github.com/open-meadow/your-tube/blob/87262de1adb3b7e7bdfa6803a7632f8a6f786cce/docs/playlist_sidebar.png)
 
 > Screenshot of Video Page in Playlist View
-![screenshot](https://github.com/open-meadow/your-tube/blob/87262de1adb3b7e7bdfa6803a7632f8a6f786cce/docs/video_page_playlist_view.png)
+![screenshot](https://github.com/open-meadow/your-tube/blob/d1544a6569109e130df89d87fdefd5e0e36cd7c4/docs/video_page_playlist_view.png)
 
 > Screenshot of Add to Playlist button
 ![screenshot](https://github.com/open-meadow/your-tube/blob/87262de1adb3b7e7bdfa6803a7632f8a6f786cce/docs/add_to_new_playlist.png)
